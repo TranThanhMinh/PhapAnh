@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/gray"
+
+    tools:context="anhpha.clientfirst.crm.activity.ClientsActivity">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+
+        android:orientation="vertical">
+
+        <include
+            android:id="@+id/include"
+            layout="@layout/layout_toolbar"></include>
+        <RadioButton
+            android:id="@+id/radioButton0"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentStart="true"
+            android:layout_below="@+id/include"
+            android:layout_marginBottom="1dp"
+            android:background="@color/white"
+            android:padding="15dp"
+            android:text="@string/all" />
+        <RadioButton
+            android:id="@+id/radioButton1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentStart="true"
+            android:layout_below="@+id/include"
+            android:layout_marginBottom="1dp"
+            android:background="@color/white"
+            android:padding="15dp"
+            android:text="@string/to_date" />
+
+        <RadioButton
+            android:id="@+id/radioButton2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentStart="true"
+            android:layout_below="@+id/include"
+            android:layout_marginBottom="1dp"
+            android:background="@color/white"
+            android:padding="15dp"
+            android:text="@string/yesterday" />
+
+        <RadioButton
+            android:id="@+id/radioButton3"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentStart="true"
+            android:layout_below="@+id/include"
+            android:layout_marginBottom="1dp"
+            android:background="@color/white"
+            android:padding="15dp"
+            android:text="@string/this_week" />
+
+        <RadioButton
+            android:id="@+id/radioButton4"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentStart="true"
+            android:layout_below="@+id/include"
+            android:layout_marginBottom="1dp"
+            android:background="@color/white"
+            android:padding="15dp"
+            android:text="@string/last_week" />
+
+        <RadioButton
+            android:id="@+id/radioButton5"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentLeft="true"
+
+            android:layout_alignParentRight="true"
+            android:layout_alignParentStart="true"
+            android:layout_below="@+id/include"
+            android:layout_marginBottom="1dp"
+            android:background="@color/white"
+            android:padding="15dp"
+            android:text="@string/month" />
+
+        <RadioButton
+        android:id="@+id/radioButton6"
+        android:layout_width="399dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/include"
+        android:layout_marginBottom="1dp"
+        android:background="@color/white"
+        android:padding="15dp"
+        android:text="@string/last_month" />
+        <RadioButton
+            android:id="@+id/radioButton7"
+            android:layout_width="399dp"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentStart="true"
+            android:layout_below="@+id/include"
+            android:layout_marginBottom="1dp"
+            android:background="@color/white"
+            android:padding="15dp"
+            android:text="@string/this_precious" />
+        <RadioButton
+            android:id="@+id/radioButton8"
+            android:layout_width="399dp"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentStart="true"
+            android:layout_below="@+id/include"
+            android:layout_marginBottom="1dp"
+            android:background="@color/white"
+            android:padding="15dp"
+            android:text="@string/last_precious" />
+    </LinearLayout>
+
+</android.support.design.widget.CoordinatorLayout>

@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.design.widget.CoordinatorLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+
+    android:background="@color/white"
+    tools:context="anhpha.clientfirst.crm.activity.ActivityUserActivity">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <include layout="@layout/layout_toolbar"
+            android:id="@+id/include"></include>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingBottom="20dp"
+            android:background="@color/white"
+            android:layout_marginTop="5dp"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_below="@+id/include"
+            android:id="@+id/relativeLayout">
+
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/linearLayout">
+                <LinearLayout
+                    android:orientation="vertical"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="16"
+                    >
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:text="@string/sales_month"
+                        android:padding="12dp"
+                        android:drawableRight="@mipmap/ic_dms_79"
+                        android:gravity="center_vertical"
+                        android:id="@+id/textView1" />
+                </LinearLayout>
+                <LinearLayout
+                    android:orientation="vertical"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="16"
+                    >
+                    <ImageButton
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:visibility="gone"
+                        android:scaleType="centerInside"
+                        android:background="@color/gray"
+                        android:gravity="center_vertical"
+                        android:id="@+id/imageButton2" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:text="@string/inventory_market"
+                        android:drawableRight="@mipmap/ic_dms_79"
+                        android:padding="12dp"
+                        android:visibility="gone"
+                        android:gravity="center_vertical"
+                        android:id="@+id/textView2" />
+                </LinearLayout>
+                <LinearLayout
+                    android:orientation="vertical"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="16"
+                    >
+                    <ImageButton
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:scaleType="centerInside"
+                        android:background="@color/gray"
+                        android:gravity="center_vertical"
+                        android:id="@+id/imageButton3" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:text="@string/sales_user"
+                        android:gravity="center_vertical"
+                        android:drawableRight="@mipmap/ic_dms_79"
+                        android:padding="12dp"
+                        android:id="@+id/textView3" />
+                </LinearLayout>
+                <LinearLayout
+                    android:orientation="vertical"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="16"
+                    >
+                    <ImageButton
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:scaleType="centerInside"
+                        android:background="@color/gray"
+                        android:gravity="center_vertical"
+                        android:id="@+id/imageButton4" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:text="@string/order_user"
+                        android:padding="12dp"
+                        android:drawableRight="@mipmap/ic_dms_79"
+                        android:gravity="center_vertical"
+                        android:id="@+id/textView4" />
+                </LinearLayout>
+               </LinearLayout>
+        </RelativeLayout>
+
+    </RelativeLayout>
+
+</android.support.design.widget.CoordinatorLayout>

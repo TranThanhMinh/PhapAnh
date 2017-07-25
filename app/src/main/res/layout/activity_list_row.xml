@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:padding="5dp"
+    android:layout_height="match_parent">
+
+    <ImageButton
+        android:layout_width="30dp"
+        android:layout_height="35dp"
+        android:id="@+id/imageButton"
+        android:scaleType="centerInside"
+        android:background="@color/transparent"
+        android:padding="7dp"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="User name"
+        android:id="@+id/user_name"
+        android:maxLines="2"
+        android:gravity="center_vertical"
+        android:layout_alignParentTop="true"
+        android:layout_toRightOf="@+id/imageButton"
+        android:layout_toEndOf="@+id/imageButton"
+        android:layout_alignBottom="@+id/imageButton" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Client name"
+        android:id="@+id/client_name"
+        android:textColor="@color/colorApp"
+        android:layout_alignParentTop="true"
+        android:maxLines="2"
+        android:gravity="center_vertical"
+        android:layout_alignBottom="@+id/user_name"
+        android:layout_toLeftOf="@+id/time"
+        android:layout_toRightOf="@+id/textView" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Content check in"
+        android:id="@+id/content_activity"
+        android:maxLines="2"
+        android:layout_below="@+id/imageButton"
+        android:layout_toRightOf="@+id/imageButton"
+        android:layout_toEndOf="@+id/imageButton" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="00:01"
+        android:id="@+id/time"
+        android:gravity="center_vertical"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignBottom="@+id/client_name" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text=" > "
+        android:textColor="@color/colorApp"
+        android:id="@+id/textView"
+        android:gravity="center_vertical"
+        android:layout_alignParentTop="true"
+        android:layout_toRightOf="@+id/user_name"
+        android:layout_toEndOf="@+id/user_name"
+        android:layout_above="@+id/content_activity" />
+</RelativeLayout>

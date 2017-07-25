@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="horizontal" android:layout_width="match_parent"
+    android:background="@color/gray"
+    android:id="@+id/layout_find"
+    android:visibility="gone"
+    android:layout_height="@dimen/button_height">
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/etText"
+        android:hint="@string/find_name_client"
+        android:layout_weight="1.0" />
+    <ImageButton
+        android:layout_width="@dimen/button_height"
+        android:layout_height="@dimen/button_height"
+        android:src="@mipmap/ic_crm_42"
+        android:background="@color/transparent"
+        android:padding="10dp"
+        android:layout_marginLeft="10dp"
+        android:scaleType="centerInside"
+        android:id="@+id/ibDone" />
+    <ImageButton
+        android:layout_width="@dimen/button_height"
+        android:layout_height="@dimen/button_height"
+        android:src="@mipmap/ic_crm_44"
+        android:background="@color/transparent"
+        android:padding="10dp"
+        android:layout_marginLeft="10dp"
+        android:scaleType="centerInside"
+        android:id="@+id/ibClose" />
+</LinearLayout>

@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.design.widget.CoordinatorLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+
+    tools:context="anhpha.clientfirst.crm.activity.ClientsActivity">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <include layout="@layout/layout_toolbar"
+            android:id="@+id/include"></include>
+        <ScrollView
+            android:layout_width="match_parent"
+            android:padding="5dp"
+            android:layout_below="@+id/include"
+            android:layout_height="match_parent">
+        <LinearLayout
+            android:id="@+id/relativeLayout2"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:layout_centerHorizontal="true">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/name"
+                android:textStyle="bold"
+                android:textSize="@dimen/text_size_big"
+                android:padding="8dp"
+                android:id="@+id/name" />
+
+            <ImageView
+                android:id="@id/image"
+                android:src="@drawable/no_img_big"
+                android:layout_width="match_parent"
+                android:scaleType="fitCenter"
+                android:layout_height="350dp" />
+            <LinearLayout
+                android:id="@+id/layout_image"
+                android:visibility="gone"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"></LinearLayout>
+            <TextView
+                android:id="@+id/tvView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/view_more"
+                android:visibility="gone"
+                android:drawableLeft="@mipmap/y32"
+                android:layout_margin="10dp"
+                android:gravity="center"
+                android:drawablePadding="5dp"
+                android:layout_gravity="center_horizontal" />
+
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/date"
+                android:padding="8dp"
+                android:id="@+id/date" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/address"
+                android:padding="8dp"
+                android:id="@+id/address" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/number"
+                android:padding="8dp"
+                android:id="@+id/number" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/description"
+                android:padding="8dp"
+                android:id="@+id/description" />
+        </LinearLayout>
+        </ScrollView>
+    </RelativeLayout>
+</android.support.design.widget.CoordinatorLayout>

@@ -1,0 +1,28 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item
+        android:id="@+id/invite"
+        android:title="@string/invite"
+        android:visible="false"
+        app:showAsAction="collapseActionView" />
+    <item
+        android:id="@+id/cancel"
+        android:visible="false"
+
+        android:title="@string/cancel"
+        app:showAsAction="collapseActionView" />
+    <item
+        android:id="@+id/confirm"
+        android:title="@string/confirm"
+        android:visible="false"
+
+        app:showAsAction="collapseActionView" />
+    <item
+        android:id="@+id/attend"
+        android:title="@string/attend"
+        android:visible="false"
+
+        app:showAsAction="collapseActionView" />
+
+</menu>

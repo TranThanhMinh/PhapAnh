@@ -1,0 +1,719 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.design.widget.CoordinatorLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:fab="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:id="@+id/coordinatorLayout"
+    android:background="@color/gray_dark"
+    tools:context="anhpha.clientfirst.crm.activity.ClientsActivity">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <include layout="@layout/layout_toolbar"
+        android:id="@+id/include"></include>
+        <anhpha.clientfirst.crm.segmented.SegmentedGroup
+            xmlns:segmentedgroup="http://schemas.android.com/apk/res-auto"
+            android:id="@+id/segmented2"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:gravity="center"
+            android:layout_weight="1.0"
+            android:orientation="horizontal"
+            android:layout_gravity="center_vertical"
+            segmentedgroup:sc_border_width="1dp"
+            segmentedgroup:sc_corner_radius="10dp"
+            segmentedgroup:sc_tint_color="@color/white"
+            segmentedgroup:sc_checked_text_color="@color/colorApp">
+
+            <RadioButton
+                android:id="@+id/button1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/detail"
+                style="@style/MyRadioButton" />
+
+            <RadioButton
+                android:id="@+id/button2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/activity"
+                style="@style/MyRadioButton" />
+        </anhpha.clientfirst.crm.segmented.SegmentedGroup>
+        <ScrollView
+            android:layout_below="@+id/include"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_height="?attr/actionBarSize"
+            android:layout_width="match_parent"
+            android:orientation="horizontal"
+            android:id="@+id/layout_client_parent">
+
+            <include layout="@layout/layout_client"
+                android:id="@+id/layout_client"></include>
+
+        </LinearLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingBottom="20dp"
+            android:background="@color/gray"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_below="@+id/layout_client_parent"
+            android:id="@+id/relativeLayout">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="@dimen/button_height"
+                android:textSize="@dimen/text_size_normal"
+                android:text="@string/all"
+                android:id="@+id/tvDate"
+                android:textColor="@color/colorApp"
+                android:layout_alignParentTop="true"
+                android:gravity="center"
+                android:paddingLeft="20dp"
+                android:paddingRight="20dp"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/button_height"
+                android:text="0"
+                android:textSize="@dimen/text_size_large"
+                android:id="@+id/tvAmount"
+                android:gravity="center|left"
+                android:layout_alignParentTop="true"
+                android:layout_toRightOf="@+id/tvDate"
+                android:layout_toEndOf="@+id/tvDate"
+                android:layout_above="@+id/linearLayout" />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="55dp"
+                android:layout_below="@+id/tvDate"
+                android:id="@+id/linearLayout">
+                <LinearLayout
+                    android:orientation="vertical"
+                    android:layout_width="match_parent"
+                    android:id="@+id/line1"
+                    android:layout_height="match_parent"
+                    android:layout_weight="16"
+                    >
+                    <ImageButton
+                        android:layout_width="match_parent"
+                        android:layout_height="30dp"
+                        android:src="@mipmap/ic_crm_16"
+                        android:scaleType="centerInside"
+                        android:background="@color/transparent"
+                        android:gravity="center"
+                        android:clickable="false"
+                        android:id="@+id/imageButton1" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:text="0"
+                        android:clickable="false"
+                        android:gravity="center"
+                        android:id="@+id/textView1" />
+                </LinearLayout>
+                <LinearLayout
+                    android:orientation="vertical"
+                    android:layout_width="match_parent"
+                    android:visibility="gone"
+                    android:layout_height="match_parent"
+                    android:id="@+id/line2"
+                    android:layout_weight="16"
+                    >
+                    <ImageButton
+                        android:layout_width="match_parent"
+                        android:layout_height="30dp"
+                        android:src="@mipmap/ic_crm_17"
+                        android:scaleType="centerInside"
+                        android:background="@color/transparent"
+                        android:gravity="center"
+                        android:clickable="false"
+                        android:id="@+id/imageButton2" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:text="0"
+                        android:clickable="false"
+                        android:gravity="center"
+                        android:id="@+id/textView2" />
+                </LinearLayout>
+                <LinearLayout
+                    android:orientation="vertical"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:id="@+id/line3"
+                    android:layout_weight="16"
+                    >
+                    <ImageButton
+                        android:layout_width="match_parent"
+                        android:layout_height="30dp"
+                        android:src="@mipmap/ic_crm_96"
+                        android:scaleType="centerInside"
+                        android:background="@color/transparent"
+                        android:gravity="center"
+                        android:clickable="false"
+                        android:id="@+id/imageButton3" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:text="0"
+                        android:clickable="false"
+                        android:gravity="center"
+                        android:id="@+id/textView3" />
+                </LinearLayout>
+                <LinearLayout
+                    android:orientation="vertical"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:id="@+id/line4"
+                    android:layout_weight="16"
+                    >
+                    <ImageButton
+                        android:layout_width="match_parent"
+                        android:layout_height="30dp"
+                        android:src="@mipmap/ic_crm_18"
+                        android:scaleType="centerInside"
+                        android:background="@color/transparent"
+                        android:gravity="center"
+                        android:clickable="false"
+                        android:id="@+id/imageButton4" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:text="0"
+                        android:clickable="false"
+                        android:gravity="center"
+                        android:id="@+id/textView4" />
+                </LinearLayout>
+                <LinearLayout
+                    android:orientation="vertical"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:id="@+id/line7"
+                    android:layout_weight="16"
+                    >
+                    <ImageButton
+                        android:layout_width="match_parent"
+                        android:layout_height="30dp"
+                        android:src="@mipmap/ic_crm_20"
+                        android:scaleType="centerInside"
+                        android:background="@color/transparent"
+                        android:gravity="center"
+                        android:clickable="false"
+                        android:id="@+id/imageButton7" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:text="0"
+                        android:clickable="false"
+                        android:gravity="center"
+                        android:id="@+id/textView7" />
+                </LinearLayout>
+                <LinearLayout
+                    android:orientation="vertical"
+                    android:layout_width="match_parent"
+                    android:id="@+id/line5"
+                    android:layout_height="match_parent"
+                    android:layout_weight="16"
+                    >
+                    <ImageButton
+                        android:layout_width="match_parent"
+                        android:layout_height="30dp"
+                        android:src="@mipmap/ic_crm_66"
+                        android:scaleType="centerInside"
+                        android:background="@color/transparent"
+                        android:clickable="false"
+                        android:gravity="center"
+                        android:id="@+id/imageButton5" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:text="0"
+                        android:clickable="false"
+                        android:gravity="center"
+                        android:id="@+id/textView5" />
+                </LinearLayout>
+                <LinearLayout
+                    android:orientation="vertical"
+                    android:id="@+id/line6"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="16"
+                    >
+                    <ImageButton
+                        android:layout_width="match_parent"
+                        android:layout_height="30dp"
+                        android:src="@mipmap/ic_crm_23"
+                        android:scaleType="centerInside"
+                        android:clickable="false"
+                        android:background="@color/transparent"
+                        android:gravity="center"
+                        android:id="@+id/imageButton6" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:text="0"
+                        android:clickable="false"
+                        android:gravity="center"
+                        android:id="@+id/textView6" />
+                </LinearLayout>
+            </LinearLayout>
+        </RelativeLayout>
+
+        <LinearLayout
+            android:id="@+id/relativeLayout2"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:layout_below="@+id/relativeLayout"
+            android:layout_centerHorizontal="true">
+
+            <GridLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="5dp"
+                android:layout_marginTop="5dp"
+                android:layout_marginBottom="5dp"
+                android:layout_marginRight="5dp"
+                android:id="@+id/view_label"
+                android:columnCount="3"/>
+        <anhpha.clientfirst.crm.customs.CustomRecyclerView
+            android:id="@+id/rvActivities"
+            android:layout_width="match_parent"
+            android:background="@color/white"
+            android:layout_height="350dp"
+            android:visibility="visible"
+            android:layout_below="@+id/relativeLayout"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true" />
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:padding="5dp"
+                android:id="@+id/view"
+                android:visibility="gone"
+                android:layout_height="match_parent">
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:orientation="vertical"
+                    android:id="@+id/view1"
+                    android:visibility="visible"
+                    android:layout_height="match_parent">
+
+                    <android.support.design.widget.TextInputLayout
+                        android:id="@+id/input_layout_1"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@color/white">
+
+                        <EditText
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:visibility="gone"
+                            android:hint="@string/client_code"
+                            android:focusable="false"
+                            android:id="@+id/etCode" >
+                            <requestFocus />
+                            </EditText>
+                    </android.support.design.widget.TextInputLayout>
+                    <android.support.design.widget.TextInputLayout
+                        android:id="@+id/input_layout_2"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@color/white"
+                        android:layout_alignParentRight="true"
+                        android:layout_alignParentEnd="true"
+                        android:layout_below="@+id/layout_client">
+
+                        <EditText
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:hint="@string/client_name"
+                            android:focusable="false"
+                            android:id="@+id/etName" />
+                    </android.support.design.widget.TextInputLayout>
+                    <android.support.design.widget.TextInputLayout
+                        android:id="@+id/input_layout_3"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@color/white"
+                        android:layout_alignParentRight="true"
+                        android:layout_alignParentEnd="true"
+                        android:layout_below="@+id/layout_client">
+
+                        <EditText
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:hint="@string/contact"
+                            android:focusable="false"
+                            android:visibility="gone"
+                            android:id="@+id/etContact" />
+                    </android.support.design.widget.TextInputLayout>
+                    <android.support.design.widget.TextInputLayout
+                        android:id="@+id/input_layout_4"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@color/white"
+                        android:layout_alignParentRight="true"
+                        android:layout_alignParentEnd="true"
+                        android:layout_below="@+id/layout_client">
+
+                        <EditText
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:hint="@string/phone"
+                            android:visibility="gone"
+                            android:focusable="false"
+                            android:drawableRight="@mipmap/ic_crm_87"
+                            android:id="@+id/etPhone" />
+                    </android.support.design.widget.TextInputLayout>
+                    <android.support.design.widget.TextInputLayout
+                        android:id="@+id/input_layout_5"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@color/white"
+                        android:layout_alignParentRight="true"
+                        android:layout_alignParentEnd="true"
+                        android:layout_below="@+id/layout_client">
+
+                        <EditText
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:hint="@string/email"
+                            android:visibility="gone"
+                            android:drawableRight="@mipmap/ic_crm_92"
+                            android:focusable="false"
+                            android:id="@+id/etEmail" />
+                    </android.support.design.widget.TextInputLayout>
+                    <android.support.design.widget.TextInputLayout
+                        android:id="@+id/input_layout_6"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@color/white"
+                        android:layout_alignParentRight="true"
+                        android:layout_alignParentEnd="true"
+                        android:layout_below="@+id/layout_client">
+
+                        <EditText
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:hint="@string/website"
+                            android:drawableRight="@mipmap/ic_crm_95"
+                            android:visibility="gone"
+                            android:focusable="false"
+                            android:id="@+id/etWeb" />
+                    </android.support.design.widget.TextInputLayout>
+                    <android.support.design.widget.TextInputLayout
+                        android:id="@+id/input_layout_7"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@color/white"
+                        android:layout_alignParentRight="true"
+                        android:layout_alignParentEnd="true"
+                        android:layout_below="@+id/layout_client">
+
+                        <EditText
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:hint="@string/address"
+                            android:visibility="gone"
+                            android:focusable="false"
+                            android:id="@+id/etAddress" />
+                    </android.support.design.widget.TextInputLayout>
+
+                    <android.support.design.widget.TextInputLayout
+                        android:id="@+id/input_layout_e1d22"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@color/white"
+                        android:layout_alignParentRight="true"
+                        android:layout_alignParentEnd="true"
+                        android:layout_below="@+id/layout_client">
+
+                        <EditText
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:hint="@string/description"
+                            android:visibility="gone"
+                            android:focusable="false"
+                            android:id="@+id/etDescription" />
+                    </android.support.design.widget.TextInputLayout>
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:orientation="vertical"
+                    android:visibility="visible"
+                    android:id="@+id/view2"
+                    android:layout_below="@+id/view1"
+                    android:layout_height="match_parent">
+
+                    <LinearLayout
+                        android:orientation="horizontal"
+                        android:layout_marginTop="1dp"
+                        android:background="@color/white"
+                        android:paddingLeft="8dp"
+                        android:paddingRight="8dp"
+                        android:paddingTop="15dp"
+                        android:paddingBottom="10dp"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content" >
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginRight="10dp"
+                            android:text="@string/type_client"
+                            android:layout_weight="50"
+                            android:id="@+id/textView34" />
+
+                        <Spinner
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:id="@+id/spType"
+                            android:layout_weight="50"/>
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:orientation="horizontal"
+                        android:layout_marginTop="1dp"
+                        android:background="@color/white"
+                        android:paddingLeft="8dp"
+                        android:paddingRight="8dp"
+                        android:paddingTop="15dp"
+                        android:paddingBottom="10dp"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content" >
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginRight="10dp"
+                            android:text="@string/group_client"
+                            android:layout_weight="50"
+                            android:id="@+id/textView35" />
+
+                        <Spinner
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:id="@+id/spGroup"
+                            android:layout_weight="50" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:orientation="horizontal"
+                        android:layout_marginTop="1dp"
+                        android:background="@color/white"
+                        android:paddingLeft="8dp"
+                        android:paddingRight="8dp"
+                        android:paddingTop="15dp"
+                        android:paddingBottom="10dp"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content" >
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginRight="10dp"
+                            android:text="@string/status"
+                            android:layout_weight="50"
+                            android:id="@+id/textView36" />
+
+                        <Spinner
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="50"
+                            android:id="@+id/spStatus"/>
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:orientation="horizontal"
+                        android:layout_marginTop="1dp"
+                        android:background="@color/white"
+                        android:paddingLeft="8dp"
+                        android:paddingRight="8dp"
+                        android:paddingTop="15dp"
+                        android:paddingBottom="10dp"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent">
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginRight="10dp"
+                            android:layout_weight="50"
+                            android:text="@string/area"
+                            android:id="@+id/textView322" />
+
+                        <Spinner
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:id="@+id/spArea"
+                            android:layout_weight="50" />
+                    </LinearLayout>
+
+                    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                        xmlns:tools="http://schemas.android.com/tools"
+                        android:layout_width="match_parent"
+                        android:background="@color/gray_dark"
+                        android:layout_height="match_parent" >
+
+                        <anhpha.clientfirst.crm.customs.CustomMapView
+                            android:id="@+id/mapview"
+                            android:layout_width="match_parent"
+                            android:layout_height="300dp" />
+
+                    </RelativeLayout>
+
+
+                </LinearLayout>
+
+            </RelativeLayout>
+
+        </LinearLayout>
+        </RelativeLayout>
+        </ScrollView>
+
+    </RelativeLayout>
+    <anhpha.clientfirst.crm.fab.FloatingActionMenu
+        android:id="@+id/menu"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_gravity="bottom|right"
+        android:layout_alignParentRight="true"
+        android:layout_marginRight="10dp"
+        android:layout_marginBottom="10dp"
+        android:layout_marginLeft="10dp"
+        fab:menu_fab_size="normal"
+        fab:menu_showShadow="true"
+        fab:menu_shadowColor="#66000000"
+        fab:menu_shadowRadius="4dp"
+        fab:menu_shadowXOffset="1dp"
+        fab:menu_shadowYOffset="3dp"
+        fab:menu_colorNormal="@color/colorApp"
+        fab:menu_colorPressed="@color/colorApp"
+        fab:menu_colorRipple="#99FFFFFF"
+        fab:menu_animationDelayPerItem="50"
+        fab:menu_icon="@drawable/fab_add"
+        fab:menu_buttonSpacing="0dp"
+        fab:menu_labels_margin="0dp"
+        fab:menu_labels_showAnimation="@anim/fab_slide_in_from_right"
+        fab:menu_labels_hideAnimation="@anim/fab_slide_out_to_right"
+        fab:menu_labels_paddingTop="4dp"
+        fab:menu_labels_paddingRight="8dp"
+        fab:menu_labels_paddingBottom="4dp"
+        fab:menu_labels_paddingLeft="8dp"
+        fab:menu_labels_padding="8dp"
+        fab:menu_labels_textColor="@color/colorAppDark"
+        fab:menu_labels_textSize="14sp"
+        fab:menu_labels_cornerRadius="3dp"
+        fab:menu_labels_colorNormal="#FFFFFF"
+        fab:menu_labels_colorPressed="#FFFFFF"
+        fab:menu_labels_colorRipple="@color/colorApp"
+        fab:menu_labels_showShadow="true"
+        fab:menu_labels_singleLine="false"
+        fab:menu_labels_ellipsize="none"
+        fab:menu_labels_maxLines="-1"
+        fab:menu_labels_position="left"
+        fab:menu_openDirection="up"
+        fab:menu_backgroundColor="@android:color/transparent"
+        fab:menu_fab_show_animation="@anim/show_from_bottom"
+        fab:menu_fab_hide_animation="@anim/hide_to_bottom">
+
+
+        <anhpha.clientfirst.crm.fab.FloatingActionButton
+            android:id="@+id/menu_item1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:scaleType="centerInside"
+            android:padding="15dp"
+            android:src="@mipmap/ic_crm_88"
+            style="@style/MenuButtonsSmall"
+            fab:fabSize="normal"
+            fab:fab_label="@string/order" />
+        <anhpha.clientfirst.crm.fab.FloatingActionButton
+            android:id="@+id/menu_item2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:scaleType="centerInside"
+            android:padding="15dp"
+            android:src="@mipmap/ic_crm_91"
+            style="@style/MenuButtonsSmall"
+            fab:fabSize="normal"
+            fab:fab_label="@string/work" />
+        <anhpha.clientfirst.crm.fab.FloatingActionButton
+            android:id="@+id/menu_item3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:scaleType="centerInside"
+            android:padding="15dp"
+            android:src="@mipmap/ic_crm_98"
+            style="@style/MenuButtonsSmall"
+            fab:fabSize="normal"
+            fab:fab_label="@string/meet" />
+
+        <anhpha.clientfirst.crm.fab.FloatingActionButton
+            android:id="@+id/menu_item4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:scaleType="centerInside"
+            android:padding="15dp"
+            android:src="@mipmap/ic_crm_87"
+            style="@style/MenuButtonsSmall"
+            fab:fabSize="normal"
+            fab:fab_label="@string/call" />
+        <anhpha.clientfirst.crm.fab.FloatingActionButton
+            android:id="@+id/menu_item5"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:scaleType="centerInside"
+            android:padding="15dp"
+            android:src="@mipmap/ic_crm_92"
+            style="@style/MenuButtonsSmall"
+            fab:fabSize="normal"
+            fab:fab_label="@string/email" />
+
+        <anhpha.clientfirst.crm.fab.FloatingActionButton
+            android:id="@+id/menu_item6"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:scaleType="centerInside"
+            android:padding="15dp"
+            android:src="@mipmap/ic_crm_90"
+            style="@style/MenuButtonsSmall"
+            fab:fabSize="normal"
+            fab:fab_label="@string/event" />
+
+        <anhpha.clientfirst.crm.fab.FloatingActionButton
+            android:id="@+id/menu_item7"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:scaleType="centerInside"
+            android:padding="15dp"
+            android:src="@mipmap/ic_crm_34"
+            style="@style/MenuButtonsSmall"
+            fab:fabSize="normal"
+            fab:fab_label="@string/label" />
+
+    </anhpha.clientfirst.crm.fab.FloatingActionMenu>
+
+</android.support.design.widget.CoordinatorLayout>

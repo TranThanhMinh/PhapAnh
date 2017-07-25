@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#009BDA</color>
+    <color name="colorPrimaryDark">#0991D0</color>
+    <color name="colorAccent">#00000000</color>
+
+    <color name="colorApp">#009BDA</color>
+    <color name="colorAppDark">#0991D0</color>
+    <color name="colorAppLight">#0deded</color>
+    <color name="white">#ffffff</color>
+    <color name="red">#FF1744</color>
+    <color name="green">#00E676</color>
+    <color name="gray_dark">#d9d9d9</color>
+    <color name="dark_light">#898989</color>
+    <color name="gray">#EFEBE9</color>
+    <color name="dark">#333333</color>
+    <color name="transparent">#00000000</color>
+    <color name="blue">#0000ff</color>
+    <color name="orange">#ffb732</color>
+    <color name="orange_light">#FFFACD</color>
+    <color name="radio_button_selected_color">#ff33b5e5</color>
+    <color name="radio_button_unselected_color">#00000000</color>
+    <color name="order_status_1">#2ABCBA</color>
+    <color name="order_status_2">#FAAC58</color>
+    <color name="order_status_4">#0B0B61</color>
+    <color name="order_status_6">#DF0101</color>
+    <color name="order_status_7">#009BDA</color>
+
+    <color name="float_transparent">#00000000</color>
+    <color name="sweet_dialog_bg_color">#FFFFFF</color>
+    <color name="button_text_color">#FFFFFF</color>
+    <color name="gray_btn_bg_color">#D0D0D0</color>
+    <color name="gray_btn_bg_pressed_color">#B6B6B6</color>
+    <color name="blue_btn_bg_color">#AEDEF4</color>
+    <color name="blue_btn_bg_pressed_color">#96BFD2</color>
+    <color name="red_btn_bg_color">#DD6B55</color>
+    <color name="red_btn_bg_pressed_color">#CD5B55</color>
+    <color name="error_stroke_color">#F27474</color>
+    <color name="success_stroke_color">#A5DC86</color>
+    <color name="trans_success_stroke_color">#33A5DC86</color>
+    <color name="warning_stroke_color">#F8BB86</color>
+    <color name="text_color">#575757</color>
+    <color name="material_blue_grey_80">#ff37474f</color>
+    <color name="material_blue_grey_90">#ff263238</color>
+    <color name="material_blue_grey_95">#ff21272b</color>
+    <color name="material_deep_teal_20">#ff80cbc4</color>
+    <color name="material_deep_teal_50">#ff009688</color>
+    <!-- Exceptions colors -->
+    <color name="dynamicbox_exception_button_color">#5fcf80</color>
+    <color name="dynamicbox_exception_button_color_second">#35c460</color>
+    <color name="dynamicbox_exception_title_color">#ff6a7983</color>
+    <color name="dynamicbox_exception_message_color">#8c989e</color>
+
+    <color name="windowBackground">#1C1C1C</color>
+    <color name="colorButtonNormal">#FFFFFB</color>
+    <color name="textColorPrimary">#FFFFFB</color>
+    <color name="textColorPrimaryInverse">#1C1C1C</color>
+    <color name="overlay">#AA1C1C1C</color>
+    <color name="divider">#333333</color>
+
+</resources>

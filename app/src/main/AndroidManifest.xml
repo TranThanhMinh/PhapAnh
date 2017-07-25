@@ -1,0 +1,386 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="anhpha.clientfirst.crm" >
+
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+    <uses-permission android:name="android.permission.CHANGE_WIFI_STATE" />
+    <uses-permission android:name="com.google.android.providers.gsf.permission.READ_GSERVICES"/>
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
+    <uses-permission android:name="android.permission.CALL_PHONE" />
+    <uses-permission android:name="android.permission.WRITE_CALENDAR" />
+    <uses-permission android:name="android.permission.READ_CALENDAR" />
+    <uses-permission android:name="android.permission.READ_CONTACTS"/>
+
+    <uses-permission android:name="android.permission.GET_TASKS"/>
+    <uses-feature android:name="android.hardware.location.gps" android:required="false"></uses-feature>
+    <uses-feature android:name="android.hardware.telephony" android:required="false"></uses-feature>
+    <supports-screens
+
+        android:largeScreens="true"
+
+        android:normalScreens="true"
+
+        android:smallScreens="true"
+
+        android:xlargeScreens="true"
+
+        android:resizeable="true"
+
+        android:anyDensity="true"
+
+        />
+    <uses-feature
+        android:glEsVersion="0x00020000"
+        android:required="true"/>
+    <permission
+        android:name="anhpha.clientfirst.crm.permission.MAPS_RECEIVE"
+        android:protectionLevel="signature"/>
+    <uses-permission android:name="anhpha.clientfirst.crm.MAPS_RECEIVE"/>
+    <application
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:supportsRtl="true"
+        android:name="android.support.multidex.MultiDexApplication"
+        android:theme="@style/AppTheme" >
+        <!--<service android:name=".utils.MyFirebaseMessagingService">-->
+            <!--<intent-filter>-->
+                <!--<action android:name="com.google.firebase.MESSAGING_EVENT"/>-->
+            <!--</intent-filter>-->
+        <!--</service>-->
+        <service android:name="anhpha.clientfirst.crm.utils.FirebaseIDService">
+            <intent-filter>
+                <action android:name="com.google.firebase.INSTANCE_ID_EVENT"/>
+            </intent-filter>
+        </service>
+        <receiver
+            android:name="anhpha.clientfirst.crm.utils.FirebaseDataReceiver"
+            android:exported="true"
+            android:permission="com.google.android.c2dm.permission.SEND">
+            <intent-filter>
+                <action android:name="com.google.android.c2dm.intent.RECEIVE" />
+            </intent-filter>
+        </receiver>
+
+        <meta-data
+            android:name="com.google.android.maps.v2.API_KEY"
+            android:value="AIzaSyAhIiTgQzt-UOSG3NN5Vejeg2D5n2AQAbs"/>
+        <meta-data
+            android:name="com.google.android.gms.version"
+            android:value="@integer/google_play_services_version" />
+
+        <activity android:name="anhpha.clientfirst.crm.activity.LoginActivity"
+            android:screenOrientation="portrait">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN"/>
+                <category android:name="android.intent.category.LAUNCHER"/>
+            </intent-filter>
+
+        </activity>
+        <activity android:name="anhpha.clientfirst.crm.activity.MainActivity"
+            android:screenOrientation="portrait">
+        </activity>
+        <activity
+            android:name="anhpha.clientfirst.crm.activity.ActivityUserActivity"
+            android:label="@string/title_activity_activity_user"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme" >
+        </activity>
+        <activity
+            android:name="anhpha.clientfirst.crm.activity.OrdersActivity"
+            android:label="@string/title_activity_order"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme" >
+        </activity>
+        <activity
+            android:name="anhpha.clientfirst.crm.activity.ReportActivity"
+            android:label="@string/title_activity_report"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme" >
+        </activity>
+        <activity
+            android:name="anhpha.clientfirst.crm.activity.ReportSalesMonthActivity"
+            android:label="@string/title_activity_report"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme" >
+        </activity>
+        <activity
+            android:name="anhpha.clientfirst.crm.activity.ReportSalesUserActivity"
+            android:label="@string/title_activity_report"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme" >
+        </activity>
+        <activity
+            android:name="anhpha.clientfirst.crm.activity.CalendarActivitiesActivity"
+            android:label="@string/title_activity_calendar_activities"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme" >
+        </activity>
+        <activity
+            android:name="anhpha.clientfirst.crm.activity.ReportOrderCountUserActivity"
+            android:label="@string/title_activity_report"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme" >
+        </activity>
+        <activity
+            android:name="anhpha.clientfirst.crm.activity.ReportInventoryActivity"
+            android:label="@string/title_activity_report"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme" >
+        </activity> <activity
+            android:name="anhpha.clientfirst.crm.activity.ClientsActivity"
+            android:label="@string/title_activity_client"
+        android:screenOrientation="portrait"
+            android:theme="@style/AppTheme" >
+        </activity> <activity
+            android:name="anhpha.clientfirst.crm.activity.WorksActivity"
+            android:label="@string/title_activity_work"
+        android:screenOrientation="portrait"
+            android:theme="@style/AppTheme" >
+        </activity><activity
+            android:name="anhpha.clientfirst.crm.activity.CommunicationsActivity"
+            android:label="@string/title_activity_communication"
+        android:screenOrientation="portrait"
+            android:theme="@style/AppTheme" >
+    </activity><activity
+            android:name="anhpha.clientfirst.crm.activity.CommunicationActivity"
+            android:label="@string/title_activity_communication"
+        android:screenOrientation="portrait"
+            android:theme="@style/AppTheme" >
+    </activity>
+        <activity
+            android:name="anhpha.clientfirst.crm.activity.KPIActivity"
+            android:label="@string/title_activity_kpi"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme" >
+        </activity><activity
+            android:name="anhpha.clientfirst.crm.activity.InventoriesActivity"
+            android:label="@string/title_activity_inventory"
+        android:screenOrientation="portrait"
+            android:theme="@style/AppTheme" >
+        </activity>
+        <activity
+            android:name="anhpha.clientfirst.crm.activity.TrackingActivity"
+            android:label="@string/title_activity_tracking"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme" >
+        </activity>
+        <activity
+            android:name="anhpha.clientfirst.crm.activity.TrackingByUserActivity"
+            android:label="@string/title_activity_tracking"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme" >
+        </activity>
+        <activity
+            android:name="anhpha.clientfirst.crm.activity.ChangPassActivity"
+            android:label="@string/title_activity_change_pass"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme" >
+        </activity>
+        <activity
+            android:name="anhpha.clientfirst.crm.activity.OrderActivity"
+            android:label="@string/title_activity_order"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme" >
+        </activity>
+        <activity
+            android:name="anhpha.clientfirst.crm.activity.OrderViewActivity"
+            android:label="@string/title_activity_order"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme" >
+        </activity><activity
+            android:name="anhpha.clientfirst.crm.activity.ContractsActivity"
+            android:label="@string/title_activity_contract"
+        android:screenOrientation="portrait"
+            android:theme="@style/AppTheme" >
+        </activity><activity
+        android:name="anhpha.clientfirst.crm.activity.LabelsActivity"
+        android:label="@string/title_activity_label"
+        android:screenOrientation="portrait"
+        android:theme="@style/AppTheme" >
+    </activity><activity
+        android:name="anhpha.clientfirst.crm.activity.LabelActivity"
+        android:label="@string/title_activity_label"
+        android:screenOrientation="portrait"
+        android:theme="@style/AppTheme" >
+    </activity><activity
+        android:name="anhpha.clientfirst.crm.activity.CallActivity"
+        android:label="@string/title_activity_call"
+        android:screenOrientation="portrait"
+        android:theme="@style/AppTheme" >
+    </activity><activity
+        android:name="anhpha.clientfirst.crm.activity.EmailActivity"
+        android:label="@string/title_activity_email"
+        android:screenOrientation="portrait"
+        android:theme="@style/AppTheme" >
+    </activity><activity
+        android:name="anhpha.clientfirst.crm.activity.CheckinActivity"
+        android:label="@string/title_activity_chekin"
+        android:screenOrientation="portrait"
+        android:theme="@style/AppTheme" >
+        </activity>
+        <activity
+            android:name="anhpha.clientfirst.crm.activity.WorkActivity"
+            android:label="@string/title_activity_work"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme" >  </activity>
+        <activity
+            android:name="anhpha.clientfirst.crm.activity.CalendarsActivity"
+            android:label="@string/title_activity_calendars"
+            android:theme="@style/AppTheme" ></activity>
+        <activity
+            android:name="anhpha.clientfirst.crm.activity.CalendarClientActivity"
+            android:label="@string/title_activity_calendar"
+            android:theme="@style/AppTheme" >
+    </activity><activity
+            android:name="anhpha.clientfirst.crm.activity.CheckInventoryActivity"
+            android:label="@string/title_activity_check_inventory"
+            android:theme="@style/AppTheme" >
+    </activity><activity
+        android:name="anhpha.clientfirst.crm.activity.CropperImage"
+        android:label="@string/title_activity_crop_image"
+        android:theme="@style/AppTheme" >
+    </activity><activity
+        android:name="anhpha.clientfirst.crm.activity.ClientActivity"
+        android:label="@string/title_activity_client"
+        android:theme="@style/AppTheme" >
+    </activity><activity
+        android:name="anhpha.clientfirst.crm.activity.ChooseClientsActivity"
+        android:label="@string/title_activity_choose_client"
+        android:theme="@style/AppTheme" >
+    </activity><activity
+        android:name="anhpha.clientfirst.crm.activity.ChooseClientContactActivity"
+        android:label="@string/title_activity_choose_client"
+        android:theme="@style/AppTheme" >
+    </activity>
+        <activity
+            android:name="anhpha.clientfirst.crm.activity.EditClientActivity"
+            android:label="@string/title_activity_client_edit"
+            android:theme="@style/AppTheme" >
+        </activity>
+        <activity
+            android:name="anhpha.clientfirst.crm.activity.UsersActivity"
+            android:label="@string/title_activity_users"
+            android:theme="@style/AppTheme" >
+        </activity>
+        <activity
+            android:name="anhpha.clientfirst.crm.activity.ChooseUsersActivity"
+            android:label="@string/title_activity_users"
+            android:theme="@style/AppTheme" >
+        </activity>
+        <activity
+            android:name="anhpha.clientfirst.crm.activity.CalendarAddActivity"
+            android:label="@string/title_activity_calendars"
+            android:theme="@style/AppTheme" >
+        </activity>
+        <activity
+            android:name="anhpha.clientfirst.crm.activity.CalendarActivity"
+            android:label="@string/title_activity_calendar"
+            android:theme="@style/AppTheme" >
+        </activity>
+        <activity
+            android:name="anhpha.clientfirst.crm.activity.ChooseClientAreaActivity"
+            android:label="@string/area"
+            android:theme="@style/AppTheme" >
+        </activity>
+        <activity
+            android:name="anhpha.clientfirst.crm.activity.ChooseClientGroupActivity"
+            android:label="@string/group_client"
+            android:theme="@style/AppTheme" >
+        </activity>
+        <activity
+            android:name="anhpha.clientfirst.crm.activity.ChooseClientLabelActivity"
+            android:label="@string/label"
+            android:theme="@style/AppTheme" >
+        </activity>
+        <activity
+            android:name="anhpha.clientfirst.crm.activity.ChooseClientStatusActivity"
+            android:label="@string/status"
+            android:theme="@style/AppTheme" >
+        </activity>
+        <activity
+            android:name="anhpha.clientfirst.crm.activity.ChooseClientTypeActivity"
+            android:label="@string/type_client"
+            android:theme="@style/AppTheme" >
+        </activity>
+        <activity
+            android:name="anhpha.clientfirst.crm.activity.ViewImageActivity"
+            android:label="@string/checkin"
+            android:theme="@style/AppTheme" >
+        </activity>
+        <activity
+            android:name="anhpha.clientfirst.crm.activity.ChangPassByEmailActivity"
+            android:label="@string/title_activity_forgot_password"
+            android:theme="@style/AppTheme" >
+        </activity>
+        <activity
+            android:name="anhpha.clientfirst.crm.activity.GeneralActivity"
+            android:label="@string/general"
+            android:theme="@style/AppTheme" >
+        </activity>
+        <activity
+            android:name="anhpha.clientfirst.crm.activity.GeneralSettingLanguage"
+            android:label="@string/setting_language"
+            android:theme="@style/AppTheme" >
+        </activity>
+        <activity
+            android:name="anhpha.clientfirst.crm.activity.RegisterActivity"
+            android:label="@string/title_activity_register"
+            android:theme="@style/AppTheme" >
+        </activity>
+        <activity
+        android:name="anhpha.clientfirst.crm.activity.EventViewActivity"
+        android:label="@string/title_activity_event"
+        android:theme="@style/AppTheme" >
+    </activity>
+        <activity
+            android:name="anhpha.clientfirst.crm.activity.EventActivity"
+            android:label="@string/title_activity_event"
+            android:theme="@style/AppTheme" >
+        </activity>
+        <activity
+            android:name="anhpha.clientfirst.crm.activity.EventsActivity"
+            android:label="@string/title_activity_event"
+            android:theme="@style/AppTheme" >
+        </activity>
+        <activity
+            android:name="anhpha.clientfirst.crm.activity.EventClientActivity"
+            android:label="@string/title_activity_event"
+            android:theme="@style/AppTheme" >
+        </activity>
+        <activity
+            android:name="anhpha.clientfirst.crm.activity.EventsClientActivity"
+            android:label="@string/title_activity_event"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme" >
+        </activity>
+        <activity
+            android:name="anhpha.clientfirst.crm.activity.OrdersDebtActivity"
+            android:label="@string/title_activity_order_debt"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme" >
+        </activity>
+        <activity
+            android:name="anhpha.clientfirst.crm.activity.OrderDebtActivity"
+            android:label="@string/title_activity_order_debt"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme" >
+        </activity>
+        <activity
+            android:configChanges="orientation|screenSize"
+            android:name=".crop.CropActivity"
+            android:label="@string/app_name"
+            >
+
+        </activity>
+        <activity
+            android:name=".crop.ResultActivity">
+        </activity>
+    </application>
+
+</manifest>

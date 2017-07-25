@@ -1,0 +1,178 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:padding="5dp"
+    android:background="@color/white"
+    android:layout_height="match_parent">
+
+    <ImageButton
+        android:layout_width="35dp"
+        android:layout_height="match_parent"
+        android:id="@+id/imageButton"
+        android:src="@mipmap/ic_crm_26"
+        android:scaleType="centerInside"
+        android:clickable="true"
+        android:background="@color/white"
+        android:padding="6dp"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Client name"
+        android:id="@+id/client_name"
+        android:maxLines="2"
+        android:background="@color/white"
+        android:layout_below="@+id/linearLayout2"
+        android:gravity="center_vertical"
+        android:layout_alignLeft="@+id/address"
+        android:layout_alignStart="@+id/address"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Address"
+        android:id="@+id/address"
+        android:paddingTop="5dp"
+        android:textSize="@dimen/text_size_small"
+        android:background="@color/white"
+        android:layout_below="@+id/client_name"
+        android:layout_toRightOf="@+id/imageButton"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text=""
+        android:id="@+id/distance"
+        android:gravity="center_vertical"
+        android:background="@color/white"
+        android:layout_below="@+id/address"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true" />
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="wrap_content"
+        android:layout_height="20dp"
+        android:padding="2dp"
+        android:visibility="visible"
+        android:background="@color/white"
+        android:id="@+id/linearLayout2"
+        android:layout_alignLeft="@+id/client_name"
+        android:layout_alignStart="@+id/client_name">
+        </LinearLayout>
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_alignLeft="@+id/client_name"
+        android:layout_alignStart="@+id/client_name"
+        android:layout_height="wrap_content">
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="5dp"
+        android:visibility="gone"
+        android:id="@+id/linearLayout3"
+        android:background="@drawable/layout_round_gray_client"
+        >
+        <ImageButton
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:padding="5dp"
+            android:src="@mipmap/ic_crm_29"
+            android:scaleType="centerInside"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="3dp"
+            android:clickable="true"
+            android:background="@color/gray"
+            android:id="@+id/imageButton2" />
+
+        <ImageButton
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:src="@mipmap/ic_crm_32"
+            android:padding="5dp"
+            android:layout_marginLeft="3dp"
+            android:layout_marginRight="3dp"
+            android:clickable="true"
+            android:scaleType="centerInside"
+            android:background="@color/gray"
+            android:id="@+id/imageButton3" />
+
+        <ImageButton
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:padding="5dp"
+            android:layout_marginLeft="3dp"
+            android:layout_marginRight="3dp"
+            android:clickable="true"
+            android:src="@mipmap/ic_crm_99"
+            android:scaleType="centerInside"
+            android:background="@color/gray"
+            android:id="@+id/imageButton4" />
+
+        <ImageButton
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:padding="5dp"
+            android:layout_marginLeft="3dp"
+            android:layout_marginRight="3dp"
+            android:clickable="true"
+            android:src="@mipmap/ic_crm_28"
+            android:scaleType="centerInside"
+            android:background="@color/gray"
+            android:id="@+id/imageButton5" />
+
+        <ImageButton
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:padding="5dp"
+            android:layout_marginLeft="3dp"
+            android:layout_marginRight="3dp"
+            android:src="@mipmap/ic_crm_58"
+            android:clickable="true"
+            android:scaleType="fitXY"
+            android:background="@color/gray"
+            android:id="@+id/imageButton6" />
+
+        <ImageButton
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_marginLeft="3dp"
+            android:layout_marginRight="3dp"
+            android:padding="5dp"
+            android:src="@mipmap/ic_crm_31"
+            android:scaleType="centerInside"
+            android:clickable="true"
+            android:background="@color/gray"
+            android:id="@+id/imageButton7" />
+        <ImageButton
+            android:layout_width="wrap_content"
+            android:layout_height="30dp"
+            android:padding="5dp"
+            android:layout_marginLeft="3dp"
+            android:layout_marginRight="5dp"
+            android:clickable="true"
+            android:src="@mipmap/ic_crm_34"
+            android:scaleType="centerInside"
+            android:background="@color/gray"
+            android:id="@+id/imageButton8" />
+    </LinearLayout>
+    </ScrollView>
+
+    <ImageView
+
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:id="@+id/im_activity"
+        android:src="@mipmap/ic_check"
+        android:layout_centerHorizontal="true"
+        android:visibility="gone"
+        android:layout_alignRight="@+id/distance"
+        android:layout_alignEnd="@+id/distance" />
+</RelativeLayout>

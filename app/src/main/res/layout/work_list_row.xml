@@ -1,0 +1,180 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    android:orientation="vertical"
+    android:padding="5dp">
+
+    <anhpha.clientfirst.crm.swipe.SwipeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:elevation="5dp"
+            android:gravity="right"
+            android:padding="5dp">
+
+            <TextView
+                android:id="@+id/done"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:background="@color/colorApp"
+                android:clickable="true"
+                android:gravity="center"
+                android:padding="20dp"
+                android:text="@string/done"
+                android:textColor="@color/white" />
+
+            <TextView
+                android:id="@+id/delete"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:background="@color/red"
+                android:clickable="true"
+                android:gravity="center"
+                android:padding="20dp"
+                android:tag="Hover"
+                android:text="@string/delete"
+                android:textColor="@color/white" />
+        </LinearLayout>
+
+        <RelativeLayout
+            android:id="@+id/view1"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <RelativeLayout
+                android:id="@+id/view"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_below="@+id/linearLayout2"
+                android:background="@color/orange_light">
+
+
+            </RelativeLayout>
+
+            <ImageButton
+                android:id="@+id/imageButton"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:layout_below="@+id/user"
+                android:background="@color/transparent"
+                android:padding="5dp"
+                android:scaleType="centerInside"
+                android:src="@mipmap/ic_dms_14" />
+
+            <TextView
+                android:id="@+id/type"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignTop="@+id/imageButton"
+                android:layout_below="@+id/user"
+                android:layout_toEndOf="@+id/imageButton"
+                android:layout_toRightOf="@+id/imageButton"
+                android:gravity="center_vertical"
+                android:maxLines="2"
+                android:padding="5dp"
+                android:text="Type" />
+
+            <TextView
+                android:id="@+id/client"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_toEndOf="@+id/type"
+                android:layout_toRightOf="@+id/type"
+                android:gravity="center_vertical"
+                android:singleLine="true"
+                android:textColor="@color/colorApp"
+                android:visibility="visible"
+                android:text=" > Client"
+                android:layout_above="@+id/content"
+                android:layout_alignTop="@+id/type" />
+
+            <TextView
+                android:id="@+id/content"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/type"
+                android:layout_toRightOf="@+id/imageButton"
+                android:paddingLeft="5dp"
+                android:text="content" />
+
+            <TextView
+                android:id="@+id/time"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentRight="true"
+                android:layout_alignTop="@+id/user"
+                android:gravity="center_vertical"
+                android:text="0 m" />
+
+            <TextView
+                android:id="@+id/user"
+                android:layout_width="match_parent"
+                android:layout_height="20dp"
+                android:layout_alignLeft="@+id/type"
+                android:layout_alignStart="@+id/type"
+                android:layout_below="@+id/linearLayout2"
+                android:orientation="horizontal"
+                android:padding="2dp"
+                android:paddingLeft="5dp"
+                android:text="User Name">
+
+            </TextView>
+
+            <LinearLayout
+                android:id="@+id/linearLayout2"
+                android:layout_width="wrap_content"
+                android:layout_height="30dp"
+                android:layout_marginBottom="10dp"
+                android:layout_toEndOf="@+id/imageButton"
+                android:layout_toRightOf="@+id/imageButton"
+                android:background="@drawable/layout_round"
+                android:orientation="horizontal"
+                android:paddingLeft="8dp"
+                android:paddingRight="28dp"
+                android:visibility="gone">
+
+                <TextView
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:layout_alignLeft="@+id/type"
+                    android:layout_alignStart="@+id/type"
+                    android:layout_below="@+id/linearLayout2"
+                    android:layout_gravity="center_vertical"
+                    android:background="@drawable/layout_round_white"
+                    android:orientation="horizontal"
+                    android:padding="2dp">
+
+                </TextView>
+
+                <TextView
+                    android:id="@+id/title"
+                    android:layout_width="match_parent"
+                    android:layout_height="20dp"
+                    android:layout_alignLeft="@+id/type"
+                    android:layout_alignStart="@+id/type"
+                    android:layout_below="@+id/linearLayout2"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginLeft="8dp"
+                    android:orientation="horizontal"
+                    android:padding="2dp"
+                    android:text="@string/out_of_date"
+                    android:textColor="@color/white">
+
+                </TextView>
+
+
+            </LinearLayout>
+
+        </RelativeLayout>
+
+    </anhpha.clientfirst.crm.swipe.SwipeLayout>
+
+</RelativeLayout>

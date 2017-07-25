@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.design.widget.CoordinatorLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+
+    tools:context="anhpha.clientfirst.crm.activity.ClientsActivity">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <include layout="@layout/layout_toolbar"
+            android:id="@+id/include"></include>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_marginTop="2dp"
+            android:background="@color/white"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentBottom="true"
+            android:id="@+id/relativeLayout">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:id="@+id/linearLayout">
+                <LinearLayout
+                    android:orientation="vertical"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="16"
+                    >
+                    <ImageButton
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:padding="5dp"
+                        android:src="@mipmap/ic_crm_49"
+                        android:scaleType="centerInside"
+                        android:background="@color/transparent"
+                        android:gravity="center"
+                        android:id="@+id/imageButton1" />
+
+                </LinearLayout>
+                <LinearLayout
+                    android:orientation="vertical"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="16"
+                    >
+                    <ImageButton
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:src="@mipmap/ic_crm_52"
+                        android:layout_gravity="center"
+                        android:padding="5dp"
+                        android:scaleType="centerInside"
+                        android:background="@color/transparent"
+                        android:id="@+id/imageButton2" />
+
+                </LinearLayout>
+                <LinearLayout
+                    android:orientation="vertical"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="16"
+                    >
+                    <ImageButton
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:src="@mipmap/ic_crm_46"
+                        android:scaleType="centerInside"
+                        android:padding="5dp"
+                        android:background="@color/transparent"
+                        android:gravity="center"
+                        android:id="@+id/imageButton3" />
+
+                </LinearLayout>
+
+            </LinearLayout>
+        </RelativeLayout>
+        <LinearLayout
+            android:id="@+id/relativeLayout2"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@+id/include"
+            android:orientation="vertical"
+            android:layout_centerHorizontal="true"
+            android:layout_above="@+id/relativeLayout">
+            <include layout="@layout/layout_find_action"></include>
+        <LinearLayout
+            android:id="@+id/linearLayout2"
+            android:orientation="horizontal"
+            android:layout_width="wrap_content"
+            android:layout_height="30dp"
+            android:paddingLeft="8dp"
+            android:paddingRight="28dp"
+            android:layout_margin="10dp"
+            android:layout_marginBottom="10dp"
+            android:visibility="visible"
+            android:layout_below="@+id/include"
+            android:background="@drawable/layout_round"
+            android:layout_toRightOf="@+id/imageButton"
+            android:layout_toEndOf="@+id/imageButton">
+            <TextView
+                android:orientation="horizontal"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:layout_gravity="center_vertical"
+                android:padding="2dp"
+                android:background="@drawable/layout_round_white"
+                android:layout_below="@+id/linearLayout2"
+                android:layout_alignLeft="@+id/type"
+                android:layout_alignStart="@+id/type">
+
+            </TextView>
+            <TextView
+                android:id="@+id/title"
+                android:orientation="horizontal"
+                android:layout_width="wrap_content"
+                android:layout_height="20dp"
+                android:padding="2dp"
+                android:textColor="@color/white"
+                android:text="@string/to_date"
+                android:layout_marginLeft="8dp"
+                android:layout_gravity="center_vertical"
+                android:layout_below="@+id/linearLayout2"
+                android:layout_alignLeft="@+id/type"
+                android:layout_alignStart="@+id/type">
+
+            </TextView>
+            </LinearLayout>
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/rvActivities"
+                android:layout_width="match_parent"
+                android:background="@color/white"
+                android:layout_height="wrap_content" />
+
+            <com.google.android.gms.maps.MapView
+                android:id="@+id/mapview"
+                android:background="@color/white"
+                android:visibility="gone"
+                android:layout_height="match_parent"
+                android:layout_width="fill_parent"/>
+        </LinearLayout>
+    </RelativeLayout>
+
+</android.support.design.widget.CoordinatorLayout>

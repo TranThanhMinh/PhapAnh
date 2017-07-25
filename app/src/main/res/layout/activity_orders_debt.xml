@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.design.widget.CoordinatorLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+
+    android:background="@color/white"
+    tools:context="anhpha.clientfirst.crm.activity.OrdersActivity">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <include layout="@layout/layout_toolbar"
+            android:id="@+id/include"></include>
+        <android.support.v4.widget.DrawerLayout
+            android:id="@+id/drawer_layout"
+            android:layout_width="match_parent"
+            android:layout_below="@id/include"
+            android:layout_height="match_parent">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:visibility="visible"
+            android:layout_height="match_parent"
+            android:layout_centerHorizontal="true">
+
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/rvActivities"
+                android:layout_width="match_parent"
+                android:background="@color/white"
+                android:layout_height="wrap_content" />
+            <ImageButton
+                android:id="@+id/ibOpen"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_marginLeft="-2dp"
+                android:layout_marginTop="@dimen/button_height"
+                android:background="@color/transparent"
+                android:scaleType="fitXY"
+                android:src="@mipmap/ic_crm_62" />
+        </RelativeLayout>
+            <LinearLayout
+                android:id="@+id/left_drawer"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/transparent"
+                android:layout_marginTop="@dimen/button_height"
+                android:layout_gravity="left|start"
+                android:clickable="true"
+                android:orientation="horizontal">
+                <LinearLayout
+                    android:background="@color/colorApp"
+                    android:orientation="vertical"
+                    android:layout_width="200dp"
+                    android:layout_height="wrap_content">
+                    <TextView
+                        android:id="@+id/textView0"
+                        android:layout_width="match_parent"
+                        android:text="@string/total"
+                        android:textSize="@dimen/text_size_normal"
+                        android:textColor="@color/white"
+                        android:gravity="left"
+                        android:padding="10dp"
+                        android:layout_height="wrap_content" />
+                    <TextView
+                        android:id="@+id/textView1"
+                        android:layout_width="match_parent"
+                        android:text="@string/paid"
+                        android:textSize="@dimen/text_size_normal"
+                        android:textColor="@color/white"
+                        android:gravity="left"
+                        android:padding="10dp"
+                        android:layout_height="wrap_content" />
+                    <TextView
+                        android:id="@+id/textView2"
+                        android:layout_width="match_parent"
+                        android:text="@string/remain"
+                        android:textSize="@dimen/text_size_normal"
+                        android:textColor="@color/white"
+                        android:gravity="left"
+                        android:padding="10dp"
+                        android:layout_height="wrap_content" />
+
+                </LinearLayout>
+
+                <ImageButton
+                    android:id="@+id/ibClose"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:layout_marginLeft="-2dp"
+                    android:layout_marginTop="-2dp"
+                    android:background="@color/transparent"
+                    android:scaleType="fitXY"
+                    android:src="@mipmap/ic_crm_63" />
+
+            </LinearLayout>
+
+        </android.support.v4.widget.DrawerLayout>
+    </RelativeLayout>
+
+</android.support.design.widget.CoordinatorLayout>

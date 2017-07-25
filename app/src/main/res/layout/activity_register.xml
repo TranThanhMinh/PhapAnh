@@ -1,0 +1,223 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.design.widget.CoordinatorLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+
+    android:background="@color/white"
+    android:id="@+id/coordinatorLayout"
+    tools:context="anhpha.clientfirst.crm.activity.ClientsActivity">
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@android:color/white">
+
+    <include
+        android:id="@+id/toolbar"
+        layout="@layout/layout_toolbar" />
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/toolbar"
+        android:scrollbars="none">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:paddingBottom="24dp">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:padding="5dp"
+                android:background="@color/colorAppDark"
+                android:textAllCaps="true"
+                android:gravity="center"
+                android:text="@string/infomation_partner"
+                android:textColor="@color/white"
+                android:id="@+id/textView31" />
+
+             <android.support.design.widget.TextInputLayout                   
+                                   
+                 android:layout_width="match_parent"                  
+                 android:layout_height="wrap_content"               
+                 android:layout_below="@+id/ivLogoText"              
+
+                 android:layout_margin="5dp">
+            <EditText
+                android:id="@+id/etName"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/hint_business_name"
+                android:singleLine="true"/>
+             </android.support.design.widget.TextInputLayout>
+             <android.support.design.widget.TextInputLayout
+                 android:layout_width="match_parent"
+                 android:layout_height="wrap_content"                
+                 android:layout_below="@+id/ivLogoText"
+
+                                      
+                 android:layout_margin="5dp">
+            <EditText
+                android:id="@+id/etContact"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/hint_contact_name"
+                android:singleLine="true"/>
+             </android.support.design.widget.TextInputLayout>
+
+             <android.support.design.widget.TextInputLayout
+                 android:layout_width="match_parent"
+                 android:layout_height="wrap_content"           
+                 android:layout_below="@+id/ivLogoText"             
+                                     
+                                   
+                 android:layout_margin="5dp">
+            <EditText
+                android:id="@+id/etPhone"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/phone"
+                android:inputType="phone"
+                android:singleLine="true" />
+             </android.support.design.widget.TextInputLayout>
+             <android.support.design.widget.TextInputLayout
+                 android:layout_width="match_parent"
+                 android:layout_height="wrap_content"             
+                 android:layout_below="@+id/ivLogoText"
+                 android:layout_margin="5dp">
+            <EditText
+                android:id="@+id/etAddress"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/address"
+                android:singleLine="true"/>
+            </android.support.design.widget.TextInputLayout>
+
+            <Spinner
+                android:id="@+id/spnProvince"
+                style="@style/Base.Widget.AppCompat.Spinner.Underlined"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"/>
+
+            <Spinner
+                android:id="@+id/spnDistrict"
+                style="@style/Base.Widget.AppCompat.Spinner.Underlined"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp" />
+            <Spinner
+                android:id="@+id/spnWard"
+                style="@style/Base.Widget.AppCompat.Spinner.Underlined"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp" />
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="@color/white"
+                android:background="@color/colorAppDark"
+                android:padding="5dp"
+                android:gravity="center"
+                android:textAllCaps="true"
+                android:layout_marginTop="8dp"
+                android:text="@string/information_account"
+                android:id="@+id/textView32" />
+             <android.support.design.widget.TextInputLayout                     
+                                 
+                 android:layout_width="match_parent"                 
+                 android:layout_height="wrap_content"             
+                 android:layout_below="@+id/ivLogoText"           
+                                  
+                                 
+                 android:layout_margin="5dp">
+            <EditText
+                android:id="@+id/etEmail"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/email"
+                android:inputType="textEmailAddress"
+                android:singleLine="true" />
+             </android.support.design.widget.TextInputLayout>
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                 <android.support.design.widget.TextInputLayout                     
+                                       
+                     android:layout_width="match_parent"                
+                     android:layout_height="wrap_content"              
+                     android:layout_below="@+id/ivLogoText"
+                     android:layout_margin="5dp">
+                <EditText
+                    android:id="@+id/etPassword"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/password"
+                    android:inputType="textPassword"
+                    android:singleLine="true"
+                    android:layout_toLeftOf="@+id/cbxPassword"
+                    android:layout_toStartOf="@+id/cbxPassword" />
+                 </android.support.design.widget.TextInputLayout>
+                <CheckBox
+                    android:id="@+id/cbxPassword"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:background="@android:color/transparent"
+                    android:button="@mipmap/ic_dms_75"
+                    android:gravity="center"
+                    android:paddingBottom="16dp"
+                    android:paddingRight="4dp"
+                    android:paddingTop="16dp" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                 <android.support.design.widget.TextInputLayout      
+                                       
+                     android:layout_width="match_parent"              
+                     android:layout_height="wrap_content"           
+                     android:layout_below="@+id/ivLogoText"            
+                                       
+                                 
+                     android:layout_margin="5dp">
+                     <EditText
+                    android:id="@+id/etPasswordConfirm"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/re_password"
+                    android:inputType="textPassword"
+                    android:singleLine="true"
+                    android:layout_toLeftOf="@+id/cbxConfirmPassword"
+                    android:layout_toStartOf="@+id/cbxConfirmPassword" />
+                 </android.support.design.widget.TextInputLayout>
+                <CheckBox
+                    android:id="@+id/cbxRePassword"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:background="@android:color/transparent"
+                    android:button="@mipmap/ic_dms_75"
+                    android:gravity="center"
+                    android:paddingBottom="16dp"
+                    android:paddingRight="4dp"
+                    android:paddingTop="16dp" />
+            </RelativeLayout>
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="24dp">
+                
+            </RelativeLayout>
+
+        </LinearLayout>
+
+    </ScrollView>
+
+</RelativeLayout>
+    </android.support.design.widget.CoordinatorLayout>

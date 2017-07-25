@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.design.widget.CoordinatorLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+
+    android:background="@color/white"
+    tools:context="anhpha.clientfirst.crm.activity.ClientsActivity">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <include layout="@layout/layout_toolbar"
+            android:id="@+id/include"></include>
+        <LinearLayout
+            android:id="@+id/linearLayout2"
+            android:orientation="horizontal"
+            android:layout_width="wrap_content"
+            android:layout_height="30dp"
+            android:paddingLeft="8dp"
+            android:paddingRight="28dp"
+            android:layout_margin="10dp"
+            android:layout_marginBottom="10dp"
+            android:visibility="visible"
+            android:layout_below="@+id/include"
+            android:background="@drawable/layout_round"
+            android:layout_toRightOf="@+id/imageButton"
+            android:layout_toEndOf="@+id/imageButton">
+            <TextView
+                android:orientation="horizontal"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:layout_gravity="center_vertical"
+                android:padding="2dp"
+                android:background="@drawable/layout_round_white"
+                android:layout_below="@+id/linearLayout2"
+                android:layout_alignLeft="@+id/type"
+                android:layout_alignStart="@+id/type">
+
+            </TextView>
+            <TextView
+                android:id="@+id/title"
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="20dp"
+                android:padding="2dp"
+                android:textColor="@color/white"
+                android:text="@string/month"
+                android:layout_marginLeft="8dp"
+                android:layout_gravity="center_vertical"
+                android:layout_below="@+id/linearLayout2"
+                android:layout_alignLeft="@+id/type"
+                android:layout_alignStart="@+id/type">
+
+            </TextView>
+
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_below="@+id/linearLayout2"
+            android:id="@+id/view"
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:padding="8dp"
+            android:background="@color/gray"
+            android:layout_height="wrap_content">
+
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/kpi"
+                android:id="@+id/name"
+                android:padding="5dp"
+                android:maxLines="2"
+                android:textStyle="bold"
+                android:layout_weight="20"
+                android:gravity="center_vertical"
+                android:layout_below="@+id/user"
+                android:layout_toRightOf="@+id/imageButton"
+                android:layout_toEndOf="@+id/imageButton"
+                android:layout_alignTop="@+id/imageButton" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/target"
+                android:id="@+id/target"
+                android:paddingLeft="5dp"
+                android:textStyle="bold"
+                android:gravity="center"
+                android:layout_weight="20"
+                android:layout_below="@+id/type"
+                android:layout_toRightOf="@+id/imageButton" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/perform"
+                android:id="@+id/perform"
+                android:layout_weight="20"
+                android:textStyle="bold"
+                android:gravity="center"
+                android:layout_alignTop="@+id/user"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentEnd="true" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="2dp"
+                android:paddingLeft="25dp"
+                android:gravity="center"
+                android:layout_weight="25"
+                android:text="%"
+                android:textStyle="bold"
+                android:layout_below="@+id/linearLayout2"
+                android:id="@+id/percent"
+                android:layout_alignLeft="@+id/type"
+                android:layout_alignStart="@+id/type">
+
+            </TextView>
+
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/relativeLayout2"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@+id/view"
+            android:layout_centerHorizontal="true">
+
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/rvActivities"
+                android:layout_width="match_parent"
+                android:background="@color/white"
+                android:layout_height="wrap_content" />
+        </LinearLayout>
+    </RelativeLayout>
+
+</android.support.design.widget.CoordinatorLayout>

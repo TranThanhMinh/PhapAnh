@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.design.widget.CoordinatorLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:id="@id/coordinatorLayout"
+    android:background="@color/gray">
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:orientation="vertical"
+        android:layout_height="match_parent">
+        <include layout="@layout/layout_toolbar"
+            android:id="@+id/include"></include>
+
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_below="@id/include"
+                android:layout_weight="1.0"
+                android:layout_height="match_parent"
+                android:layout_above="@+id/btAdd">
+
+                <include layout="@layout/layout_client"
+                    android:id="@+id/layout_client"></include>
+
+                <LinearLayout
+                    android:id="@+id/view"
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:padding="8dp"
+                    android:layout_marginTop="5dp"
+                    android:background="@color/white"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/textView7">
+
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/contract"
+                        android:id="@+id/name"
+                        android:padding="5dp"
+                        android:maxLines="2"
+                        android:textStyle="bold"
+                        android:layout_weight="20"
+                        android:gravity="center_vertical"
+                        android:layout_below="@+id/user"
+                        android:layout_toRightOf="@+id/imageButton"
+                        android:layout_toEndOf="@+id/imageButton"
+                        android:layout_alignTop="@+id/imageButton" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/sl"
+                        android:id="@+id/target"
+                        android:paddingLeft="5dp"
+                        android:textStyle="bold"
+                        android:layout_weight="20"
+                        android:layout_below="@+id/type"
+                        android:layout_toRightOf="@+id/imageButton" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/unit_price"
+                        android:id="@+id/perform"
+                        android:layout_weight="20"
+                        android:textStyle="bold"
+                        android:gravity="center_vertical"
+                        android:layout_alignTop="@+id/user"
+                        android:layout_alignParentRight="true"
+                        android:layout_alignParentEnd="true" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:padding="2dp"
+                        android:paddingLeft="25dp"
+                        android:layout_weight="25"
+                        android:text="@string/total"
+                        android:textStyle="bold"
+                        android:layout_below="@+id/linearLayout2"
+                        android:id="@+id/percent"
+                        android:layout_alignLeft="@+id/type"
+                        android:layout_alignStart="@+id/type">
+
+                    </TextView>
+
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/relativeLayout2"
+                    android:orientation="vertical"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1.0"
+                    android:layout_marginTop="1dp">
+
+                    <ListView
+                        android:id="@+id/rvActivities"
+                        android:layout_width="match_parent"
+                        android:background="@color/white"
+                        android:layout_height="match_parent" />
+                </LinearLayout>
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="45dp"
+                    android:text="@string/total_amount_i"
+                    android:id="@+id/tvAmount"
+                    android:background="@color/gray_dark"
+                    android:gravity="center_vertical|right"
+                    android:layout_marginBottom="5dp"
+                    android:paddingRight="10dp"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentStart="true"
+                    android:layout_above="@+id/btAdd"
+                    android:layout_alignParentRight="true"
+                    android:layout_alignParentEnd="true" />
+            </LinearLayout>
+
+
+        <Button
+            android:id="@+id/btAdd"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/add_contract"
+            android:textColor="@color/colorApp"
+            android:layout_alignParentBottom="true"
+            android:background="@color/white"
+            />
+    </RelativeLayout>
+</android.support.design.widget.CoordinatorLayout>
