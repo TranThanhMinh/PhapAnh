@@ -19,9 +19,9 @@ import anhpha.clientfirst.crm.R;
 import anhpha.clientfirst.crm.configs.Constants;
 import anhpha.clientfirst.crm.configs.Preferences;
 import anhpha.clientfirst.crm.model.MActivity;
+import anhpha.clientfirst.crm.utils.DynamicBox;
 import butterknife.Bind;
 import butterknife.ButterKnife;
-import anhpha.clientfirst.crm.utils.DynamicBox;
 
 public class CalendarClientActivity extends BaseAppCompatActivity implements CompoundButton.OnCheckedChangeListener {
     @Bind(R.id.radioButton0)
@@ -61,7 +61,7 @@ public class CalendarClientActivity extends BaseAppCompatActivity implements Com
         Preferences preferences = new Preferences(mContext);
 
         setSupportActionBar(toolbar);
-        ActionBar  actionBar = getSupportActionBar();
+        ActionBar actionBar = getSupportActionBar();
         actionBar.setTitle(R.string.title_activity_calendar);
         actionBar.setDisplayHomeAsUpEnabled(true);
         actionBar.setHomeButtonEnabled(true);
@@ -205,7 +205,7 @@ public class CalendarClientActivity extends BaseAppCompatActivity implements Com
                 finish();
                 break;
             case R.id.radioButton7:
-                Calendar cal=Calendar.getInstance();
+                Calendar cal= Calendar.getInstance();
                 int month = cal.get(Calendar.MONTH) + 1;
                 int quarter=0;
                 int target = 0;
@@ -244,7 +244,7 @@ public class CalendarClientActivity extends BaseAppCompatActivity implements Com
                 finish();
                 break;
             case R.id.radioButton8:
-                Calendar cal2=Calendar.getInstance();
+                Calendar cal2= Calendar.getInstance();
                 int month2 = cal2.get(Calendar.MONTH) + 1;
                 int quarter2=0;
                 int target2 = 0;

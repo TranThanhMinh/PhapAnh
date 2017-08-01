@@ -23,9 +23,9 @@ import anhpha.clientfirst.crm.configs.Constants;
 import anhpha.clientfirst.crm.configs.Preferences;
 import anhpha.clientfirst.crm.customs.DividerItemDecoration;
 import anhpha.clientfirst.crm.customs.RecyclerTouchListener;
+import anhpha.clientfirst.crm.utils.DynamicBox;
 import butterknife.Bind;
 import butterknife.ButterKnife;
-import anhpha.clientfirst.crm.utils.DynamicBox;
 
 public class ChooseClientStatusActivity extends BaseAppCompatActivity implements  RecyclerTouchListener.ClickListener, View.OnClickListener  {
 
@@ -44,7 +44,7 @@ public class ChooseClientStatusActivity extends BaseAppCompatActivity implements
         preferences = new Preferences(mContext);
 
         setSupportActionBar(toolbar);
-        ActionBar  actionBar = getSupportActionBar();
+        ActionBar actionBar = getSupportActionBar();
         actionBar.setTitle(R.string.status);
         actionBar.setDisplayHomeAsUpEnabled(true);
         actionBar.setHomeButtonEnabled(true);

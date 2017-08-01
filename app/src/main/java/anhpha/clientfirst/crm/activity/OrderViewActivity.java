@@ -31,16 +31,16 @@ import anhpha.clientfirst.crm.adapter.OrderViewAdapter;
 import anhpha.clientfirst.crm.configs.Constants;
 import anhpha.clientfirst.crm.configs.Preferences;
 import anhpha.clientfirst.crm.model.MAPIResponse;
+import anhpha.clientfirst.crm.model.MContract;
 import anhpha.clientfirst.crm.model.MId;
 import anhpha.clientfirst.crm.model.MOrder;
-import anhpha.clientfirst.crm.model.MContract;
 import anhpha.clientfirst.crm.service_api.ServiceAPI;
+import anhpha.clientfirst.crm.utils.DynamicBox;
 import anhpha.clientfirst.crm.utils.LogUtils;
 import anhpha.clientfirst.crm.utils.TokenUtils;
 import anhpha.clientfirst.crm.utils.Utils;
 import butterknife.Bind;
 import butterknife.ButterKnife;
-import anhpha.clientfirst.crm.utils.DynamicBox;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -96,7 +96,7 @@ public class OrderViewActivity extends BaseAppCompatActivity implements Callback
         ButterKnife.bind(this);
         preferences = new Preferences(mContext);
         setSupportActionBar(toolbar);
-        ActionBar  actionBar = getSupportActionBar();
+        ActionBar actionBar = getSupportActionBar();
         actionBar.setTitle(R.string.title_activity_order);
         actionBar.setDisplayHomeAsUpEnabled(true);
         actionBar.setHomeButtonEnabled(true);
@@ -148,6 +148,10 @@ public class OrderViewActivity extends BaseAppCompatActivity implements Callback
                 if (menu.getItem(i).getItemId() == R.id.send)
                     menu.getItem(i).setVisible(true);
             }
+            for (int i = 0; i < menu.size(); i++) {
+                if (menu.getItem(i).getItemId() == R.id.history)
+                    menu.getItem(i).setVisible(true);
+            }
         }
         if(!preferences.getBooleanValue(Constants.permission_cancel_order,false)){
             for (int i = 0; i < menu.size(); i++) {
@@ -171,6 +175,10 @@ public class OrderViewActivity extends BaseAppCompatActivity implements Callback
                 return true;
             case R.id.print:
 
+                return true;
+            case R.id.history:
+                Intent in = new Intent(mContext,History_orders_activity.class);
+                startActivity(in);
                 return true;
             case R.id.cancel:
 
@@ -199,14 +207,14 @@ public class OrderViewActivity extends BaseAppCompatActivity implements Callback
                                             finish();
                                         }
                                         else{
-                                            Utils.showError(coordinatorLayout,R.string.delete_order_fail);
+                                            Utils.showError(coordinatorLayout, R.string.delete_order_fail);
                                         }
                                     }
                                     @Override
                                     public void onFailure(Call<MAPIResponse<MId>> call, Throwable t) {
                                         LogUtils.d(TAG, "getUserActivities ", t.toString());
                                         box.hideAll();
-                                        Utils.showError(coordinatorLayout,R.string.delete_order_fail);
+                                        Utils.showError(coordinatorLayout, R.string.delete_order_fail);
                                     }
                                 });
 
@@ -340,14 +348,14 @@ public class OrderViewActivity extends BaseAppCompatActivity implements Callback
                                     Utils.showDialogSuccess(mContext, R.string.done_order_done);
                                 }
                                 else{
-                                    Utils.showError(coordinatorLayout,R.string.done_order_fail);
+                                    Utils.showError(coordinatorLayout, R.string.done_order_fail);
                                 }
                             }
                             @Override
                             public void onFailure(Call<MAPIResponse<MId>> call, Throwable t) {
                                 LogUtils.d(TAG, "getUserActivities ", t.toString());
                                 box.hideAll();
-                                Utils.showError(coordinatorLayout,R.string.done_order_fail);
+                                Utils.showError(coordinatorLayout, R.string.done_order_fail);
                             }
                         });
 
@@ -361,7 +369,7 @@ public class OrderViewActivity extends BaseAppCompatActivity implements Callback
         //Define a bitmap with the same size as the view
         ScrollView vv= view;
         view.measure(View.MeasureSpec.UNSPECIFIED, View.MeasureSpec.UNSPECIFIED);
-        Bitmap returnedBitmap = Bitmap.createBitmap(view.getWidth(), view.getMeasuredHeight(),Bitmap.Config.ARGB_8888);
+        Bitmap returnedBitmap = Bitmap.createBitmap(view.getWidth(), view.getMeasuredHeight(), Bitmap.Config.ARGB_8888);
         //Bind a canvas to it
         Canvas canvas = new Canvas(returnedBitmap);
         //Get the view's background
@@ -404,7 +412,7 @@ public class OrderViewActivity extends BaseAppCompatActivity implements Callback
 
     }
 
-    public void composeEmail( final String subject, final String flie) {
+    public void composeEmail(final String subject, final String flie) {
 //        String[] strarray = new String[1];
 //        List<String> value = new ArrayList<>();
 //        value.add("buvianthuong.it@gmail.com");

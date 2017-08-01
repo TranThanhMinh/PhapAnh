@@ -1,23 +1,17 @@
 package anhpha.clientfirst.crm.activity;
 
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.ActionBar;
 import android.support.v7.widget.Toolbar;
 import android.text.Html;
-import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
-
-import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -31,7 +25,6 @@ import anhpha.clientfirst.crm.model.MClient;
 import anhpha.clientfirst.crm.model.MEvent;
 import anhpha.clientfirst.crm.model.MEventDetail;
 import anhpha.clientfirst.crm.model.MId;
-import anhpha.clientfirst.crm.model.MPhoto;
 import anhpha.clientfirst.crm.model.MRequestBody;
 import anhpha.clientfirst.crm.service_api.ServiceAPI;
 import anhpha.clientfirst.crm.utils.DynamicBox;
@@ -83,7 +76,7 @@ public class EventActivity extends BaseAppCompatActivity implements View.OnClick
         ButterKnife.bind(this);
         mEvent = (MEvent) getIntent().getSerializableExtra("mEvent");
         setSupportActionBar(toolbar);
-        ActionBar  actionBar = getSupportActionBar();
+        ActionBar actionBar = getSupportActionBar();
         actionBar.setTitle(R.string.title_activity_event);
         actionBar.setDisplayHomeAsUpEnabled(true);
         actionBar.setHomeButtonEnabled(true);
@@ -195,7 +188,7 @@ public class EventActivity extends BaseAppCompatActivity implements View.OnClick
 
                 return true;
             case R.id.user:
-                startActivityForResult(new Intent(mContext, UsersActivity.class),Constants.RESULT_USERS);
+                startActivityForResult(new Intent(mContext, UsersActivity.class), Constants.RESULT_USERS);
 
                 return true;
             case android.R.id.home:

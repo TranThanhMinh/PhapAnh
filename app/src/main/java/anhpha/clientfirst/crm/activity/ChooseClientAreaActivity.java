@@ -25,11 +25,11 @@ import anhpha.clientfirst.crm.customs.RecyclerTouchListener;
 import anhpha.clientfirst.crm.model.MAPIResponse;
 import anhpha.clientfirst.crm.model.MClientArea;
 import anhpha.clientfirst.crm.service_api.ServiceAPI;
+import anhpha.clientfirst.crm.utils.DynamicBox;
 import anhpha.clientfirst.crm.utils.LogUtils;
 import anhpha.clientfirst.crm.utils.TokenUtils;
 import butterknife.Bind;
 import butterknife.ButterKnife;
-import anhpha.clientfirst.crm.utils.DynamicBox;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -51,7 +51,7 @@ public class ChooseClientAreaActivity extends BaseAppCompatActivity implements  
         preferences = new Preferences(mContext);
 
         setSupportActionBar(toolbar);
-        ActionBar  actionBar = getSupportActionBar();
+        ActionBar actionBar = getSupportActionBar();
         actionBar.setTitle(R.string.area);
         actionBar.setDisplayHomeAsUpEnabled(true);
         actionBar.setHomeButtonEnabled(true);

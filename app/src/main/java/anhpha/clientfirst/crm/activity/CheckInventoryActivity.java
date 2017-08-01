@@ -1,13 +1,10 @@
 package anhpha.clientfirst.crm.activity;
 
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.CoordinatorLayout;
 import android.support.v7.app.ActionBar;
-import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.Toolbar;
-import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -29,15 +26,15 @@ import anhpha.clientfirst.crm.configs.Preferences;
 import anhpha.clientfirst.crm.interfaces.AdapterInterface;
 import anhpha.clientfirst.crm.model.MAPIResponse;
 import anhpha.clientfirst.crm.model.MClient;
-import anhpha.clientfirst.crm.model.MOrder;
 import anhpha.clientfirst.crm.model.MContract;
+import anhpha.clientfirst.crm.model.MOrder;
 import anhpha.clientfirst.crm.service_api.ServiceAPI;
+import anhpha.clientfirst.crm.utils.DynamicBox;
 import anhpha.clientfirst.crm.utils.LogUtils;
 import anhpha.clientfirst.crm.utils.TokenUtils;
 import anhpha.clientfirst.crm.utils.Utils;
 import butterknife.Bind;
 import butterknife.ButterKnife;
-import anhpha.clientfirst.crm.utils.DynamicBox;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -80,7 +77,7 @@ public class CheckInventoryActivity extends BaseAppCompatActivity implements Ada
         preferences = new Preferences(mContext);
 
         setSupportActionBar(toolbar);
-        ActionBar  actionBar = getSupportActionBar();
+        ActionBar actionBar = getSupportActionBar();
         actionBar.setTitle(R.string.title_activity_check_inventory);
         actionBar.setDisplayHomeAsUpEnabled(true);
         actionBar.setHomeButtonEnabled(true);
@@ -136,7 +133,7 @@ public class CheckInventoryActivity extends BaseAppCompatActivity implements Ada
             tvClientName.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    startActivityForResult(new Intent(mContext,ChooseClientsActivity.class),Constants.RESULT_CLIENT);
+                    startActivityForResult(new Intent(mContext,ChooseClientsActivity.class), Constants.RESULT_CLIENT);
                 }
             });
         }
@@ -286,7 +283,7 @@ public class CheckInventoryActivity extends BaseAppCompatActivity implements Ada
             amount += MContract.getAmount_price();
         }
         mOrder.setAmount(amount);
-        tvAmount.setText(getString(R.string.total_amount_i)+ " "+Utils.formatCurrency(amount));
+        tvAmount.setText(getString(R.string.total_amount_i)+ " "+ Utils.formatCurrency(amount));
     }
     private void LoadOrderView() {
         orderViewAdapter.setActivityItemList(mOrder.getContracts());
@@ -298,7 +295,7 @@ public class CheckInventoryActivity extends BaseAppCompatActivity implements Ada
             amount += MContract.getAmount_price();
         }
         mOrder.setAmount(amount);
-        tvAmount.setText(getString(R.string.total_amount_i)+ " "+Utils.formatCurrency(amount));
+        tvAmount.setText(getString(R.string.total_amount_i)+ " "+ Utils.formatCurrency(amount));
     }
 
     private void LoadContract() {

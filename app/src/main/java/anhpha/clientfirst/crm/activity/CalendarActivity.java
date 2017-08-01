@@ -10,17 +10,18 @@ import android.view.MenuItem;
 import android.widget.CompoundButton;
 import android.widget.RadioButton;
 
-import anhpha.clientfirst.crm.R;
-import anhpha.clientfirst.crm.configs.Constants;
-import anhpha.clientfirst.crm.configs.Preferences;
-import anhpha.clientfirst.crm.model.MActivity;
-import butterknife.Bind;
-import butterknife.ButterKnife;
-import anhpha.clientfirst.crm.utils.DynamicBox;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
+
+import anhpha.clientfirst.crm.R;
+import anhpha.clientfirst.crm.configs.Constants;
+import anhpha.clientfirst.crm.configs.Preferences;
+import anhpha.clientfirst.crm.model.MActivity;
+import anhpha.clientfirst.crm.utils.DynamicBox;
+import butterknife.Bind;
+import butterknife.ButterKnife;
 
 public class CalendarActivity extends BaseAppCompatActivity implements CompoundButton.OnCheckedChangeListener {
     @Bind(R.id.radioButton1)
@@ -54,7 +55,7 @@ public class CalendarActivity extends BaseAppCompatActivity implements CompoundB
         Preferences preferences = new Preferences(mContext);
 
         setSupportActionBar(toolbar);
-        ActionBar  actionBar = getSupportActionBar();
+        ActionBar actionBar = getSupportActionBar();
         actionBar.setTitle(R.string.title_activity_calendar);
         actionBar.setDisplayHomeAsUpEnabled(true);
         actionBar.setHomeButtonEnabled(true);

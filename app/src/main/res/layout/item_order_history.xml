@@ -1,0 +1,156 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <anhpha.clientfirst.crm.swipe.SwipeRevealLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/swipe_layout_1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:dragEdge="right"
+        app:mode="normal">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/tvUpdate_history"
+                android:layout_width="100dp"
+                android:layout_height="match_parent"
+                android:background="@android:color/holo_red_dark"
+                android:gravity="center"
+                android:text="@string/srtUpdate"
+                android:textColor="@android:color/white"
+                android:visibility="visible" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/colorWhite"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:paddingLeft="15dp"
+                android:paddingRight="15dp">
+
+                <LinearLayout
+                    android:id="@+id/lay_display"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="20dp"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:gravity="center_vertical"
+                            android:text="@string/srtTime"
+                            android:textSize="13sp" />
+
+                        <TextView
+                            android:id="@+id/tvTime"
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:layout_alignParentRight="true"
+                            android:gravity="center_vertical"
+                            android:text="7/11/2017 10:27:57 AM"
+                            android:textSize="13sp" />
+
+                    </RelativeLayout>
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="20dp"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:gravity="center_vertical"
+                            android:text="@string/srtPersonnel"
+                            android:textSize="13sp" />
+
+                        <TextView
+                            android:id="@+id/tvPersonnel"
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:layout_alignParentRight="true"
+                            android:gravity="center_vertical"
+                            android:text="7/11/2017 10:27:57 AM"
+                            android:textSize="13sp" />
+
+                    </RelativeLayout>
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="20dp"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:gravity="center_vertical"
+                            android:text="@string/srtStaus"
+                            android:textSize="13sp" />
+
+                        <TextView
+                            android:id="@+id/tvStatus"
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:layout_alignParentRight="true"
+                            android:gravity="center_vertical"
+                            android:text="7/11/2017 10:27:57 AM"
+                            android:textSize="13sp" />
+                    </RelativeLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+
+                            android:text="@string/srtNote"
+                            android:textSize="13sp" />
+
+                        <TextView
+                            android:id="@+id/tvNote"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_marginLeft="5dp"
+                            android:text="@string/srtNote"
+                            android:textSize="13sp" />
+                    </LinearLayout>
+                </LinearLayout>
+
+                <android.support.v7.widget.RecyclerView
+                    android:layout_marginTop="5dp"
+                    android:id="@+id/lvPhoto"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"></android.support.v7.widget.RecyclerView>
+            </LinearLayout>
+            <View
+                android:id="@+id/view"
+                android:layout_marginTop="5dp"
+                android:layout_width="match_parent"
+                android:layout_height="0.01dp"
+                android:background="@color/colorBlack" />
+        </LinearLayout>
+    </anhpha.clientfirst.crm.swipe.SwipeRevealLayout>
+
+
+</LinearLayout>

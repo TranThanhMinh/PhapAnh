@@ -13,14 +13,12 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.widget.TextView;
 
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
 import anhpha.clientfirst.crm.R;
 import anhpha.clientfirst.crm.adapter.ReportAdapter;
-import anhpha.clientfirst.crm.adapter.ReportOrderAdapter;
 import anhpha.clientfirst.crm.charting.charts.PieChart;
 import anhpha.clientfirst.crm.charting.data.Entry;
 import anhpha.clientfirst.crm.charting.data.PieData;
@@ -38,12 +36,12 @@ import anhpha.clientfirst.crm.model.MId;
 import anhpha.clientfirst.crm.model.MReport;
 import anhpha.clientfirst.crm.model.MRequestBody;
 import anhpha.clientfirst.crm.service_api.ServiceAPI;
+import anhpha.clientfirst.crm.utils.DynamicBox;
 import anhpha.clientfirst.crm.utils.LogUtils;
 import anhpha.clientfirst.crm.utils.TokenUtils;
 import anhpha.clientfirst.crm.utils.Utils;
 import butterknife.Bind;
 import butterknife.ButterKnife;
-import anhpha.clientfirst.crm.utils.DynamicBox;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -51,7 +49,7 @@ import retrofit2.Response;
 /**
  * Created by mc975 on 2/6/17.
  */
-public class ReportSalesMonthActivity extends BaseAppCompatActivity  implements Callback<MAPIResponse<List<MReport>>>,OnChartValueSelectedListener {
+public class ReportSalesMonthActivity extends BaseAppCompatActivity implements Callback<MAPIResponse<List<MReport>>>,OnChartValueSelectedListener {
     @Bind(R.id.chart1)
     PieChart mChart;
     @Bind(R.id.include)
@@ -112,7 +110,7 @@ public class ReportSalesMonthActivity extends BaseAppCompatActivity  implements 
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.user:
-                startActivityForResult(new Intent(mContext, UsersActivity.class),Constants.RESULT_USERS);
+                startActivityForResult(new Intent(mContext, UsersActivity.class), Constants.RESULT_USERS);
 
                 return true;
 

@@ -29,12 +29,12 @@ import anhpha.clientfirst.crm.model.MColor;
 import anhpha.clientfirst.crm.model.MLabel;
 import anhpha.clientfirst.crm.model.MRequestBody;
 import anhpha.clientfirst.crm.service_api.ServiceAPI;
+import anhpha.clientfirst.crm.utils.DynamicBox;
 import anhpha.clientfirst.crm.utils.LogUtils;
 import anhpha.clientfirst.crm.utils.TokenUtils;
 import anhpha.clientfirst.crm.utils.Utils;
 import butterknife.Bind;
 import butterknife.ButterKnife;
-import anhpha.clientfirst.crm.utils.DynamicBox;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -64,7 +64,7 @@ public class LabelActivity extends BaseAppCompatActivity implements Callback<MAP
         preferences = new Preferences(mContext);
 
         setSupportActionBar(toolbar);
-        ActionBar  actionBar = getSupportActionBar();
+        ActionBar actionBar = getSupportActionBar();
         actionBar.setTitle(R.string.title_activity_label);
         actionBar.setDisplayHomeAsUpEnabled(true);
         actionBar.setHomeButtonEnabled(true);

@@ -26,10 +26,10 @@ import anhpha.clientfirst.crm.R;
 import anhpha.clientfirst.crm.configs.Preferences;
 import anhpha.clientfirst.crm.model.MClient;
 import anhpha.clientfirst.crm.model.MWorkUser;
+import anhpha.clientfirst.crm.utils.DynamicBox;
 import anhpha.clientfirst.crm.utils.Utils;
 import butterknife.Bind;
 import butterknife.ButterKnife;
-import anhpha.clientfirst.crm.utils.DynamicBox;
 
 public class CalendarAddActivity extends BaseAppCompatActivity implements View.OnClickListener ,AdapterView.OnItemSelectedListener , TimePickerDialog.OnTimeSetListener, DatePickerDialog.OnDateSetListener{
     @Bind(R.id.etTitle)
@@ -59,7 +59,7 @@ public class CalendarAddActivity extends BaseAppCompatActivity implements View.O
         preferences = new Preferences(mContext);
 
         setSupportActionBar(toolbar);
-        ActionBar  actionBar = getSupportActionBar();
+        ActionBar actionBar = getSupportActionBar();
         actionBar.setTitle(R.string.title_activity_calendars);
         actionBar.setDisplayHomeAsUpEnabled(true);
         actionBar.setHomeButtonEnabled(true);

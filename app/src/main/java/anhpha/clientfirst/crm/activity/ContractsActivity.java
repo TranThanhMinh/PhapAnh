@@ -1,6 +1,5 @@
 package anhpha.clientfirst.crm.activity;
 
-import android.Manifest;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
@@ -30,23 +29,23 @@ import java.util.ArrayList;
 import java.util.List;
 
 import anhpha.clientfirst.crm.R;
-import anhpha.clientfirst.crm.adapter.GroupContractsAdapter;
 import anhpha.clientfirst.crm.adapter.ContractsAdapter;
+import anhpha.clientfirst.crm.adapter.GroupContractsAdapter;
 import anhpha.clientfirst.crm.configs.Constants;
 import anhpha.clientfirst.crm.configs.Preferences;
 import anhpha.clientfirst.crm.customs.DividerItemDecoration;
 import anhpha.clientfirst.crm.customs.RecyclerTouchListener;
 import anhpha.clientfirst.crm.model.MAPIResponse;
 import anhpha.clientfirst.crm.model.MClient;
-import anhpha.clientfirst.crm.model.MGroupContract;
 import anhpha.clientfirst.crm.model.MContract;
+import anhpha.clientfirst.crm.model.MGroupContract;
 import anhpha.clientfirst.crm.service_api.ServiceAPI;
+import anhpha.clientfirst.crm.utils.DynamicBox;
 import anhpha.clientfirst.crm.utils.LogUtils;
 import anhpha.clientfirst.crm.utils.TokenUtils;
 import anhpha.clientfirst.crm.utils.Utils;
 import butterknife.Bind;
 import butterknife.ButterKnife;
-import anhpha.clientfirst.crm.utils.DynamicBox;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -91,7 +90,7 @@ public class ContractsActivity extends BaseAppCompatActivity implements Recycler
         //set up
         mDrawerList.getLayoutParams().width = Utils.getWidth(mContext) - 100;
         setSupportActionBar(toolbar);
-        ActionBar  actionBar = getSupportActionBar();
+        ActionBar actionBar = getSupportActionBar();
         actionBar.setTitle(R.string.title_activity_contract);
         actionBar.setDisplayHomeAsUpEnabled(true);
         actionBar.setHomeButtonEnabled(true);

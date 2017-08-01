@@ -1,0 +1,208 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/lay_display"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/color2"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:paddingLeft="15dp"
+        android:paddingRight="15dp">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="25dp"
+                android:gravity="center_vertical"
+                android:textStyle="bold"
+                android:text="@string/srtDate_update" />
+
+            <TextView
+                android:id="@+id/tvUpdate_date"
+                android:layout_width="wrap_content"
+                android:layout_height="25dp"
+                android:layout_alignParentRight="true"
+                android:gravity="center_vertical"
+                />
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="25dp"
+                android:gravity="center_vertical"
+                android:textStyle="bold"
+                android:text="@string/srtResult_money" />
+
+            <TextView
+                android:id="@+id/tvPrepay1"
+                android:layout_width="wrap_content"
+                android:layout_height="25dp"
+                android:layout_alignParentRight="true"
+                android:gravity="center_vertical"
+                />
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="25dp"
+                android:gravity="center_vertical"
+                android:textStyle="bold"
+
+                android:text="@string/srtExpected_date" />
+
+            <TextView
+                android:id="@+id/tvExpected_date"
+                android:layout_width="wrap_content"
+                android:layout_height="25dp"
+                android:layout_alignParentRight="true"
+                android:gravity="center_vertical"
+                 />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="25dp"
+                android:textStyle="bold"
+                android:gravity="center_vertical"
+                android:text="@string/srtStaus" />
+
+            <TextView
+                android:id="@+id/tvStatus"
+                android:layout_width="wrap_content"
+                android:layout_height="25dp"
+                android:layout_alignParentRight="true"
+                android:gravity="center_vertical"
+                />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="25dp"
+                android:gravity="center_vertical"
+                android:textStyle="bold"
+                android:text="@string/srtPersonnel" />
+
+            <TextView
+                android:id="@+id/tvPersonnel"
+                android:layout_width="wrap_content"
+                android:layout_height="25dp"
+                android:layout_alignParentRight="true"
+                android:gravity="center_vertical"
+               />
+        </RelativeLayout>
+    </LinearLayout>
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/lvProduct"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/colorWhite"
+        android:paddingLeft="17dp"
+        android:paddingRight="17dp"></android.support.v7.widget.RecyclerView>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:paddingLeft="15dp"
+        android:paddingRight="15dp">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="25dp"
+                android:gravity="center_vertical"
+                android:textStyle="bold"
+                android:text="@string/srtAmount_payment" />
+
+            <TextView
+                android:id="@+id/tvAmount_payment"
+                android:layout_width="wrap_content"
+                android:layout_height="25dp"
+                android:layout_alignParentRight="true"
+                android:gravity="center_vertical"
+                />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="25dp"
+                android:gravity="center_vertical"
+                android:textStyle="bold"
+                android:text="@string/srtPrepay" />
+
+            <TextView
+                android:id="@+id/tvPrepay2"
+                android:layout_width="wrap_content"
+                android:layout_height="25dp"
+                android:layout_alignParentRight="true"
+                android:gravity="center_vertical"
+               />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="25dp"
+                android:gravity="center_vertical"
+                android:textStyle="bold"
+                android:text="@string/srtMissing_money" />
+
+            <TextView
+                android:id="@+id/tvMissing_money"
+                android:layout_width="wrap_content"
+                android:layout_height="25dp"
+                android:layout_alignParentRight="true"
+                android:gravity="center_vertical"
+               />
+        </RelativeLayout>
+    </LinearLayout>
+
+    <View
+        android:id="@+id/vLine"
+        android:layout_width="match_parent"
+        android:layout_height="16dp"
+        android:background="@color/color1" />
+</LinearLayout>

@@ -14,8 +14,10 @@ import android.view.View;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+
 import java.util.ArrayList;
 import java.util.List;
+
 import anhpha.clientfirst.crm.R;
 import anhpha.clientfirst.crm.adapter.ActivityAdapter;
 import anhpha.clientfirst.crm.configs.Constants;
@@ -101,7 +103,7 @@ public class ActivityUserActivity extends BaseAppCompatActivity implements Recyc
         preferences = new Preferences(mContext);
 
         setSupportActionBar(toolbar);
-        ActionBar  actionBar = getSupportActionBar();
+        ActionBar actionBar = getSupportActionBar();
         actionBar.setTitle(R.string.title_activity_activity_user);
         actionBar.setDisplayHomeAsUpEnabled(true);
         actionBar.setHomeButtonEnabled(true);
@@ -133,10 +135,10 @@ public class ActivityUserActivity extends BaseAppCompatActivity implements Recyc
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.calendar:
-                startActivityForResult( new Intent(mContext, CalendarActivity.class),Constants.RESULT_CALENDAR);
+                startActivityForResult( new Intent(mContext, CalendarActivity.class), Constants.RESULT_CALENDAR);
                 return true;
             case R.id.user:
-                startActivityForResult(new Intent(mContext, UsersActivity.class),Constants.RESULT_USERS);
+                startActivityForResult(new Intent(mContext, UsersActivity.class), Constants.RESULT_USERS);
                 return true;
             case android.R.id.home:
                 onBackPressed();
@@ -146,7 +148,7 @@ public class ActivityUserActivity extends BaseAppCompatActivity implements Recyc
         }
     }
 
-    public  List<MActivityItem> getActivityItems(List<MActivityItem> mActivityItems){
+    public List<MActivityItem> getActivityItems(List<MActivityItem> mActivityItems){
         mActivityItems1 = new ArrayList<>();
         switch (type){
             case 0:
@@ -241,39 +243,39 @@ public class ActivityUserActivity extends BaseAppCompatActivity implements Recyc
 
         switch (view.getId()){
             case R.id.line1:
-                if(type!=Constants.ACTIVITY_TYPE_ORDER)type = Constants.ACTIVITY_TYPE_ORDER;else type = 0;
-                if(type!=Constants.ACTIVITY_TYPE_ORDER)imageButton1.setImageDrawable(getResources().getDrawable(R.mipmap.ic_crm_16));else imageButton1.setImageDrawable(getResources().getDrawable(R.mipmap.ic_crm_11));
+                if(type!= Constants.ACTIVITY_TYPE_ORDER)type = Constants.ACTIVITY_TYPE_ORDER;else type = 0;
+                if(type!= Constants.ACTIVITY_TYPE_ORDER)imageButton1.setImageDrawable(getResources().getDrawable(R.mipmap.ic_crm_16));else imageButton1.setImageDrawable(getResources().getDrawable(R.mipmap.ic_crm_11));
                 activityAdapter.setActivityItemList(getActivityItems(mActivityItems));
                 activityAdapter.notifyDataSetChanged();
                 break;
             case R.id.line2:
-                if(type!=Constants.ACTIVITY_TYPE_CLIENT)type = Constants.ACTIVITY_TYPE_CLIENT;else type = 0;
-                if(type!=Constants.ACTIVITY_TYPE_CLIENT)imageButton2.setImageDrawable(getResources().getDrawable(R.mipmap.ic_crm_17));else imageButton2.setImageDrawable(getResources().getDrawable(R.mipmap.ic_crm_3));
+                if(type!= Constants.ACTIVITY_TYPE_CLIENT)type = Constants.ACTIVITY_TYPE_CLIENT;else type = 0;
+                if(type!= Constants.ACTIVITY_TYPE_CLIENT)imageButton2.setImageDrawable(getResources().getDrawable(R.mipmap.ic_crm_17));else imageButton2.setImageDrawable(getResources().getDrawable(R.mipmap.ic_crm_3));
                 activityAdapter.setActivityItemList(getActivityItems(mActivityItems));
                 activityAdapter.notifyDataSetChanged();
                 break;
             case R.id.line3:
-                if(type!=Constants.ACTIVITY_TYPE_CHECKIN)type = Constants.ACTIVITY_TYPE_CHECKIN;else type = 0;
-                if(type!=Constants.ACTIVITY_TYPE_CHECKIN)imageButton3.setImageDrawable(getResources().getDrawable(R.mipmap.ic_crm_96));else imageButton3.setImageDrawable(getResources().getDrawable(R.mipmap.ic_crm_97));
+                if(type!= Constants.ACTIVITY_TYPE_CHECKIN)type = Constants.ACTIVITY_TYPE_CHECKIN;else type = 0;
+                if(type!= Constants.ACTIVITY_TYPE_CHECKIN)imageButton3.setImageDrawable(getResources().getDrawable(R.mipmap.ic_crm_96));else imageButton3.setImageDrawable(getResources().getDrawable(R.mipmap.ic_crm_97));
                 activityAdapter.setActivityItemList(getActivityItems(mActivityItems));
                 activityAdapter.notifyDataSetChanged();
                 break;
             case R.id.line4:
-                if(type!=Constants.ACTIVITY_TYPE_CALL)type = Constants.ACTIVITY_TYPE_CALL;else type = 0;
-                if(type!=Constants.ACTIVITY_TYPE_CALL)imageButton4.setImageDrawable(getResources().getDrawable(R.mipmap.ic_crm_18));else imageButton4.setImageDrawable(getResources().getDrawable(R.mipmap.ic_crm_6));
+                if(type!= Constants.ACTIVITY_TYPE_CALL)type = Constants.ACTIVITY_TYPE_CALL;else type = 0;
+                if(type!= Constants.ACTIVITY_TYPE_CALL)imageButton4.setImageDrawable(getResources().getDrawable(R.mipmap.ic_crm_18));else imageButton4.setImageDrawable(getResources().getDrawable(R.mipmap.ic_crm_6));
                 activityAdapter.setActivityItemList(getActivityItems(mActivityItems));
                 activityAdapter.notifyDataSetChanged();
                 break;
             case R.id.line7:
-                if(type!=Constants.ACTIVITY_TYPE_EVENT)type = Constants.ACTIVITY_TYPE_EVENT;else type = 0;
-                if(type!=Constants.ACTIVITY_TYPE_EVENT)imageButton7.setImageDrawable(getResources().getDrawable(R.mipmap.ic_crm_23));else imageButton7.setImageDrawable(getResources().getDrawable(R.mipmap.ic_crm_15));
+                if(type!= Constants.ACTIVITY_TYPE_EVENT)type = Constants.ACTIVITY_TYPE_EVENT;else type = 0;
+                if(type!= Constants.ACTIVITY_TYPE_EVENT)imageButton7.setImageDrawable(getResources().getDrawable(R.mipmap.ic_crm_23));else imageButton7.setImageDrawable(getResources().getDrawable(R.mipmap.ic_crm_15));
                 activityAdapter.setActivityItemList(getActivityItems(mActivityItems));
                 activityAdapter.notifyDataSetChanged();
                 break;
 
             case R.id.line5:
-                if(type!=Constants.ACTIVITY_TYPE_EMAIL)type = Constants.ACTIVITY_TYPE_EMAIL;else type = 0;
-                if(type!=Constants.ACTIVITY_TYPE_EMAIL)imageButton5.setImageDrawable(getResources().getDrawable(R.mipmap.ic_crm_20));else imageButton5.setImageDrawable(getResources().getDrawable(R.mipmap.ic_crm_1));
+                if(type!= Constants.ACTIVITY_TYPE_EMAIL)type = Constants.ACTIVITY_TYPE_EMAIL;else type = 0;
+                if(type!= Constants.ACTIVITY_TYPE_EMAIL)imageButton5.setImageDrawable(getResources().getDrawable(R.mipmap.ic_crm_20));else imageButton5.setImageDrawable(getResources().getDrawable(R.mipmap.ic_crm_1));
                 activityAdapter.setActivityItemList(getActivityItems(mActivityItems));
                 activityAdapter.notifyDataSetChanged();
                 break;

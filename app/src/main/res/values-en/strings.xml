@@ -593,6 +593,7 @@
     <string name="from_date">From date</string>
     <string name="to_date_1">To date</string>
     <string name="cancel_order">Cancel Order</string>
+    <string name="history_transaction">History Transaction</string>
     <string name="print_order">Print Order</string>
     <string name="send_order">Send Order</string>
     <string name="edit_order">Edit Order</string>
@@ -749,4 +750,35 @@
     <string name="order_code">Order Code</string>
     <string name="order_code_parent"> Order Group Code</string>
     <string name="source">Source</string>
+
+    <!--history_transaction-->
+    <string name="srtTime">Thời gian: </string>
+    <string name="srtDelete_photo">Thao tác</string>
+    <string name="srtNotifi">Thông báo</string>
+    <string name="srtNotifi_done">Chỉnh sửa trạng thái hợp đồng thành công</string>
+    <string name="srtNotifi_false">Chỉnh sửa trạng thái hợp đồng thất bại</string>
+    <string name="srtHistory_order">Lịch sử giao dịch </string>
+    <string name="srtHistory_contract">Lịch sử hợp đồng </string>
+    <string name="srtDelete">Xóa </string>
+    <string name="srtSort">Sắp xếp </string>
+    <string name="srtFocus">Tiêu điểm </string>
+    <string name="srtPersonnel">Nhân viên: </string>
+    <string name="srtStaus">Trạng thái: </string>
+    <string name="srtNote">Ghi chú: </string>
+    <string name="srtDate_update">Ngày cập nhập: </string>
+    <string name="srtResult_money">Tiền khách trả: </string>
+    <string name="srtExpected_date">Ngày dự kiến: </string>
+    <string name="srtAmount_payment">Tổng thu: </string>
+    <string name="srtPrepay">Đã thanh toán: </string>
+    <string name="srtMissing_money">Tiền còn thiếu: </string>
+    <string name="srtProduct">Sản phẩm: </string>
+    <string name="srtQuantity">SL: </string>
+    <string name="srtPrice">Trị Giá: </string>
+    <string name="srtSum">Tổng: </string>
+    <string name="srtCapture">Hình ảnh</string>
+    <string name="srtDone">Thành Công</string>
+    <string name="srtSend">Gửi</string>
+    <string name="srtFalse">Thất bại</string>
+    <string name="srtUpdate">Chỉnh sửa</string>
+    <string name="crop_image_menu_crop">Lưu</string>
 </resources>

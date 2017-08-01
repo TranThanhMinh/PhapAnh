@@ -31,11 +31,11 @@ import anhpha.clientfirst.crm.customs.RecyclerTouchListener;
 import anhpha.clientfirst.crm.model.MAPIResponse;
 import anhpha.clientfirst.crm.model.MClientContact;
 import anhpha.clientfirst.crm.service_api.ServiceAPI;
+import anhpha.clientfirst.crm.utils.DynamicBox;
 import anhpha.clientfirst.crm.utils.LogUtils;
 import anhpha.clientfirst.crm.utils.Utils;
 import butterknife.Bind;
 import butterknife.ButterKnife;
-import anhpha.clientfirst.crm.utils.DynamicBox;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -64,7 +64,7 @@ public class ChooseClientContactActivity extends BaseAppCompatActivity implement
         preferences = new Preferences(mContext);
 
         setSupportActionBar(toolbar);
-        ActionBar  actionBar = getSupportActionBar();
+        ActionBar actionBar = getSupportActionBar();
         actionBar.setTitle(R.string.add_client);
         actionBar.setDisplayHomeAsUpEnabled(true);
         actionBar.setHomeButtonEnabled(true);
@@ -136,7 +136,7 @@ public class ChooseClientContactActivity extends BaseAppCompatActivity implement
                                 if(response.body().getResult().size()>0){
                                     Utils.showDialogSuccess(mContext, R.string.add_client_done);
                                 }else {
-                                    Utils.showError(coordinatorLayout,R.string.add_client_fail);
+                                    Utils.showError(coordinatorLayout, R.string.add_client_fail);
                                 }
                             }
 
@@ -144,7 +144,7 @@ public class ChooseClientContactActivity extends BaseAppCompatActivity implement
                             public void onFailure(Call<MAPIResponse<List<MClientContact>>> call, Throwable t) {
                                 LogUtils.api(TAG,call,t.toString());
 
-                                Utils.showError(coordinatorLayout,R.string.add_client_fail);
+                                Utils.showError(coordinatorLayout, R.string.add_client_fail);
 
                             }
                         });

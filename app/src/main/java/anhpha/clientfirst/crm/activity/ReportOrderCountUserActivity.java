@@ -36,12 +36,12 @@ import anhpha.clientfirst.crm.model.MId;
 import anhpha.clientfirst.crm.model.MReport;
 import anhpha.clientfirst.crm.model.MRequestBody;
 import anhpha.clientfirst.crm.service_api.ServiceAPI;
+import anhpha.clientfirst.crm.utils.DynamicBox;
 import anhpha.clientfirst.crm.utils.LogUtils;
 import anhpha.clientfirst.crm.utils.TokenUtils;
 import anhpha.clientfirst.crm.utils.Utils;
 import butterknife.Bind;
 import butterknife.ButterKnife;
-import anhpha.clientfirst.crm.utils.DynamicBox;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -49,7 +49,7 @@ import retrofit2.Response;
 /**
  * Created by mc975 on 2/6/17.
  */
-public class ReportOrderCountUserActivity extends BaseAppCompatActivity  implements Callback<MAPIResponse<List<MReport>>>,OnChartValueSelectedListener {
+public class ReportOrderCountUserActivity extends BaseAppCompatActivity implements Callback<MAPIResponse<List<MReport>>>,OnChartValueSelectedListener {
     @Bind(R.id.chart1)
     PieChart mChart;
     @Bind(R.id.include)
@@ -113,7 +113,7 @@ public class ReportOrderCountUserActivity extends BaseAppCompatActivity  impleme
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.calendar:
-                startActivityForResult( new Intent(mContext, CalendarActivity.class),Constants.RESULT_CALENDAR);
+                startActivityForResult( new Intent(mContext, CalendarActivity.class), Constants.RESULT_CALENDAR);
 
                 return true;
 

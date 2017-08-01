@@ -38,13 +38,13 @@ import anhpha.clientfirst.crm.model.MId;
 import anhpha.clientfirst.crm.model.MMessager;
 import anhpha.clientfirst.crm.model.MTracking;
 import anhpha.clientfirst.crm.service_api.ServiceAPI;
+import anhpha.clientfirst.crm.utils.DynamicBox;
 import anhpha.clientfirst.crm.utils.HaversineAlgorithm;
 import anhpha.clientfirst.crm.utils.LogUtils;
 import anhpha.clientfirst.crm.utils.TokenUtils;
 import anhpha.clientfirst.crm.utils.Utils;
 import butterknife.Bind;
 import butterknife.ButterKnife;
-import anhpha.clientfirst.crm.utils.DynamicBox;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -73,7 +73,7 @@ public class TrackingActivity extends BaseAppCompatActivity implements  Recycler
         preferences = new Preferences(mContext);
 
         setSupportActionBar(toolbar);
-        ActionBar  actionBar = getSupportActionBar();
+        ActionBar actionBar = getSupportActionBar();
         actionBar.setTitle(R.string.title_activity_tracking);
         actionBar.setDisplayHomeAsUpEnabled(true);
         actionBar.setHomeButtonEnabled(true);
@@ -171,7 +171,7 @@ public class TrackingActivity extends BaseAppCompatActivity implements  Recycler
                 return true;
 
             case R.id.user:
-                startActivityForResult(new Intent(mContext, UsersActivity.class),Constants.RESULT_USERS);
+                startActivityForResult(new Intent(mContext, UsersActivity.class), Constants.RESULT_USERS);
 
                 return true;
 

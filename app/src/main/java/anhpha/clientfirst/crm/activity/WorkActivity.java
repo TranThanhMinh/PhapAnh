@@ -1,9 +1,5 @@
 package anhpha.clientfirst.crm.activity;
 
-import com.wdullaer.materialdatetimepicker.date.DatePickerDialog;
-import com.wdullaer.materialdatetimepicker.time.RadialPickerLayout;
-import com.wdullaer.materialdatetimepicker.time.TimePickerDialog;
-
 import android.Manifest;
 import android.content.Intent;
 import android.os.Bundle;
@@ -15,13 +11,18 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
+
+import com.wdullaer.materialdatetimepicker.date.DatePickerDialog;
+import com.wdullaer.materialdatetimepicker.time.RadialPickerLayout;
+import com.wdullaer.materialdatetimepicker.time.TimePickerDialog;
+
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
-import android.widget.ArrayAdapter;
 
 import anhpha.clientfirst.crm.R;
 import anhpha.clientfirst.crm.configs.Constants;
@@ -34,12 +35,12 @@ import anhpha.clientfirst.crm.model.MUser;
 import anhpha.clientfirst.crm.model.MWorkUser;
 import anhpha.clientfirst.crm.service_api.ServiceAPI;
 import anhpha.clientfirst.crm.utils.CalendarContentResolver;
+import anhpha.clientfirst.crm.utils.DynamicBox;
 import anhpha.clientfirst.crm.utils.LogUtils;
 import anhpha.clientfirst.crm.utils.TokenUtils;
 import anhpha.clientfirst.crm.utils.Utils;
 import butterknife.Bind;
 import butterknife.ButterKnife;
-import anhpha.clientfirst.crm.utils.DynamicBox;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -86,7 +87,7 @@ public class WorkActivity extends BaseAppCompatActivity implements Callback<MAPI
         preferences = new Preferences(mContext);
 
         setSupportActionBar(toolbar);
-        ActionBar  actionBar = getSupportActionBar();
+        ActionBar actionBar = getSupportActionBar();
         actionBar.setTitle(R.string.title_activity_work);
         actionBar.setDisplayHomeAsUpEnabled(true);
         actionBar.setHomeButtonEnabled(true);
@@ -546,7 +547,7 @@ public class WorkActivity extends BaseAppCompatActivity implements Callback<MAPI
     public void onDateSet(DatePickerDialog view, int Year, int Month, int Day) {
 
         Calendar now = Calendar.getInstance();
-        TimePickerDialog tpd = com.wdullaer.materialdatetimepicker.time.TimePickerDialog.newInstance(
+        TimePickerDialog tpd = TimePickerDialog.newInstance(
                 WorkActivity.this,
                 now.get(Calendar.HOUR_OF_DAY),
                 now.get(Calendar.MINUTE),

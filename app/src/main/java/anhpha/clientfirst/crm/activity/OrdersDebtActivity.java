@@ -19,7 +19,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import anhpha.clientfirst.crm.R;
-import anhpha.clientfirst.crm.adapter.OrdersAdapter;
 import anhpha.clientfirst.crm.adapter.OrdersDebtAdapter;
 import anhpha.clientfirst.crm.configs.Constants;
 import anhpha.clientfirst.crm.configs.Preferences;
@@ -79,7 +78,7 @@ public class OrdersDebtActivity extends BaseAppCompatActivity implements  Recycl
         //set up
         mDrawerList.getLayoutParams().width = Utils.getWidth(mContext) - 100;
         setSupportActionBar(toolbar);
-        ActionBar  actionBar = getSupportActionBar();
+        ActionBar actionBar = getSupportActionBar();
         actionBar.setTitle(R.string.title_activity_order_debt);
         actionBar.setDisplayHomeAsUpEnabled(true);
         actionBar.setHomeButtonEnabled(true);
@@ -136,7 +135,7 @@ public class OrdersDebtActivity extends BaseAppCompatActivity implements  Recycl
                 return true;
 
             case R.id.user:
-                startActivityForResult(new Intent(mContext, UsersActivity.class),Constants.RESULT_USERS);
+                startActivityForResult(new Intent(mContext, UsersActivity.class), Constants.RESULT_USERS);
                 load_order = false;
                 return true;
 

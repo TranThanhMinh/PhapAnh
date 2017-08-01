@@ -58,4 +58,16 @@
     <color name="overlay">#AA1C1C1C</color>
     <color name="divider">#333333</color>
 
+
+    <!--history transaction-->
+    <color name="colorRed">#d72020</color>
+    <color name="colorBlue">#29a5f7</color>
+    <color name="colorWhite">#FFFFFF</color>
+    <color name="colorBlack">#000000</color>
+    <color name="color">#807b7b</color>
+    <color name="color1">#d4d3d3</color>
+    <color name="color2">#f1eeee</color>
+    <color name="colorNotifi">#3f000000</color>
+    <color name="colorOrange">#fc9504</color>
+
 </resources>

@@ -29,10 +29,10 @@ import anhpha.clientfirst.crm.customs.RecyclerTouchListener;
 import anhpha.clientfirst.crm.interfaces.AdapterInterface;
 import anhpha.clientfirst.crm.model.MCalendar;
 import anhpha.clientfirst.crm.utils.CalendarContentResolver;
+import anhpha.clientfirst.crm.utils.DynamicBox;
 import anhpha.clientfirst.crm.utils.Utils;
 import butterknife.Bind;
 import butterknife.ButterKnife;
-import anhpha.clientfirst.crm.utils.DynamicBox;
 
 public class CalendarsActivity extends BaseAppCompatActivity implements  RecyclerTouchListener.ClickListener, TextWatcher, View.OnClickListener  {
 
@@ -57,7 +57,7 @@ public class CalendarsActivity extends BaseAppCompatActivity implements  Recycle
         preferences = new Preferences(mContext);
 
         setSupportActionBar(toolbar);
-        ActionBar  actionBar = getSupportActionBar();
+        ActionBar actionBar = getSupportActionBar();
         actionBar.setTitle(R.string.title_activity_calendars);
         actionBar.setDisplayHomeAsUpEnabled(true);
         actionBar.setHomeButtonEnabled(true);

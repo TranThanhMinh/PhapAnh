@@ -51,7 +51,7 @@ public class EventViewActivity extends BaseAppCompatActivity implements View.OnC
         ButterKnife.bind(this);
         mEvent = (MEvent) getIntent().getSerializableExtra("mEvent");
         setSupportActionBar(toolbar);
-        ActionBar  actionBar = getSupportActionBar();
+        ActionBar actionBar = getSupportActionBar();
         actionBar.setTitle(R.string.title_activity_event);
         actionBar.setDisplayHomeAsUpEnabled(true);
         actionBar.setHomeButtonEnabled(true);

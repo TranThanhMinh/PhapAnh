@@ -21,13 +21,13 @@ import anhpha.clientfirst.crm.model.MAPIResponse;
 import anhpha.clientfirst.crm.model.MUser;
 import anhpha.clientfirst.crm.service_api.ServiceAPI;
 import anhpha.clientfirst.crm.utils.AuthUtil;
+import anhpha.clientfirst.crm.utils.DynamicBox;
 import anhpha.clientfirst.crm.utils.LogUtils;
 import anhpha.clientfirst.crm.utils.StringUtils;
 import anhpha.clientfirst.crm.utils.TokenUtils;
 import anhpha.clientfirst.crm.utils.Utils;
 import butterknife.Bind;
 import butterknife.ButterKnife;
-import anhpha.clientfirst.crm.utils.DynamicBox;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -180,7 +180,7 @@ public class ChangPassByEmailActivity extends BaseAppCompatActivity implements C
         box.hideAll();
         TokenUtils.checkToken(mContext,response.body().getErrors());
         if(!response.body().isHasErrors()) {
-            Utils.showDialogSuccess(mContext,R.string.change_password_by_email_done);
+            Utils.showDialogSuccess(mContext, R.string.change_password_by_email_done);
         }else{
             Utils.showError(coordinatorLayout, R.string.change_password_fail);
         }

@@ -1,7 +1,7 @@
 package anhpha.clientfirst.crm.activity;
+
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.CoordinatorLayout;
 import android.text.InputType;
@@ -24,12 +24,12 @@ import anhpha.clientfirst.crm.model.MUser;
 import anhpha.clientfirst.crm.service_api.ServiceAPI;
 import anhpha.clientfirst.crm.utils.AuthUtil;
 import anhpha.clientfirst.crm.utils.Config;
+import anhpha.clientfirst.crm.utils.DynamicBox;
 import anhpha.clientfirst.crm.utils.LogUtils;
 import anhpha.clientfirst.crm.utils.StringUtils;
 import anhpha.clientfirst.crm.utils.Utils;
 import butterknife.Bind;
 import butterknife.ButterKnife;
-import anhpha.clientfirst.crm.utils.DynamicBox;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;

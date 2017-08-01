@@ -28,12 +28,12 @@ import anhpha.clientfirst.crm.model.MId;
 import anhpha.clientfirst.crm.model.MOrder;
 import anhpha.clientfirst.crm.model.MRequestBody;
 import anhpha.clientfirst.crm.service_api.ServiceAPI;
+import anhpha.clientfirst.crm.utils.DynamicBox;
 import anhpha.clientfirst.crm.utils.LogUtils;
 import anhpha.clientfirst.crm.utils.TokenUtils;
 import anhpha.clientfirst.crm.utils.Utils;
 import butterknife.Bind;
 import butterknife.ButterKnife;
-import anhpha.clientfirst.crm.utils.DynamicBox;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -81,7 +81,7 @@ public class OrdersActivity extends BaseAppCompatActivity implements  RecyclerTo
         //set up
         mDrawerList.getLayoutParams().width = Utils.getWidth(mContext) - 100;
         setSupportActionBar(toolbar);
-        ActionBar  actionBar = getSupportActionBar();
+        ActionBar actionBar = getSupportActionBar();
         actionBar.setTitle(R.string.title_activity_order);
         actionBar.setDisplayHomeAsUpEnabled(true);
         actionBar.setHomeButtonEnabled(true);
@@ -145,7 +145,7 @@ public class OrdersActivity extends BaseAppCompatActivity implements  RecyclerTo
                 return true;
 
             case R.id.user:
-                startActivityForResult(new Intent(mContext, UsersActivity.class),Constants.RESULT_USERS);
+                startActivityForResult(new Intent(mContext, UsersActivity.class), Constants.RESULT_USERS);
                 load_order = false;
                 return true;
 
@@ -295,11 +295,11 @@ public class OrdersActivity extends BaseAppCompatActivity implements  RecyclerTo
                     break;
             }
         }
-        textView0.setText(getString(R.string.all) +" ("+Utils.formatCurrency(order_status_num_0)+") - "+ Utils.formatCurrency(order_status_0));
-        textView1.setText(preferences.getStringValue(Constants.ORDER_STATUS_1,"") +" ("+Utils.formatCurrency(order_status_num_1)+") - "+ Utils.formatCurrency(order_status_1));
-        textView2.setText(preferences.getStringValue(Constants.ORDER_STATUS_2,"") +" ("+Utils.formatCurrency(order_status_num_2)+") - "+ Utils.formatCurrency(order_status_2));
-        textView3.setText(preferences.getStringValue(Constants.ORDER_STATUS_4,"") +" ("+Utils.formatCurrency(order_status_num_4)+") - "+ Utils.formatCurrency(order_status_4));
-        textView4.setText(preferences.getStringValue(Constants.ORDER_STATUS_6,"") +" ("+Utils.formatCurrency(order_status_num_6)+") - "+ Utils.formatCurrency(order_status_6));
+        textView0.setText(getString(R.string.all) +" ("+ Utils.formatCurrency(order_status_num_0)+") - "+ Utils.formatCurrency(order_status_0));
+        textView1.setText(preferences.getStringValue(Constants.ORDER_STATUS_1,"") +" ("+ Utils.formatCurrency(order_status_num_1)+") - "+ Utils.formatCurrency(order_status_1));
+        textView2.setText(preferences.getStringValue(Constants.ORDER_STATUS_2,"") +" ("+ Utils.formatCurrency(order_status_num_2)+") - "+ Utils.formatCurrency(order_status_2));
+        textView3.setText(preferences.getStringValue(Constants.ORDER_STATUS_4,"") +" ("+ Utils.formatCurrency(order_status_num_4)+") - "+ Utils.formatCurrency(order_status_4));
+        textView4.setText(preferences.getStringValue(Constants.ORDER_STATUS_6,"") +" ("+ Utils.formatCurrency(order_status_num_6)+") - "+ Utils.formatCurrency(order_status_6));
 
         activityAdapter = new OrdersAdapter(mContext,list);
         rvActivities.setAdapter(activityAdapter);

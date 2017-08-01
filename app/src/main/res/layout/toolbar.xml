@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.Toolbar xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/toolbar"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="?attr/colorPrimaryDark"
+    app:titleTextAppearance="@style/Toolbar.TitleText"
+    app:popupTheme="@style/ThemeOverlay.AppCompat.Light">
+    <!--<RelativeLayout-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="50dp">-->
+
+        <!--<ImageView-->
+            <!--android:id="@+id/imBack"-->
+            <!--android:layout_width="50dp"-->
+            <!--android:layout_height="match_parent"-->
+            <!--android:padding="13sp"-->
+            <!--android:src="@drawable/ic_black" />-->
+        <!--<TextView-->
+            <!--android:id="@+id/tvName"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="match_parent"-->
+            <!--android:gravity="center_vertical"-->
+            <!--android:text="@string/srtHistory_order"-->
+            <!--android:textColor="@color/colorWhite"-->
+            <!--android:textSize="15sp" />-->
+    <!--</RelativeLayout>-->
+
+</android.support.v7.widget.Toolbar>

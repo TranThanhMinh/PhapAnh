@@ -12,14 +12,14 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
-import anhpha.clientfirst.crm.cropper.CropImageView;
-import anhpha.clientfirst.crm.R;
-import anhpha.clientfirst.crm.utils.LogUtils;
-
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.OutputStream;
 import java.util.Random;
+
+import anhpha.clientfirst.crm.R;
+import anhpha.clientfirst.crm.cropper.CropImageView;
+import anhpha.clientfirst.crm.utils.LogUtils;
 
 public class CropperImage extends BaseAppCompatActivity {
 

@@ -22,17 +22,17 @@ import anhpha.clientfirst.crm.configs.Constants;
 import anhpha.clientfirst.crm.configs.Preferences;
 import anhpha.clientfirst.crm.customs.DividerItemDecoration;
 import anhpha.clientfirst.crm.model.MAPIResponse;
+import anhpha.clientfirst.crm.model.MContract;
 import anhpha.clientfirst.crm.model.MId;
 import anhpha.clientfirst.crm.model.MOrder;
-import anhpha.clientfirst.crm.model.MContract;
 import anhpha.clientfirst.crm.model.MRequestBody;
 import anhpha.clientfirst.crm.service_api.ServiceAPI;
+import anhpha.clientfirst.crm.utils.DynamicBox;
 import anhpha.clientfirst.crm.utils.LogUtils;
 import anhpha.clientfirst.crm.utils.TokenUtils;
 import anhpha.clientfirst.crm.utils.Utils;
 import butterknife.Bind;
 import butterknife.ButterKnife;
-import anhpha.clientfirst.crm.utils.DynamicBox;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -57,7 +57,7 @@ public class InventoriesActivity extends BaseAppCompatActivity implements Callba
         preferences = new Preferences(mContext);
 
         setSupportActionBar(toolbar);
-        ActionBar  actionBar = getSupportActionBar();
+        ActionBar actionBar = getSupportActionBar();
         actionBar.setTitle(R.string.title_activity_inventory);
         actionBar.setDisplayHomeAsUpEnabled(true);
         actionBar.setHomeButtonEnabled(true);
@@ -101,7 +101,7 @@ public class InventoriesActivity extends BaseAppCompatActivity implements Callba
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.user:
-                startActivityForResult(new Intent(mContext, UsersActivity.class),Constants.RESULT_USERS);
+                startActivityForResult(new Intent(mContext, UsersActivity.class), Constants.RESULT_USERS);
                 return true;
 
             case android.R.id.home:

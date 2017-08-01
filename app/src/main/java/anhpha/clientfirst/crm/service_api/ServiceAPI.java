@@ -3,21 +3,23 @@ package anhpha.clientfirst.crm.service_api;
 /**
  * Created by mc975 on 2/3/17.
  */
+
 import java.util.List;
 
+import anhpha.clientfirst.crm.model.MAPIResponse;
+import anhpha.clientfirst.crm.model.MActivity;
+import anhpha.clientfirst.crm.model.MCall;
+import anhpha.clientfirst.crm.model.MCheckin;
+import anhpha.clientfirst.crm.model.MClient;
 import anhpha.clientfirst.crm.model.MClientArea;
 import anhpha.clientfirst.crm.model.MClientBusiness;
 import anhpha.clientfirst.crm.model.MClientContact;
 import anhpha.clientfirst.crm.model.MClientGroup;
 import anhpha.clientfirst.crm.model.MClientRequest;
 import anhpha.clientfirst.crm.model.MClientType;
-import anhpha.clientfirst.crm.model.MAPIResponse;
-import anhpha.clientfirst.crm.model.MActivity;
-import anhpha.clientfirst.crm.model.MCall;
-import anhpha.clientfirst.crm.model.MCheckin;
-import anhpha.clientfirst.crm.model.MClient;
 import anhpha.clientfirst.crm.model.MColor;
 import anhpha.clientfirst.crm.model.MCommunication;
+import anhpha.clientfirst.crm.model.MContract;
 import anhpha.clientfirst.crm.model.MDebt;
 import anhpha.clientfirst.crm.model.MEmail;
 import anhpha.clientfirst.crm.model.MEvent;
@@ -29,17 +31,22 @@ import anhpha.clientfirst.crm.model.MMessager;
 import anhpha.clientfirst.crm.model.MOrder;
 import anhpha.clientfirst.crm.model.MPartner;
 import anhpha.clientfirst.crm.model.MPhoto;
-import anhpha.clientfirst.crm.model.MContract;
 import anhpha.clientfirst.crm.model.MReport;
 import anhpha.clientfirst.crm.model.MRequestBody;
+import anhpha.clientfirst.crm.model.MResult_order_history;
 import anhpha.clientfirst.crm.model.MTracking;
 import anhpha.clientfirst.crm.model.MUser;
 import anhpha.clientfirst.crm.model.MUserDefault;
 import anhpha.clientfirst.crm.model.MWeekWork;
 import anhpha.clientfirst.crm.model.MWorkUser;
+import anhpha.clientfirst.crm.model.Result_history_contract;
+import anhpha.clientfirst.crm.model.Result_status_contract;
+import anhpha.clientfirst.crm.model.Result_upload_photo;
+import anhpha.clientfirst.crm.model.Status;
 import okhttp3.MultipartBody;
 import retrofit2.Call;
 import retrofit2.http.Body;
+import retrofit2.http.DELETE;
 import retrofit2.http.GET;
 import retrofit2.http.Header;
 import retrofit2.http.Multipart;
@@ -110,7 +117,7 @@ public interface ServiceAPI{
         Call<MAPIResponse<List<MTracking>>> getTrackingUser(@Header("token") String token, @Header("user_id") int user_id ,@Header("partner_id") int partner_id);
         @POST("/api/v1/user/v1/get_user_tracking_by_user")
         Call<MAPIResponse<List<MTracking>>> getTrackingUserByUser(@Header("token") String token, @Header("user_id") int user_id ,@Header("partner_id") int partner_id,@Header("object_id") int object_id, @Body MRequestBody body);
-         @POST("/api/v1/user/v1/set_notification_tracking")
+        @POST("/api/v1/user/v1/set_notification_tracking")
         Call<MAPIResponse<MMessager>> setTracking(@Header("token") String token, @Header("user_id") int user_id , @Header("partner_id") int partner_id, @Header("type_id") int type_id);
         @POST("/api/v1/user/v1/set_user_call")
         Call<MAPIResponse<MCall>> setUserCall(@Header("token") String token, @Header("user_id") int user_id ,@Header("partner_id") int partner_id,@Header("client_id") int client_id,@Body MCall mCall);
@@ -180,5 +187,30 @@ public interface ServiceAPI{
 
         @POST("/api/v1/program/v1/set_program_event_status")
         Call<MAPIResponse<MMessager>> setEventStatus(@Header("token") String token, @Header("user_id") int user_id ,@Header("partner_id") int partner_id,@Header("object_id") int object_id,@Header("status_id") int status_id, @Header("client_id") int client_id);
+
+        //History transaction
+//        @GET("get_clients")
+//        Call<MResult_client> getClients(@Header("user_id") int user_id, @Header("partner_id") int partner_id , @Header("token") String token, @Header("page_size") int page_size, @Header("page_index") int page_index);
+//        @GET("get_client_areas")
+//        Call<Result_client_area> getClient_area(@Header("user_id") int user_id, @Header("partner_id") int partner_id, @Header("token") String token);
+//        @GET("get_client_groups ")
+//        Call<Result_client_groups> getClient_groups(@Header("user_id") int user_id, @Header("partner_id") int partner_id, @Header("token") String token);
+//        @GET("get_client_labels  ")
+//        Call<Result_client_lable> getClient_lable(@Header("user_id") int user_id, @Header("partner_id") int partner_id, @Header("token") String token,  @Header("client_id") int client_id);
+//        @GET("get_client_types ")
+//        Call<Result_client_types> getClient_types(@Header("user_id") int user_id, @Header("partner_id") int partner_id, @Header("token") String token);
+        @GET("get_order_transaction ")
+        Call<Result_history_contract> getHistory_contract(@Header("user_id") int user_id, @Header("partner_id") int partner_id, @Header("token") String token, @Header("object_id") int object_id);
+        @GET("get_user_status_order ")
+        Call<MResult_order_history> getHistory_order(@Header("user_id") int user_id, @Header("partner_id") int partner_id, @Header("token") String token, @Header("object_id") int object_id);
+        @POST("set_user_status_order")
+        Call<Result_status_contract> getStatus_contract(@Header("object_id") int object_id, @Header("token") String token, @Header("client_id") int client_id, @Header("status_id") int status_id, @Header("user_id") int user_id, @Header("partner_id") int partner_id, @Body Status value);
+        @Multipart
+        @POST("upload_photo ")
+        Call<Result_upload_photo> getUpload_photo(@Header("code") String code, @Header("object_id") int object_id, @Header("token") String token, @Header("user_id") int user_id, @Header("device") String device, @Header("partner_id") int partner_id, @Header("type") String type, @Part MultipartBody.Part photo);
+        @DELETE("delete_photo ")
+        Call<Result_upload_photo> getDelete_photo(@Header("name") String name, @Header("code") String code, @Header("object_id") int object_id, @Header("token") String token, @Header("user_id") int user_id, @Header("device") String device, @Header("partner_id") int partner_id, @Header("type") String type, @Header("order_id") int order_id);
+//        @GET("get_users ")
+//        Call<Result_user> getUser(@Header("user_id") int user_id, @Header("partner_id") int partner_id, @Header("token") String token);
 
 }

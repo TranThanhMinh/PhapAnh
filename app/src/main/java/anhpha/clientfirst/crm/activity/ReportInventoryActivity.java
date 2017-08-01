@@ -32,16 +32,16 @@ import anhpha.clientfirst.crm.configs.Constants;
 import anhpha.clientfirst.crm.configs.Preferences;
 import anhpha.clientfirst.crm.model.MAPIResponse;
 import anhpha.clientfirst.crm.model.MColor;
-import anhpha.clientfirst.crm.model.MId;
 import anhpha.clientfirst.crm.model.MContract;
+import anhpha.clientfirst.crm.model.MId;
 import anhpha.clientfirst.crm.model.MRequestBody;
 import anhpha.clientfirst.crm.service_api.ServiceAPI;
+import anhpha.clientfirst.crm.utils.DynamicBox;
 import anhpha.clientfirst.crm.utils.LogUtils;
 import anhpha.clientfirst.crm.utils.TokenUtils;
 import anhpha.clientfirst.crm.utils.Utils;
 import butterknife.Bind;
 import butterknife.ButterKnife;
-import anhpha.clientfirst.crm.utils.DynamicBox;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -49,7 +49,7 @@ import retrofit2.Response;
 /**
  * Created by mc975 on 2/6/17.
  */
-public class ReportInventoryActivity extends BaseAppCompatActivity  implements Callback<MAPIResponse<List<MContract>>>,OnChartValueSelectedListener {
+public class ReportInventoryActivity extends BaseAppCompatActivity implements Callback<MAPIResponse<List<MContract>>>,OnChartValueSelectedListener {
     @Bind(R.id.chart1)
     PieChart mChart;
     @Bind(R.id.include)
@@ -114,7 +114,7 @@ public class ReportInventoryActivity extends BaseAppCompatActivity  implements C
                 return true;
 
             case R.id.user:
-                startActivityForResult(new Intent(mContext, UsersActivity.class),Constants.RESULT_USERS);
+                startActivityForResult(new Intent(mContext, UsersActivity.class), Constants.RESULT_USERS);
 
                 return true;
 

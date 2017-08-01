@@ -19,9 +19,9 @@ import com.squareup.picasso.Picasso;
 import anhpha.clientfirst.crm.R;
 import anhpha.clientfirst.crm.model.MCommunication;
 import anhpha.clientfirst.crm.model.MPhoto;
+import anhpha.clientfirst.crm.utils.DynamicBox;
 import butterknife.Bind;
 import butterknife.ButterKnife;
-import anhpha.clientfirst.crm.utils.DynamicBox;
 
 public class CommunicationActivity extends BaseAppCompatActivity implements View.OnClickListener  {
     @Bind(R.id.include)
@@ -46,7 +46,7 @@ public class CommunicationActivity extends BaseAppCompatActivity implements View
         ButterKnife.bind(this);
         mCommunication = (MCommunication) getIntent().getSerializableExtra("mCommunication");
         setSupportActionBar(toolbar);
-        ActionBar  actionBar = getSupportActionBar();
+        ActionBar actionBar = getSupportActionBar();
         actionBar.setTitle(R.string.title_activity_communication);
         actionBar.setDisplayHomeAsUpEnabled(true);
         actionBar.setHomeButtonEnabled(true);

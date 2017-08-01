@@ -12,9 +12,9 @@ import android.widget.TextView;
 
 import anhpha.clientfirst.crm.R;
 import anhpha.clientfirst.crm.model.MActivity;
+import anhpha.clientfirst.crm.utils.DynamicBox;
 import butterknife.Bind;
 import butterknife.ButterKnife;
-import anhpha.clientfirst.crm.utils.DynamicBox;
 
 public class ReportActivity extends BaseAppCompatActivity implements View.OnClickListener  {
     @Bind(R.id.textView1)
@@ -37,7 +37,7 @@ public class ReportActivity extends BaseAppCompatActivity implements View.OnClic
         ButterKnife.bind(this);
 
         setSupportActionBar(toolbar);
-        ActionBar  actionBar = getSupportActionBar();
+        ActionBar actionBar = getSupportActionBar();
         actionBar.setTitle(R.string.title_activity_report);
         actionBar.setDisplayHomeAsUpEnabled(true);
         actionBar.setHomeButtonEnabled(true);

@@ -19,12 +19,12 @@ import anhpha.clientfirst.crm.model.MAPIResponse;
 import anhpha.clientfirst.crm.model.MCall;
 import anhpha.clientfirst.crm.model.MClient;
 import anhpha.clientfirst.crm.service_api.ServiceAPI;
+import anhpha.clientfirst.crm.utils.DynamicBox;
 import anhpha.clientfirst.crm.utils.LogUtils;
 import anhpha.clientfirst.crm.utils.TokenUtils;
 import anhpha.clientfirst.crm.utils.Utils;
 import butterknife.Bind;
 import butterknife.ButterKnife;
-import anhpha.clientfirst.crm.utils.DynamicBox;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -54,7 +54,7 @@ public class CallActivity extends BaseAppCompatActivity implements Callback<MAPI
         preferences = new Preferences(mContext);
 
         setSupportActionBar(toolbar);
-        ActionBar  actionBar = getSupportActionBar();
+        ActionBar actionBar = getSupportActionBar();
         actionBar.setTitle(R.string.title_activity_call);
         actionBar.setDisplayHomeAsUpEnabled(true);
         actionBar.setHomeButtonEnabled(true);
@@ -93,7 +93,6 @@ public class CallActivity extends BaseAppCompatActivity implements Callback<MAPI
         switch (item.getItemId()) {
             case R.id.done:
                 box.showLoadingLayout();
-
                 mCall.setClient_id(mClient.getClient_id());
                 mCall.setUser_id(preferences.getIntValue(Constants.USER_ID,0));
                 mCall.setContent_call(etContent.getText().toString());

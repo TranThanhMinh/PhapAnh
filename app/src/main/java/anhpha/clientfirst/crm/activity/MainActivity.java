@@ -173,7 +173,7 @@ public class MainActivity extends BaseAppCompatActivity implements View.OnClickL
         Picasso.with(getApplicationContext()).load(R.mipmap.ic_crm_76).resize(500,500).centerInside().error(R.drawable.no_img_big).skipMemoryCache().into(imageButton3);
         Picasso.with(getApplicationContext()).load(R.mipmap.ic_crm_79).resize(500,500).centerInside().error(R.drawable.no_img_big).skipMemoryCache().into(imageButton4);
         Picasso.with(getApplicationContext()).load(R.mipmap.ic_crm_77).resize(500,500).centerInside().error(R.drawable.no_img_big).skipMemoryCache().into(imageButton5);
-        Picasso.with(getApplicationContext()).load(R.mipmap.ic_crm_78).resize(500,500).centerInside().error(R.drawable.no_img_big).skipMemoryCache().into(imageButton6);
+        Picasso.with(getApplicationContext()).load(R.mipmap.ic_crm_100).resize(500,500).centerInside().error(R.drawable.no_img_big).skipMemoryCache().into(imageButton6);
 
     }
 
@@ -209,7 +209,7 @@ public class MainActivity extends BaseAppCompatActivity implements View.OnClickL
                 startActivity(it5);
                 break;
             case R.id.imageButton6:
-                Intent it6 = new Intent(mContext,CommunicationsActivity.class);
+                Intent it6 = new Intent(mContext,Focus_activity.class);
                 startActivity(it6);
                 break;
             case R.id.tvKpi:

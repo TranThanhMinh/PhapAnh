@@ -11,7 +11,6 @@ import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
 import android.support.design.widget.CoordinatorLayout;
-import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AlertDialog;
@@ -34,7 +33,6 @@ import android.widget.RadioButton;
 import android.widget.Spinner;
 import android.widget.TextView;
 
-import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.maps.CameraUpdate;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -43,7 +41,6 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.wdullaer.materialdatetimepicker.date.DatePickerDialog;
-import com.wdullaer.materialdatetimepicker.time.TimePickerDialog;
 
 import java.io.File;
 import java.io.UnsupportedEncodingException;
@@ -61,22 +58,20 @@ import anhpha.clientfirst.crm.model.MAPIResponse;
 import anhpha.clientfirst.crm.model.MClient;
 import anhpha.clientfirst.crm.model.MClientArea;
 import anhpha.clientfirst.crm.model.MClientBusiness;
-import anhpha.clientfirst.crm.model.MClientDelivery;
 import anhpha.clientfirst.crm.model.MClientGroup;
 import anhpha.clientfirst.crm.model.MClientType;
 import anhpha.clientfirst.crm.model.MDistrict;
 import anhpha.clientfirst.crm.model.MPhoto;
-
 import anhpha.clientfirst.crm.model.MProvince;
 import anhpha.clientfirst.crm.model.MUser;
 import anhpha.clientfirst.crm.model.MWard;
 import anhpha.clientfirst.crm.service_api.ServiceAPI;
+import anhpha.clientfirst.crm.utils.DynamicBox;
 import anhpha.clientfirst.crm.utils.LogUtils;
 import anhpha.clientfirst.crm.utils.TokenUtils;
 import anhpha.clientfirst.crm.utils.Utils;
 import butterknife.Bind;
 import butterknife.ButterKnife;
-import anhpha.clientfirst.crm.utils.DynamicBox;
 import okhttp3.MediaType;
 import okhttp3.MultipartBody;
 import okhttp3.RequestBody;
@@ -649,7 +644,7 @@ public class EditClientActivity extends BaseAppCompatActivity implements Compoun
     public void onClick(View view) {
         switch (view.getId()){
             case R.id.tvManager:
-                startActivityForResult(new Intent(mContext, ChooseUsersActivity.class),Constants.RESULT_USERS);
+                startActivityForResult(new Intent(mContext, ChooseUsersActivity.class), Constants.RESULT_USERS);
                 break;
             case R.id.tvChooseDate:
                 Calendar calendar = Calendar.getInstance();

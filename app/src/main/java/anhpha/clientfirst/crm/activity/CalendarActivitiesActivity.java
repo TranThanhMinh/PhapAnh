@@ -48,13 +48,13 @@ import anhpha.clientfirst.crm.model.MUser;
 import anhpha.clientfirst.crm.model.MWeek;
 import anhpha.clientfirst.crm.model.MWeekWork;
 import anhpha.clientfirst.crm.service_api.ServiceAPI;
+import anhpha.clientfirst.crm.utils.DynamicBox;
 import anhpha.clientfirst.crm.utils.HaversineAlgorithm;
 import anhpha.clientfirst.crm.utils.LogUtils;
 import anhpha.clientfirst.crm.utils.TokenUtils;
 import anhpha.clientfirst.crm.utils.Utils;
 import butterknife.Bind;
 import butterknife.ButterKnife;
-import anhpha.clientfirst.crm.utils.DynamicBox;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -180,7 +180,7 @@ public class CalendarActivitiesActivity extends BaseAppCompatActivity implements
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.user:
-                startActivityForResult(new Intent(mContext, ChooseUsersActivity.class),Constants.RESULT_USERS);
+                startActivityForResult(new Intent(mContext, ChooseUsersActivity.class), Constants.RESULT_USERS);
                 return true;
 
             case R.id.calendar:

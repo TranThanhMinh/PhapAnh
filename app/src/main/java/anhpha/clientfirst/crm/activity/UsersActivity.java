@@ -32,12 +32,12 @@ import anhpha.clientfirst.crm.service_api.ServiceAPI;
 import anhpha.clientfirst.crm.treeviewa.TreeViewData;
 import anhpha.clientfirst.crm.treeviewa.TreeViewLists;
 import anhpha.clientfirst.crm.treeviewa.TreeViewNode;
+import anhpha.clientfirst.crm.utils.DynamicBox;
 import anhpha.clientfirst.crm.utils.LogUtils;
 import anhpha.clientfirst.crm.utils.TokenUtils;
 import anhpha.clientfirst.crm.utils.Utils;
 import butterknife.Bind;
 import butterknife.ButterKnife;
-import anhpha.clientfirst.crm.utils.DynamicBox;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -63,7 +63,7 @@ public class UsersActivity extends BaseAppCompatActivity implements AdapterView.
         Preferences preferences = new Preferences(mContext);
         setSupportActionBar(toolbar);
 
-        ActionBar  actionBar = getSupportActionBar();
+        ActionBar actionBar = getSupportActionBar();
         actionBar.setTitle(R.string.title_activity_users);
         actionBar.setDisplayHomeAsUpEnabled(true);
         actionBar.setHomeButtonEnabled(true);
@@ -312,7 +312,7 @@ public class UsersActivity extends BaseAppCompatActivity implements AdapterView.
         }
     }
     private void selectStaff(int index,boolean is_select){
-        MId mid =new  MId(displayNodes.get(index).getUser_id());
+        MId mid =new MId(displayNodes.get(index).getUser_id());
         boolean is_set = false;
         int leve  = -1;
         int user_id = mid.getId();

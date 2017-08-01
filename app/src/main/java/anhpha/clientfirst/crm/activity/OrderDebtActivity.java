@@ -1,15 +1,8 @@
 package anhpha.clientfirst.crm.activity;
 
 import android.content.DialogInterface;
-import android.content.Intent;
-import android.graphics.Bitmap;
-import android.graphics.Canvas;
-import android.graphics.Color;
-import android.net.Uri;
 import android.os.Bundle;
-import android.os.Environment;
 import android.support.design.widget.CoordinatorLayout;
-import android.support.design.widget.TextInputLayout;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.Toolbar;
@@ -22,7 +15,6 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
-import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.RadioButton;
@@ -33,11 +25,7 @@ import com.wdullaer.materialdatetimepicker.date.DatePickerDialog;
 import com.wdullaer.materialdatetimepicker.time.RadialPickerLayout;
 import com.wdullaer.materialdatetimepicker.time.TimePickerDialog;
 
-import java.io.File;
-import java.io.FileOutputStream;
-import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.List;
 
 import anhpha.clientfirst.crm.R;
 import anhpha.clientfirst.crm.adapter.OrderDebtAdapter;
@@ -47,7 +35,6 @@ import anhpha.clientfirst.crm.configs.Preferences;
 import anhpha.clientfirst.crm.model.MAPIResponse;
 import anhpha.clientfirst.crm.model.MContract;
 import anhpha.clientfirst.crm.model.MDebt;
-import anhpha.clientfirst.crm.model.MId;
 import anhpha.clientfirst.crm.model.MOrder;
 import anhpha.clientfirst.crm.service_api.ServiceAPI;
 import anhpha.clientfirst.crm.utils.DynamicBox;
@@ -110,7 +97,7 @@ public class OrderDebtActivity extends BaseAppCompatActivity implements Callback
         ButterKnife.bind(this);
         preferences = new Preferences(mContext);
         setSupportActionBar(toolbar);
-        ActionBar  actionBar = getSupportActionBar();
+        ActionBar actionBar = getSupportActionBar();
         actionBar.setTitle(R.string.title_activity_order);
         actionBar.setDisplayHomeAsUpEnabled(true);
         actionBar.setHomeButtonEnabled(true);
@@ -493,7 +480,7 @@ public class OrderDebtActivity extends BaseAppCompatActivity implements Callback
         Calendar calendar = Calendar.getInstance();
         calendar.set(Year, (Month + 1), Day);
         Calendar now = Calendar.getInstance();
-        TimePickerDialog tpd = com.wdullaer.materialdatetimepicker.time.TimePickerDialog.newInstance(
+        TimePickerDialog tpd = TimePickerDialog.newInstance(
                 OrderDebtActivity.this,
                 now.get(Calendar.HOUR_OF_DAY),
                 now.get(Calendar.MINUTE),

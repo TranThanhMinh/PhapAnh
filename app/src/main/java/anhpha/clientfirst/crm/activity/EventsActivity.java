@@ -15,18 +15,15 @@ import android.widget.ListView;
 import java.util.List;
 
 import anhpha.clientfirst.crm.R;
-import anhpha.clientfirst.crm.adapter.CommunicationAdapter;
 import anhpha.clientfirst.crm.adapter.EventAdapter;
 import anhpha.clientfirst.crm.configs.Constants;
 import anhpha.clientfirst.crm.configs.Preferences;
 import anhpha.clientfirst.crm.model.MAPIResponse;
-import anhpha.clientfirst.crm.model.MCommunication;
 import anhpha.clientfirst.crm.model.MEvent;
 import anhpha.clientfirst.crm.service_api.ServiceAPI;
 import anhpha.clientfirst.crm.utils.DynamicBox;
 import anhpha.clientfirst.crm.utils.LogUtils;
 import anhpha.clientfirst.crm.utils.TokenUtils;
-import anhpha.clientfirst.crm.utils.Utils;
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import retrofit2.Call;
@@ -48,7 +45,7 @@ public class EventsActivity extends BaseAppCompatActivity implements View.OnClic
         Preferences preferences = new Preferences(mContext);
 
         setSupportActionBar(toolbar);
-        ActionBar  actionBar = getSupportActionBar();
+        ActionBar actionBar = getSupportActionBar();
         actionBar.setTitle(R.string.title_activity_event);
         actionBar.setDisplayHomeAsUpEnabled(true);
         actionBar.setHomeButtonEnabled(true);

@@ -25,7 +25,6 @@ import anhpha.clientfirst.crm.model.MClient;
 import anhpha.clientfirst.crm.model.MEvent;
 import anhpha.clientfirst.crm.model.MMessager;
 import anhpha.clientfirst.crm.model.MPhoto;
-import anhpha.clientfirst.crm.model.MRequestBody;
 import anhpha.clientfirst.crm.service_api.ServiceAPI;
 import anhpha.clientfirst.crm.utils.DynamicBox;
 import anhpha.clientfirst.crm.utils.LogUtils;
@@ -72,7 +71,7 @@ public class EventClientActivity extends BaseAppCompatActivity implements View.O
         ShowMenu = getIntent().getBooleanExtra("ShowMenu",true);
         mClient = (MClient) getIntent().getSerializableExtra("mClient");
         setSupportActionBar(toolbar);
-        ActionBar  actionBar = getSupportActionBar();
+        ActionBar actionBar = getSupportActionBar();
         actionBar.setTitle(R.string.title_activity_event);
         actionBar.setDisplayHomeAsUpEnabled(true);
         actionBar.setHomeButtonEnabled(true);
@@ -254,7 +253,7 @@ public class EventClientActivity extends BaseAppCompatActivity implements View.O
     private void setEventClientStatus(final int i) {
 
         if(mEvent.getEvent_detail_status_id() ==0 && i > 1){
-            Utils.showError(coordinatorLayout,R.string.require_invite_client);
+            Utils.showError(coordinatorLayout, R.string.require_invite_client);
         }else {
             Preferences preferences = new Preferences(mContext);
             GetRetrofit().create(ServiceAPI.class)

@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/color">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal">
+        <ImageView
+            android:id="@+id/imClose"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_alignParentRight="true"
+            android:layout_marginTop="60dp"
+            android:padding="5dp"
+            android:src="@drawable/ic_close" />
+
+        <android.support.v4.view.ViewPager
+            android:id="@+id/vpPhoto"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@+id/imClose"
+            android:layout_marginBottom="90dp"></android.support.v4.view.ViewPager>
+
+        <HorizontalScrollView
+            android:layout_width="wrap_content"
+            android:layout_height="20dp"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginBottom="10dp"
+            android:scrollbars="none">
+
+            <LinearLayout
+                android:id="@+id/viewPagerCountDots"
+                android:layout_width="match_parent"
+                android:layout_height="13dp"
+                android:orientation="horizontal">
+
+            </LinearLayout>
+        </HorizontalScrollView>
+    </RelativeLayout>
+</LinearLayout>

@@ -20,7 +20,6 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
-import android.widget.RadioButton;
 import android.widget.Spinner;
 import android.widget.TextView;
 
@@ -40,16 +39,16 @@ import anhpha.clientfirst.crm.configs.Preferences;
 import anhpha.clientfirst.crm.interfaces.AdapterInterface;
 import anhpha.clientfirst.crm.model.MAPIResponse;
 import anhpha.clientfirst.crm.model.MClient;
+import anhpha.clientfirst.crm.model.MContract;
 import anhpha.clientfirst.crm.model.MId;
 import anhpha.clientfirst.crm.model.MOrder;
-import anhpha.clientfirst.crm.model.MContract;
 import anhpha.clientfirst.crm.service_api.ServiceAPI;
+import anhpha.clientfirst.crm.utils.DynamicBox;
 import anhpha.clientfirst.crm.utils.LogUtils;
 import anhpha.clientfirst.crm.utils.TokenUtils;
 import anhpha.clientfirst.crm.utils.Utils;
 import butterknife.Bind;
 import butterknife.ButterKnife;
-import anhpha.clientfirst.crm.utils.DynamicBox;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -189,17 +188,17 @@ public class OrderActivity extends BaseAppCompatActivity implements Callback<MAP
                                         box.hideAll();
                                         TokenUtils.checkToken(mContext,response.body().getErrors());
                                         if(!response.body().isHasErrors()){
-                                            Utils.showSuccess(coordinatorLayout,R.string.change_order_status_done);
+                                            Utils.showSuccess(coordinatorLayout, R.string.change_order_status_done);
                                         }
                                         else{
-                                            Utils.showError(coordinatorLayout,R.string.delete_order_fail);
+                                            Utils.showError(coordinatorLayout, R.string.delete_order_fail);
                                         }
                                     }
                                     @Override
                                     public void onFailure(Call<MAPIResponse<MId>> call, Throwable t) {
                                         LogUtils.d(TAG, "getUserActivities ", t.toString());
                                         box.hideAll();
-                                        Utils.showError(coordinatorLayout,R.string.delete_order_fail);
+                                        Utils.showError(coordinatorLayout, R.string.delete_order_fail);
                                     }
                                 });
                     }
@@ -588,7 +587,7 @@ public class OrderActivity extends BaseAppCompatActivity implements Callback<MAP
         Calendar calendar = Calendar.getInstance();
         calendar.set(Year, (Month + 1), Day);
         Calendar now = Calendar.getInstance();
-        TimePickerDialog tpd = com.wdullaer.materialdatetimepicker.time.TimePickerDialog.newInstance(
+        TimePickerDialog tpd = TimePickerDialog.newInstance(
                 OrderActivity.this,
                 now.get(Calendar.HOUR_OF_DAY),
                 now.get(Calendar.MINUTE),
