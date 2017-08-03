@@ -6,6 +6,8 @@ package anhpha.clientfirst.crm.service_api;
 
 import java.util.List;
 
+import anhpha.clientfirst.crm.model.AddFocus;
+import anhpha.clientfirst.crm.model.Focus;
 import anhpha.clientfirst.crm.model.MAPIResponse;
 import anhpha.clientfirst.crm.model.MActivity;
 import anhpha.clientfirst.crm.model.MCall;
@@ -39,6 +41,8 @@ import anhpha.clientfirst.crm.model.MUser;
 import anhpha.clientfirst.crm.model.MUserDefault;
 import anhpha.clientfirst.crm.model.MWeekWork;
 import anhpha.clientfirst.crm.model.MWorkUser;
+import anhpha.clientfirst.crm.model.Result;
+import anhpha.clientfirst.crm.model.Result_focus;
 import anhpha.clientfirst.crm.model.Result_history_contract;
 import anhpha.clientfirst.crm.model.Result_status_contract;
 import anhpha.clientfirst.crm.model.Result_upload_photo;
@@ -212,5 +216,14 @@ public interface ServiceAPI{
         Call<Result_upload_photo> getDelete_photo(@Header("name") String name, @Header("code") String code, @Header("object_id") int object_id, @Header("token") String token, @Header("user_id") int user_id, @Header("device") String device, @Header("partner_id") int partner_id, @Header("type") String type, @Header("order_id") int order_id);
 //        @GET("get_users ")
 //        Call<Result_user> getUser(@Header("user_id") int user_id, @Header("partner_id") int partner_id, @Header("token") String token);
+
+        //Focus
+        @GET ("get_clients_focus")
+        Call<Result_focus> get_clients_focus(@Header("user_id") int user_id, @Header("partner_id") int partner_id, @Header("client_id") int client_id, @Header("token") String token);
+        @POST ("set_clients_focus_status")
+        Call<Result> set_clients_focus_status(@Header("user_id") int user_id, @Header("partner_id") int partner_id, @Header("token") String token, @Body List<Focus> focus);
+        @POST ("set_clients_focus")
+        Call<Result> set_clients_focus(@Header("user_id") int usder_id, @Header("partner_id") int partner_id, @Header("token") String token, @Body List<AddFocus> focus);
+
 
 }

@@ -16,6 +16,7 @@ import java.util.List;
 
 import anhpha.clientfirst.crm.R;
 import anhpha.clientfirst.crm.adapter.adapter_History_orders;
+import anhpha.clientfirst.crm.configs.Preferences;
 import anhpha.clientfirst.crm.interfaces.Url;
 import anhpha.clientfirst.crm.model.History_order;
 import anhpha.clientfirst.crm.model.MResult_order_history;
@@ -41,6 +42,7 @@ public class History_orders_activity extends BaseAppCompatActivity implements Vi
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_histor_orders);
         toolbar = (Toolbar) findViewById(R.id.toolbar);
+        Preferences preferences = new Preferences(mContext);
         if (toolbar != null) {
 
             setSupportActionBar(toolbar);

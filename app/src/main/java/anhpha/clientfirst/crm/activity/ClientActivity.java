@@ -132,6 +132,8 @@ public class ClientActivity extends BaseAppCompatActivity implements RecyclerTou
     FloatingActionButton menu_item6;
     @Bind(R.id.menu_item7)
     FloatingActionButton menu_item7;
+    @Bind(R.id.menu_item8)
+    FloatingActionButton menu_item8;
     @Bind(R.id.menu)
     FloatingActionMenu menu;
 
@@ -339,6 +341,13 @@ public class ClientActivity extends BaseAppCompatActivity implements RecyclerTou
             @Override
             public void onClick(View view) {
                 mContext.startActivity(new Intent(mContext, LabelsActivity.class).putExtra("mClient", mClient));
+                menu.close(true);
+            }
+        });
+        menu_item8.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                mContext.startActivity(new Intent(mContext, HistoryFocusActivity.class).putExtra("mClient", mClient));
                 menu.close(true);
             }
         });

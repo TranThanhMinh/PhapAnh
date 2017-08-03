@@ -713,6 +713,16 @@
             style="@style/MenuButtonsSmall"
             fab:fabSize="normal"
             fab:fab_label="@string/label" />
+        <anhpha.clientfirst.crm.fab.FloatingActionButton
+            android:id="@+id/menu_item8"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:scaleType="centerInside"
+            android:padding="15dp"
+            android:src="@mipmap/ic_crm_101"
+            style="@style/MenuButtonsSmall"
+            fab:fabSize="normal"
+            fab:fab_label="@string/srtFocus" />
 
     </anhpha.clientfirst.crm.fab.FloatingActionMenu>
 

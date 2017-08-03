@@ -762,8 +762,15 @@
     <string name="srtNotifi_done">Chỉnh sửa trạng thái hợp đồng thành công</string>
     <string name="srtNotifi_false">Chỉnh sửa trạng thái hợp đồng thất bại</string>
     <string name="srtHistory_order">Lịch sử giao dịch </string>
+    <string name="srtHistory_focus">Lịch sử trọng tâm </string>
     <string name="srtHistory_contract">Lịch sử hợp đồng </string>
     <string name="srtDelete">Xóa </string>
+    <string name="srtTarget">Mục tiêu </string>
+    <string name="srtSetfocus">Thiết lập trọng tâm </string>
+    <string name="srtUnknowntime">Không xác định thời gian </string>
+    <string name="srtTo">Từ </string>
+    <string name="srtDate">ngày </string>
+    <string name="srtFrom">Đến </string>
     <string name="srtSort">Sắp xếp </string>
     <string name="srtFocus">Trọng tâm </string>
     <string name="srtPersonnel">Nhân viên: </string>
@@ -782,6 +789,7 @@
     <string name="srtCapture">Hình ảnh</string>
     <string name="srtDone">Thành Công</string>
     <string name="srtSend">Gửi</string>
+    <string name="srtCheckDate">Vui lòng kiểm tra từ ngày đến ngày</string>
     <string name="srtFalse">Thất bại</string>
     <string name="srtUpdate">Chỉnh sửa</string>
     <string name="crop_image_menu_crop">Lưu</string>
