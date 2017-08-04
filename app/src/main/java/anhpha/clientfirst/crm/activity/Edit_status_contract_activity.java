@@ -36,10 +36,12 @@ import java.io.File;
 
 import anhpha.clientfirst.crm.R;
 import anhpha.clientfirst.crm.adapter.adapter_Photo_history_order;
+import anhpha.clientfirst.crm.configs.Constants;
+import anhpha.clientfirst.crm.configs.Preferences;
 import anhpha.clientfirst.crm.cropper.CropImage.CropImage;
 import anhpha.clientfirst.crm.cropper.CropImage.CropImage_View;
+import anhpha.clientfirst.crm.cropper.CropImage.FileUtils;
 import anhpha.clientfirst.crm.interfaces.Url;
-import anhpha.clientfirst.crm.model.FileUtils;
 import anhpha.clientfirst.crm.model.Photo;
 import anhpha.clientfirst.crm.model.Result_status_contract;
 import anhpha.clientfirst.crm.model.Result_upload_photo;
@@ -63,10 +65,10 @@ import static anhpha.clientfirst.crm.adapter.adapter_History_orders.lvImage;
  * Created by MinhTran on 7/13/2017.
  */
 
-public class Edit_status_contract_activity extends AppCompatActivity implements View.OnClickListener, adapter_Photo_history_order.funcDelete_lvImage {
+public class Edit_status_contract_activity extends BaseAppCompatActivity implements View.OnClickListener, adapter_Photo_history_order.funcDelete_lvImage{
     private RecyclerView lvPhoto;
     private EditText editNote;
-    private TextView tvStatus;
+    private TextView tvStatus,tvName,tvAddress;
     private View popupView;
     private PopupWindow popupWindow;
     private ImageView imSelect_upload_photo, imBack;
@@ -76,29 +78,30 @@ public class Edit_status_contract_activity extends AppCompatActivity implements 
     private Bundle b;
     private boolean result;
     private Toolbar toolbar;
-
+    private Preferences preferences;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_edit_status_contract);
         toolbar = (Toolbar) findViewById(R.id.toolbar);
+        preferences = new Preferences(mContext);
         if (toolbar != null) {
             setSupportActionBar(toolbar);
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-            final Drawable upArrow = getResources().getDrawable(R.drawable.ic_black);
-            upArrow.setColorFilter(getResources().getColor(android.R.color.white), PorterDuff.Mode.SRC_IN);
-            getSupportActionBar().setHomeAsUpIndicator(upArrow);
             getSupportActionBar().setTitle(R.string.srtHistory_order);
             toolbar.setTitleTextColor(getResources().getColor(R.color.colorWhite));
         }
+
         relNotifi = (RelativeLayout) findViewById(R.id.relNotifi);
         lvPhoto = (RecyclerView) findViewById(R.id.lvPhoto);
         editNote = (EditText) findViewById(R.id.editNote);
         tvStatus = (TextView) findViewById(R.id.tvStatus);
+        tvName = (TextView) findViewById(R.id.tvName);
+        tvAddress = (TextView) findViewById(R.id.tvAddress);
         imSelect_upload_photo = (ImageView) findViewById(R.id.imSelect_upload_photo);
-       // imBack = (ImageView) findViewById(R.id.imBack);
+        // imBack = (ImageView) findViewById(R.id.imBack);
         imSelect_upload_photo.setOnClickListener(this);
-       // imBack.setOnClickListener(this);
+        // imBack.setOnClickListener(this);
         LinearLayoutManager layoutManager = new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL
                 , false);
         layoutManager.setOrientation(LinearLayoutManager.HORIZONTAL);
@@ -106,12 +109,14 @@ public class Edit_status_contract_activity extends AppCompatActivity implements 
         lvPhoto.setLayoutManager(layoutManager);
 
         b = getIntent().getExtras();
+        tvName.setText(b.getString("client_name"));
+        tvAddress.setText(b.getString("address"));
         editNote.setText(b.getString("note"));
         tvStatus.setText(b.getString("status"));
         retrofit = func_Connect();
         retrofit_photo = func_Upload_photo();
         getLoad_photo();
-      //  funcPopupWindow_upload_photo();
+        //  funcPopupWindow_upload_photo();
     }
 
 //    public void funcPopupWindow_upload_photo() {
@@ -132,9 +137,36 @@ public class Edit_status_contract_activity extends AppCompatActivity implements 
     @Override
     public void onClick(View view) {
         if (view == imSelect_upload_photo) {
-//            CropImage.activity(null).setGuidelines(CropImage_View.Guidelines.ON)
-//                    .start(Edit_status_contract_activity.this);
+            CropImage.activity(null).setGuidelines(CropImage_View.Guidelines.ON)
+                    .start(Edit_status_contract_activity.this);
 
+//            if (popupWindow.isShowing()) {
+//                popupWindow.dismiss();
+//            } else {
+//
+//                TextView tv_select_file = (TextView) popupView.findViewById(R.id.tv_select_file);
+//                TextView tv_select_camera = (TextView) popupView.findViewById(R.id.tv_select_camera);
+//                tv_select_file.setOnClickListener(new View.OnClickListener() {
+//                    @Override
+//                    public void onClick(View view) {
+//                        Intent intent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+//
+//                        intent.putExtra("return-data", true);
+//                        startActivityForResult(intent, 1);
+//                        popupWindow.dismiss();
+//                    }
+//                });
+//                tv_select_camera.setOnClickListener(new View.OnClickListener() {
+//                    @Override
+//                    public void onClick(View view) {
+////                        Intent intent = new Intent("com.android.camera.action.CROP");
+////                        intent.putExtra("return-data", true);
+////                        startActivityForResult(intent, 2);
+//                        popupWindow.dismiss();
+//                    }
+//                });
+//                popupWindow.showAsDropDown(imSelect_upload_photo, 0, 0);
+//            }
         }
 
         if (view == imBack) {
@@ -164,19 +196,24 @@ public class Edit_status_contract_activity extends AppCompatActivity implements 
         ServiceAPI history_orders = retrofit.create(ServiceAPI.class);
         Status resquet_client = new Status();
         resquet_client.setValue(editNote.getText().toString());
-        Call<Result_status_contract> call = history_orders.getStatus_contract(597, "thuonghuyen", 216, b.getInt("StatusId"), 10, 4, resquet_client);
-        call.enqueue(new Callback<Result_status_contract>() {
 
+        Call<Result_status_contract> call = history_orders.getStatus_contract(b.getInt("object_id"),  preferences.getStringValue(Constants.TOKEN, ""), b.getInt("client_id"), b.getInt("StatusId"), preferences.getIntValue(Constants.USER_ID, 0), preferences.getIntValue(Constants.PARTNER_ID, 0), resquet_client);
+        call.enqueue(new Callback<Result_status_contract>() {
             @RequiresApi(api = Build.VERSION_CODES.KITKAT)
             @Override
             public void onResponse(Call<Result_status_contract> call, Response<Result_status_contract> response) {
                 if (response.body().getStatus().getId() > 0) {
+                    if (lvImage.size() > 0) {
                     boolean b = funcUpload_photo(response.body().getStatus().getId(), lvImage.size() - 1);
                     if (b == false) {
                         funcNotification(2);
                         relNotifi.setVisibility(View.INVISIBLE);
                     } else {
                         funcNotification(1);
+                        relNotifi.setVisibility(View.INVISIBLE);
+                    }
+                }else {
+                        funcNotification(2);
                         relNotifi.setVisibility(View.INVISIBLE);
                     }
 
@@ -195,7 +232,6 @@ public class Edit_status_contract_activity extends AppCompatActivity implements 
     }
 
     //upload photo đệ quy
-
     @RequiresApi(api = Build.VERSION_CODES.KITKAT)
     public boolean funcUpload_photo(final int id, final int i) {
         if (lvImage.get(i).getUrl().contains("http")) {
@@ -205,28 +241,31 @@ public class Edit_status_contract_activity extends AppCompatActivity implements 
         } else {
             ServiceAPI history_orders = retrofit_photo.create(ServiceAPI.class);
             File file = FileUtils.getFile(this, lvImage.get(i).getFilePart());
+                if(file != null) {
+                    RequestBody requestFile =
+                            RequestBody.create(
+                                    MediaType.parse(getContentResolver().getType(lvImage.get(i).getFilePart())),
+                                    file
+                            );
+                    // create RequestBody instance from file
+                    MultipartBody.Part filePart = MultipartBody.Part.createFormData("photo", file.getName(), requestFile);
+                    Call<Result_upload_photo> call = history_orders.getUpload_photo("avarta", id, preferences.getStringValue(Constants.TOKEN, ""),preferences.getIntValue(Constants.USER_ID, 0), "i",  preferences.getIntValue(Constants.PARTNER_ID, 0), "od", filePart);
+                    call.enqueue(new Callback<Result_upload_photo>() {
+                        @Override
+                        public void onResponse(Call<Result_upload_photo> call, Response<Result_upload_photo> response) {
+                            if (i == 0)
+                                result = false;
+                            else funcUpload_photo(id, i - 1);
+                        }
 
-            RequestBody requestFile =
-                             RequestBody.create(
-                                MediaType.parse(getContentResolver().getType(lvImage.get(i).getFilePart())),
-                                file
-                        );
-            // create RequestBody instance from file
-            MultipartBody.Part filePart = MultipartBody.Part.createFormData("photo", file.getName(), requestFile);
-            Call<Result_upload_photo> call = history_orders.getUpload_photo("avarta", id, "thuonghuyen", 10, "i", 4, "od", filePart);
-            call.enqueue(new Callback<Result_upload_photo>() {
-                @Override
-                public void onResponse(Call<Result_upload_photo> call, Response<Result_upload_photo> response) {
-                    if (i == 0)
-                        result = false;
-                    else funcUpload_photo(id, i - 1);
+                        @Override
+                        public void onFailure(Call<Result_upload_photo> call, Throwable t) {
+                            result = true;
+                        }
+                    });
                 }
+                else result = false;
 
-                @Override
-                public void onFailure(Call<Result_upload_photo> call, Throwable t) {
-                    result = true;
-                }
-            });
         }
 
         return result;
@@ -241,7 +280,7 @@ public class Edit_status_contract_activity extends AppCompatActivity implements 
                 String a;
 //                ((ImageView) findViewById(R.id.quick_start_cropped_image)).setImageURI(result.getUri());
                 if(result.getUri().toString().contains("file")){
-                     a = result.getUri().toString().replace("file://","");
+                    a = result.getUri().toString().replace("file://","");
                     selectedImage =getImageContentUri(this,new File(Uri.parse(a).toString()));
                     Log.d("uri",getImageContentUri(this,new File(Uri.parse(a).toString()))+"");
                 }
@@ -264,6 +303,74 @@ public class Edit_status_contract_activity extends AppCompatActivity implements 
                 Toast.makeText(this, "Lỗi file: " + result.getError(), Toast.LENGTH_LONG).show();
             }
         }
+    }
+//    @Override
+//    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+//        super.onActivityResult(requestCode, resultCode, data);
+//        if (data != null)
+//            if (requestCode == 1 && resultCode == Activity.RESULT_OK && data != null) {
+//                selectedImage = data.getData();
+//                if (selectedImage == null) {
+//                    Bitmap image = (Bitmap) data.getExtras().get("data");
+//                    selectedImage = getImageUri(this, image);
+//                    //String imagePath = getPath(selectedImage);
+//                }
+////                String a = null;
+////                Log.d("lvImage",selectedImage.toString());
+////                if(selectedImage.toString().contains("file")){
+////                     a = selectedImage.toString().replace("file://","");
+////                    selectedImage =getImageContentUri(this,new File(Uri.parse(a).toString()));
+////                    Log.d("uri",getImageContentUri(this,new File(Uri.parse(a).toString()))+"");
+////                }
+////
+//                Photo photo = new Photo();
+//                photo.setCode("");
+//                photo.setHeight(0);
+//                photo.setWidth(0);
+//                photo.setObjectId(0);
+//                photo.setOrderNo(0);
+//                photo.setPhotoId(0);
+//                photo.setType(0);
+//                photo.setName("");
+//                photo.setUrl("");
+//                photo.setFilePart(selectedImage);
+//                lvImage.add(photo);
+//                getLoad_photo();
+//
+//            }
+//        if (requestCode == 2 && resultCode == Activity.RESULT_OK) {
+//            Bitmap image = (Bitmap) data.getExtras().get("data");
+//            selectedImage = getImageUri(this, image);
+//            // String imagePath = getPath(selectedImage);
+//            Photo photo = new Photo();
+//            photo.setCode("");
+//            photo.setHeight(0);
+//            photo.setWidth(0);
+//            photo.setObjectId(0);
+//            photo.setOrderNo(0);
+//            photo.setPhotoId(0);
+//            photo.setType(0);
+//            photo.setName("");
+//            photo.setUrl("");
+//            photo.setFilePart(selectedImage);
+//            lvImage.add(photo);
+//            getLoad_photo();
+//
+//        }
+//    }
+
+    public Uri getImageUri(Context inContext, Bitmap inImage) {
+        ByteArrayOutputStream bytes = new ByteArrayOutputStream();
+        inImage.compress(Bitmap.CompressFormat.JPEG, 100, bytes);
+        String path = MediaStore.Images.Media.insertImage(inContext.getContentResolver(), inImage, "Title", null);
+        return Uri.parse(path);
+    }
+
+    public String getPath(Uri uri) {
+        Cursor cursor = getContentResolver().query(uri, null, null, null, null);
+        cursor.moveToFirst();
+        int idx = cursor.getColumnIndex(MediaStore.Images.ImageColumns.DATA);
+        return cursor.getString(idx);
     }
 
     public void funcNotification(int im) {
@@ -290,7 +397,7 @@ public class Edit_status_contract_activity extends AppCompatActivity implements 
                     .show();
         }
         else {
-            new SweetAlertDialog(this, SweetAlertDialog.SUCCESS_TYPE)
+            new SweetAlertDialog(this,SweetAlertDialog.SUCCESS_TYPE)
                     .setTitleText(getResources().getString(R.string.srtNotifi))
                     .setContentText(getResources().getString(R.string.srtNotifi_done))
                     .setConfirmText("Đồng ý")
@@ -327,7 +434,7 @@ public class Edit_status_contract_activity extends AppCompatActivity implements 
             public void onClick(View view) {
                 Photo photo = lvImage.get(pos);
                 ServiceAPI history_orders = retrofit_photo.create(ServiceAPI.class);
-                Call<Result_upload_photo> call = history_orders.getDelete_photo(photo.getName(), "avarta", photo.getPhotoId(), "thuonghuyen", 10, "a", 4, "od", photo.getObjectId());
+                Call<Result_upload_photo> call = history_orders.getDelete_photo(photo.getName(), "avarta", photo.getPhotoId(), preferences.getStringValue(Constants.TOKEN, ""), preferences.getIntValue(Constants.USER_ID, 0), "a", preferences.getIntValue(Constants.PARTNER_ID, 0), "od", photo.getObjectId());
                 call.enqueue(new Callback<Result_upload_photo>() {
                     public void onResponse(Call<Result_upload_photo> call, Response<Result_upload_photo> response) {
                         if (response.body().getHasErrors() == false) {

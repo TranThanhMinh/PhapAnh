@@ -40,8 +40,9 @@ public class adapter_History_focus extends RecyclerView.Adapter<adapter_History_
 
     @Override
     public void onBindViewHolder(adapter_History_focus.MyViewHolder holder, int position) {
-        if (position % 2 == 0)
-            holder.lay_display.setBackgroundResource(R.color.color1);
+        if (position % 2 != 0)
+            holder.lay_display.setBackgroundResource(R.color.colorWhite);
+        else  holder.lay_display.setBackgroundResource(R.color.color1);
         Focus focus = list.get(position);
         if (focus.getFocusTypeId() == 2)
             holder.tvSetupTime.setText(focus.getFocusTypeName());

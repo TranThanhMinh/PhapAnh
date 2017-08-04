@@ -27,7 +27,7 @@ public class adapter_Photo_history_order extends RecyclerView.Adapter<adapter_Ph
     private funcDelete_lvImage delete_lvImage;
     private List<Photo> list;
     private Context context;
-    public static List<Photo> list_photo;
+
     public class MyViewHolder extends RecyclerView.ViewHolder {
         public ImageView imHistory;
 

@@ -34,7 +34,18 @@ public class adapter_History_orders extends RecyclerView.Adapter<adapter_History
     Timer timer = new Timer();
     Handler handler = new Handler();
 
+    public adapter_History_orders.clickEdit getClickEdit() {
+        return clickEdit;
+    }
 
+    public void setClickEdit(adapter_History_orders.clickEdit clickEdit) {
+        this.clickEdit = clickEdit;
+    }
+
+    private clickEdit clickEdit;
+    public interface clickEdit{
+        void click(String note,String status,int statusId);
+    }
     public class MyViewHolder extends RecyclerView.ViewHolder {
         public TextView tvTime, tvPersonnel, tvStatus, tvNote, tvUpdate_history;
         public RecyclerView lvPhoto;
@@ -59,9 +70,10 @@ public class adapter_History_orders extends RecyclerView.Adapter<adapter_History
 
     }
 
-    public adapter_History_orders(Context context, List<History_order> list) {
+    public adapter_History_orders(Context context, List<History_order> list,clickEdit clickEdit) {
         this.list = list;
         this.context = context;
+        this.clickEdit = clickEdit;
         lvImage = null;
     }
 
@@ -122,14 +134,8 @@ public class adapter_History_orders extends RecyclerView.Adapter<adapter_History
         holder.tvUpdate_history.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(context, Edit_status_contract_activity.class);
-                Bundle b = new Bundle();
                 lvImage = list;
-                b.putString("note", p.getNote());
-                b.putString("status", p.getOrderStatusName());
-                b.putInt("StatusId", p.getOrderStatusId());
-                intent.putExtras(b);
-                context.startActivity(intent);
+                clickEdit.click(p.getNote(),p.getOrderStatusName(),p.getOrderStatusId());
             }
         });
 

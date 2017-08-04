@@ -7,6 +7,8 @@
         android:id="@+id/actionDone"
         android:icon="@mipmap/ic_dms_37"
         android:orderInCategory="100"
+        
         android:title="@string/srtSend"
         app:showAsAction="ifRoom"/>
+
 </menu>

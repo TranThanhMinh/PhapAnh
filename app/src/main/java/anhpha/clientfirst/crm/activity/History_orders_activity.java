@@ -16,11 +16,14 @@ import java.util.List;
 
 import anhpha.clientfirst.crm.R;
 import anhpha.clientfirst.crm.adapter.adapter_History_orders;
+import anhpha.clientfirst.crm.configs.Constants;
 import anhpha.clientfirst.crm.configs.Preferences;
 import anhpha.clientfirst.crm.interfaces.Url;
 import anhpha.clientfirst.crm.model.History_order;
+import anhpha.clientfirst.crm.model.MOrder;
 import anhpha.clientfirst.crm.model.MResult_order_history;
 import anhpha.clientfirst.crm.service_api.ServiceAPI;
+import anhpha.clientfirst.crm.utils.LogUtils;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -31,18 +34,22 @@ import retrofit2.converter.gson.GsonConverterFactory;
  * Created by MinhTran on 7/12/2017.
  */
 
-public class History_orders_activity extends BaseAppCompatActivity implements View.OnClickListener{
+public class History_orders_activity extends BaseAppCompatActivity implements View.OnClickListener,adapter_History_orders.clickEdit{
     private RecyclerView lvHistory_order;
     private Retrofit retrofit;
     private adapter_History_orders adapter_history_orders;
     private ImageView imBack;
     private Toolbar toolbar;
+    private  Preferences preferences;
+    private MOrder mOrder = new MOrder();
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_histor_orders);
         toolbar = (Toolbar) findViewById(R.id.toolbar);
-        Preferences preferences = new Preferences(mContext);
+
+        mOrder = (MOrder) getIntent().getSerializableExtra("mOrder");
+        preferences = new Preferences(mContext);
         if (toolbar != null) {
 
             setSupportActionBar(toolbar);
@@ -50,9 +57,7 @@ public class History_orders_activity extends BaseAppCompatActivity implements Vi
             actionBar.setTitle(R.string.title_activity_activity_user);
             actionBar.setDisplayHomeAsUpEnabled(true);
             actionBar.setHomeButtonEnabled(true);
-//            final Drawable upArrow = getResources().getDrawable(R.drawable.ic_black);
-//            upArrow.setColorFilter(getResources().getColor(android.R.color.white), PorterDuff.Mode.SRC_IN);
-//            getSupportActionBar().setHomeAsUpIndicator(upArrow);
+
             actionBar.setTitle(R.string.srtHistory_order);
             toolbar.setTitleTextColor(getResources().getColor(R.color.colorWhite));
         }
@@ -75,18 +80,18 @@ public class History_orders_activity extends BaseAppCompatActivity implements Vi
     }
     public void getHistory_order(){
         ServiceAPI history_orders = retrofit.create(ServiceAPI.class);
-        Call<MResult_order_history> call = history_orders.getHistory_order(10,4,"thuonghuyen",597);
+        Call<MResult_order_history> call = history_orders.getHistory_order(preferences.getIntValue(Constants.USER_ID, 0), preferences.getIntValue(Constants.PARTNER_ID, 0), preferences.getStringValue(Constants.TOKEN, ""),mOrder.getOrder_contract_id());
         call.enqueue(new Callback<MResult_order_history>() {
             @Override
             public void onResponse(Call<MResult_order_history> call, Response<MResult_order_history> response) {
-
+                LogUtils.api("",call,response);
                 List<History_order> list = response.body().getOrder_history();
-                adapter_history_orders = new adapter_History_orders(History_orders_activity.this,list);
+                adapter_history_orders = new adapter_History_orders(History_orders_activity.this,list,History_orders_activity.this);
                 lvHistory_order.setAdapter(adapter_history_orders);
             }
             @Override
             public void onFailure(Call<MResult_order_history> call, Throwable t) {
-
+                LogUtils.api("",call,t.toString());
             }
         });
     }
@@ -115,6 +120,9 @@ public class History_orders_activity extends BaseAppCompatActivity implements Vi
         int id = item.getItemId();
         if (id == R.id.actionHistory_contract) {
             Intent intent = new Intent(History_orders_activity.this,History_contract_activity.class);
+            Bundle b = new Bundle();
+            b.putInt("object_id",mOrder.getOrder_contract_id());
+            intent.putExtras(b);
             startActivity(intent);
             return true;
         }
@@ -135,4 +143,18 @@ public class History_orders_activity extends BaseAppCompatActivity implements Vi
         return super.onOptionsItemSelected(item);
     }
 
+    @Override
+    public void click(String note, String status, int statusId) {
+        Intent intent = new Intent(this, Edit_status_contract_activity.class);
+        Bundle b = new Bundle();
+        b.putString("note", note);
+        b.putString("status", status);
+        b.putInt("StatusId",statusId);
+        b.putInt("object_id",mOrder.getOrder_contract_id());
+        b.putInt("client_id",mOrder.getClient_id());
+        b.putString("client_name",mOrder.getClient_name());
+        b.putString("address",mOrder.getAddress());
+        intent.putExtras(b);
+        startActivity(intent);
+    }
 }

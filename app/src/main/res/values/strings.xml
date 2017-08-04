@@ -790,6 +790,7 @@
     <string name="srtDone">Thành Công</string>
     <string name="srtSend">Gửi</string>
     <string name="srtCheckDate">Vui lòng kiểm tra từ ngày đến ngày</string>
+    <string name="srtDate_bigger">Từ ngày lớn hơn hoặc bằng đến ngày</string>
     <string name="srtFalse">Thất bại</string>
     <string name="srtUpdate">Chỉnh sửa</string>
     <string name="crop_image_menu_crop">Lưu</string>

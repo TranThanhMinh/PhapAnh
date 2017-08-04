@@ -11,7 +11,7 @@ import android.widget.LinearLayout;
 import anhpha.clientfirst.crm.R;
 import anhpha.clientfirst.crm.adapter.Pager_Photo_adapter;
 
-import static anhpha.clientfirst.crm.adapter.adapter_Photo_history_order.list_photo;
+import static anhpha.clientfirst.crm.adapter.adapter_Photo.list_photo;
 
 
 /**

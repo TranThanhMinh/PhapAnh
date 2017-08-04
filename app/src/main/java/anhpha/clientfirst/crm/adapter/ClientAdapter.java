@@ -24,6 +24,7 @@ import anhpha.clientfirst.crm.activity.CheckinActivity;
 import anhpha.clientfirst.crm.activity.ClientActivity;
 import anhpha.clientfirst.crm.activity.EmailActivity;
 import anhpha.clientfirst.crm.activity.EventsClientActivity;
+import anhpha.clientfirst.crm.activity.HistoryFocusActivity;
 import anhpha.clientfirst.crm.activity.LabelsActivity;
 import anhpha.clientfirst.crm.activity.OrderActivity;
 import anhpha.clientfirst.crm.activity.WorkActivity;
@@ -40,7 +41,7 @@ public class ClientAdapter extends RecyclerView.Adapter<ClientAdapter.MyViewHold
     private  boolean is_distance = false;
     public class MyViewHolder extends RecyclerView.ViewHolder  {
         public TextView address, client_name, distance;
-        public ImageButton imageButton,imageButton2,imageButton3,imageButton4,imageButton5,imageButton6,imageButton7,imageButton8;
+        public ImageButton imageButton,imageButton2,imageButton3,imageButton4,imageButton5,imageButton6,imageButton7,imageButton8,imageButton9;
         public LinearLayout linearLayout2;
         public ImageView im_activity;
         public LinearLayout linearLayout3;
@@ -59,6 +60,7 @@ public class ClientAdapter extends RecyclerView.Adapter<ClientAdapter.MyViewHold
             imageButton6 = (ImageButton) view.findViewById(R.id.imageButton6);
             imageButton7 = (ImageButton) view.findViewById(R.id.imageButton7);
             imageButton8 = (ImageButton) view.findViewById(R.id.imageButton8);
+            imageButton9 = (ImageButton) view.findViewById(R.id.imageButton9);
             im_activity = (ImageView) view.findViewById(R.id.im_activity);
         }
     }
@@ -173,7 +175,12 @@ public class ClientAdapter extends RecyclerView.Adapter<ClientAdapter.MyViewHold
                 mContext.startActivity(new Intent(mContext, LabelsActivity.class).putExtra("mClient",activityItem));
             }
         });
-
+        holder.imageButton9.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                mContext.startActivity(new Intent(mContext, HistoryFocusActivity.class).putExtra("mClient",activityItem));
+            }
+        });
 
         if(activityItem.is_select()){
             if(activityItem.getClient_structure_id() == 2) {

@@ -102,7 +102,6 @@ public class OrderViewActivity extends BaseAppCompatActivity implements Callback
         actionBar.setHomeButtonEnabled(true);
 
         mOrder = (MOrder) getIntent().getSerializableExtra("mOrder");
-
         if(mOrder == null){
             mOrder = new MOrder();
         }else{
@@ -177,7 +176,8 @@ public class OrderViewActivity extends BaseAppCompatActivity implements Callback
 
                 return true;
             case R.id.history:
-                Intent in = new Intent(mContext,History_orders_activity.class);
+                Intent in = new Intent(mContext,History_orders_activity.class).putExtra("mOrder",mOrder);
+
                 startActivity(in);
                 return true;
             case R.id.cancel:

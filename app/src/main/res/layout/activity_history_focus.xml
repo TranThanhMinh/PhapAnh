@@ -16,17 +16,19 @@
         android:paddingRight="20dp">
 
         <TextView
+            android:id="@+id/tvName"
             android:layout_width="match_parent"
             android:layout_height="35dp"
             android:gravity="center_vertical"
-            android:text="Đỗ Xuân Việt"
+            android:text=""
             android:textSize="13sp"
             android:textStyle="bold" />
 
         <TextView
+            android:id="@+id/tvAddress"
             android:layout_width="match_parent"
             android:layout_height="25dp"
-            android:text="29 Xô Viết Nghệ Tĩnh"
+            android:text=""
             android:textSize="13sp" />
     </LinearLayout>
     <LinearLayout

@@ -32,7 +32,7 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class LabelsActivity extends BaseAppCompatActivity implements Callback<MAPIResponse<List<MLabel>>>, View.OnClickListener ,BaseAppCompatActivity.ItemClickListener {
+public class LabelsActivity extends BaseAppCompatActivity implements Callback<MAPIResponse<List<MLabel>>>, View.OnClickListener, LabelAdapter.Onclick{
 
     @Bind(R.id.rvActivities)
     RecyclerView rvActivities;
@@ -42,6 +42,7 @@ public class LabelsActivity extends BaseAppCompatActivity implements Callback<MA
     Preferences preferences;
     LabelAdapter activityAdapter;
     MClient mClient = new MClient();
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -62,15 +63,12 @@ public class LabelsActivity extends BaseAppCompatActivity implements Callback<MA
         mLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
         rvActivities.setLayoutManager(mLayoutManager);
         rvActivities.setItemAnimator(new DefaultItemAnimator());
-        activityAdapter = new LabelAdapter(mContext,mLabels,mClient);
+        activityAdapter = new LabelAdapter(mContext, mLabels, mClient,LabelsActivity.this);
         rvActivities.setAdapter(activityAdapter);
-        activityAdapter.setClickListener(this);
+        getList();
+        //activityAdapter.setClickListener(this);
     }
-
-    @Override
-    protected void onResume() {
-        super.onResume();
-
+    public void getList(){
         LogUtils.d(TAG, "getUserActivities ", "start");
         GetRetrofit().create(ServiceAPI.class)
                 .getClientLabels(preferences.getStringValue(Constants.TOKEN, "")
@@ -79,7 +77,13 @@ public class LabelsActivity extends BaseAppCompatActivity implements Callback<MA
                         , mClient.getClient_id()
                 )
                 .enqueue(this);
-        box.showLoadingLayout();
+       // box.showLoadingLayout();
+    }
+    @Override
+    protected void onResume() {
+        super.onResume();
+
+
     }
 
     @Override
@@ -88,11 +92,12 @@ public class LabelsActivity extends BaseAppCompatActivity implements Callback<MA
         inflater.inflate(R.menu.menu_null, menu);
         return super.onCreateOptionsMenu(menu);
     }
+
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.add:
-                startActivity(new Intent(mContext,LabelActivity.class).putExtra("mClient",mClient));
+                startActivity(new Intent(mContext, LabelActivity.class).putExtra("mClient", mClient));
                 return true;
 
             case android.R.id.home:
@@ -108,7 +113,7 @@ public class LabelsActivity extends BaseAppCompatActivity implements Callback<MA
     public void onResponse(Call<MAPIResponse<List<MLabel>>> call, Response<MAPIResponse<List<MLabel>>> response) {
         LogUtils.api(TAG, call, (response.body()));
         box.hideAll();
-        TokenUtils.checkToken(mContext,response.body().getErrors());
+        TokenUtils.checkToken(mContext, response.body().getErrors());
         mLabels = response.body().getResult();
         activityAdapter.setActivityItemList(mLabels);
         activityAdapter.notifyDataSetChanged();
@@ -126,9 +131,44 @@ public class LabelsActivity extends BaseAppCompatActivity implements Callback<MA
 
     }
 
+//    @Override
+//    public void onClick(View view, final int position) {
+//        final int status_id = mLabels.get(position).getIs_has()? 2 : 1;
+////        if (mLabels.get(position).getIs_has() == true)
+////            status_id = 2;
+////        else status_id = 1;
+//        GetRetrofit().create(ServiceAPI.class)
+//                .setClientLabelDetail(preferences.getStringValue(Constants.TOKEN, "")
+//                        , preferences.getIntValue(Constants.USER_ID, 0)
+//                        , preferences.getIntValue(Constants.PARTNER_ID, 0)
+//                        , mClient.getClient_id()
+//                        , status_id
+//                        , mLabels.get(position).getClient_label_id())
+//                .enqueue(new Callback<MAPIResponse<MLabel>>() {
+//                    @Override
+//                    public void onResponse(Call<MAPIResponse<MLabel>> call, Response<MAPIResponse<MLabel>> response) {
+//                        LogUtils.api(TAG, call, (response.body()));
+//                        box.hideAll();
+//                        TokenUtils.checkToken(mContext, response.body().getErrors());
+//                        mLabels.get(position).setIs_has(status_id == 1 ? true : false);
+//                        activityAdapter.notifyDataSetChanged();
+//                    }
+//
+//                    @Override
+//                    public void onFailure(Call<MAPIResponse<MLabel>> call, Throwable t) {
+//                        LogUtils.d(TAG, "getUserActivities ", t.toString());
+//                        box.hideAll();
+//                    }
+//                });
+//        box.showLoadingLayout();
+//    }
+
     @Override
-    public void onClick(View view, final int position) {
+    public void click(final int position) {
         final int status_id = mLabels.get(position).getIs_has()? 2 : 1;
+//        if (mLabels.get(position).getIs_has() == true)
+//            status_id = 2;
+//        else status_id = 1;
         GetRetrofit().create(ServiceAPI.class)
                 .setClientLabelDetail(preferences.getStringValue(Constants.TOKEN, "")
                         , preferences.getIntValue(Constants.USER_ID, 0)
@@ -141,15 +181,15 @@ public class LabelsActivity extends BaseAppCompatActivity implements Callback<MA
                     public void onResponse(Call<MAPIResponse<MLabel>> call, Response<MAPIResponse<MLabel>> response) {
                         LogUtils.api(TAG, call, (response.body()));
                         box.hideAll();
-                        TokenUtils.checkToken(mContext,response.body().getErrors());
-                        mLabels.get(position).setIs_has(status_id == 1? true: false);
-                        activityAdapter.notifyDataSetChanged();
+                        TokenUtils.checkToken(mContext, response.body().getErrors());
+
+
                     }
 
                     @Override
                     public void onFailure(Call<MAPIResponse<MLabel>> call, Throwable t) {
                         LogUtils.d(TAG, "getUserActivities ", t.toString());
-                        box.hideAll();
+                       box.hideAll();
                     }
                 });
         box.showLoadingLayout();

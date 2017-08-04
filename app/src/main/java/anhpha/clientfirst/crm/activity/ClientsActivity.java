@@ -250,6 +250,12 @@ public class ClientsActivity extends BaseAppCompatActivity implements SwipeRefre
 
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+        loadClient();
+    }
+
     private void loadClient() {
         //box.showLoadingLayout();
         if (is_distance) {

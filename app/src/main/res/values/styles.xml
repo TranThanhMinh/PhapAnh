@@ -124,5 +124,7 @@
     <style name="exception.button">
         <item name="android:layout_marginTop">25dip</item>
     </style>
-
+    <style name="AppTheme1" parent="Theme.AppCompat.Light.DarkActionBar">
+        <item name="actionMenuTextColor">@color/colorWhite</item>
+    </style>
 </resources>

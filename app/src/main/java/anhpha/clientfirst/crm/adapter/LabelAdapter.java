@@ -8,7 +8,10 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
+import android.widget.LinearLayout;
 import android.widget.TextView;
+
+import com.google.android.gms.vision.text.Line;
 
 import java.util.List;
 
@@ -26,15 +29,30 @@ public class LabelAdapter extends RecyclerView.Adapter<LabelAdapter.MyViewHolder
     public Context mContext;
     public MClient mClient;
     private BaseAppCompatActivity.ItemClickListener clickListener;
+    public interface Onclick{
+        void click(int i);
+    }
+
+    public Onclick getOnclick() {
+        return onclick;
+    }
+
+    public void setOnclick(Onclick onclick) {
+        this.onclick = onclick;
+    }
+
+    private Onclick onclick;
     public class MyViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
         public TextView name;
         public ImageButton check, edit;
+        private LinearLayout lview;
 
         public MyViewHolder(View view) {
             super(view);
             name = (TextView) view.findViewById(R.id.name);
             check= (ImageButton) view.findViewById(R.id.check);
             edit= (ImageButton) view.findViewById(R.id.edit);
+            lview= (LinearLayout) view.findViewById(R.id.view);
             name.setOnClickListener(this);
         }
 
@@ -46,10 +64,11 @@ public class LabelAdapter extends RecyclerView.Adapter<LabelAdapter.MyViewHolder
     public void setClickListener(BaseAppCompatActivity.ItemClickListener itemClickListener) {
         this.clickListener = itemClickListener;
     }
-    public LabelAdapter(Context context, List<MLabel> activityItemList, MClient mClient) {
+    public LabelAdapter(Context context, List<MLabel> activityItemList, MClient mClient,Onclick onclick) {
         this.activityItemList = activityItemList;
         this.mContext = context;
         this.mClient = mClient;
+        this.onclick = onclick;
     }
 
     @Override
@@ -65,7 +84,7 @@ public class LabelAdapter extends RecyclerView.Adapter<LabelAdapter.MyViewHolder
     }
 
     @Override
-    public void onBindViewHolder(MyViewHolder holder, int position) {
+    public void onBindViewHolder(MyViewHolder holder, final int position) {
         final MLabel activityItem = activityItemList.get(position);
         holder.name.setText(activityItem.getClient_label_name());
         if(!activityItem.getHex().isEmpty()) {
@@ -90,7 +109,24 @@ public class LabelAdapter extends RecyclerView.Adapter<LabelAdapter.MyViewHolder
                 mContext.startActivity(intent);
             }
         });
-
+        holder.name.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                onclick.click(position);
+                final int status_id = activityItemList.get(position).getIs_has()? 2 : 1;
+                activityItemList.get(position).setIs_has(status_id == 1 ? true : false);
+                notifyDataSetChanged();
+            }
+        });
+        holder.check.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                onclick.click(position);
+                final int status_id = activityItemList.get(position).getIs_has()? 2 : 1;
+                activityItemList.get(position).setIs_has(status_id == 1 ? true : false);
+                notifyDataSetChanged();
+            }
+        });
 
 
     }

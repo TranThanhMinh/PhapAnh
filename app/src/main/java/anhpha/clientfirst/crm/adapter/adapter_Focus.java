@@ -12,16 +12,27 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.CheckBox;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import java.io.Serializable;
 import java.util.List;
 import java.util.Random;
 
 import anhpha.clientfirst.crm.R;
+import anhpha.clientfirst.crm.activity.CallActivity;
+import anhpha.clientfirst.crm.activity.CheckinActivity;
+import anhpha.clientfirst.crm.activity.EmailActivity;
+import anhpha.clientfirst.crm.activity.EventsClientActivity;
 import anhpha.clientfirst.crm.activity.HistoryFocusActivity;
+import anhpha.clientfirst.crm.activity.LabelsActivity;
+import anhpha.clientfirst.crm.activity.OrderActivity;
+import anhpha.clientfirst.crm.activity.WorkActivity;
 import anhpha.clientfirst.crm.model.Focus;
+import anhpha.clientfirst.crm.model.MClient;
 import anhpha.clientfirst.crm.model.MClientLabel;
 import anhpha.clientfirst.crm.model.MLabel;
 import anhpha.clientfirst.crm.model.Result_focus;
@@ -66,6 +77,11 @@ public class adapter_Focus extends RecyclerView.Adapter<adapter_Focus.MyViewHold
     @Override
     public void onBindViewHolder(final MyViewHolder holder, final int position) {
         final Focus focus = list.get(position);
+        final MClient activityItem= new MClient();
+        activityItem.setClient_id(focus.getClientId());
+        activityItem.setClient_type_id(focus.getClientTypeId());
+        activityItem.setAddress(focus.getAddress());
+        activityItem.setClient_name(focus.getClientName());
         if(focus.getNumberDate()== 0)
         holder.tvDate.setText("");
         else  holder.tvDate.setText(focus.getNumberDate()+" "+context.getResources().getString(R.string.srtDate));
@@ -185,7 +201,54 @@ public class adapter_Focus extends RecyclerView.Adapter<adapter_Focus.MyViewHold
             }
         }
 
-
+        holder.imageButton2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                context.startActivity(new Intent(context, OrderActivity.class).putExtra("mClient",activityItem));
+            }
+        });
+        holder.imageButton3.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                context.startActivity(new Intent(context, WorkActivity.class).putExtra("mClient",activityItem));
+            }
+        });
+        holder.imageButton4.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                context.startActivity(new Intent(context, CheckinActivity.class).putExtra("mClient",activityItem));
+            }
+        });
+        holder.imageButton5.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                context.startActivity(new Intent(context, CallActivity.class).putExtra("mClient",activityItem));
+            }
+        });
+        holder.imageButton6.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                context.startActivity(new Intent(context, EmailActivity.class).putExtra("mClient",activityItem));
+            }
+        });
+        holder.imageButton7.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                context.startActivity(new Intent(context, EventsClientActivity.class).putExtra("mClient",activityItem));
+            }
+        });
+        holder.imageButton8.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                context.startActivity(new Intent(context, LabelsActivity.class).putExtra("mClient",activityItem));
+            }
+        });
+        holder.imageButton9.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                context.startActivity(new Intent(context, HistoryFocusActivity.class).putExtra("mClient",activityItem));
+            }
+        });
         holder.tvOk.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -214,9 +277,10 @@ public class adapter_Focus extends RecyclerView.Adapter<adapter_Focus.MyViewHold
     }
     public class MyViewHolder extends RecyclerView.ViewHolder {
         private TextView tvDate, tvName_city, tvNote,tvOk,tvNoOk,tvDelete;
-        private ImageView imageCheck,imageOrder,imageMeeting,imageCall,imageEmail,imageEvent;
-        private LinearLayout linearLayout2,linearLayout3,linearLayout;
-
+        private ImageView imageCheck,imageOrder,imageMeeting,imageCall,imageEmail,imageEvent,imageFocus;
+        private LinearLayout linearLayout2,linearLayout3;
+        private RelativeLayout linearLayout;
+        public ImageButton imageButton,imageButton2,imageButton3,imageButton4,imageButton5,imageButton6,imageButton7,imageButton8,imageButton9;
         public MyViewHolder(View v) {
             super(v);
             tvDate = (TextView) v.findViewById(R.id.tvDate);
@@ -233,7 +297,15 @@ public class adapter_Focus extends RecyclerView.Adapter<adapter_Focus.MyViewHold
             imageEvent = (ImageView) v.findViewById(R.id.imageEvent);
             linearLayout2 = (LinearLayout) v.findViewById(R.id.linearLayout2);
             linearLayout3 = (LinearLayout) v.findViewById(R.id.linearLayout3);
-            linearLayout = (LinearLayout) v.findViewById(R.id.linearLayout);
+            linearLayout = (RelativeLayout) v.findViewById(R.id.linearLayout);
+            imageButton2 = (ImageButton) v.findViewById(R.id.imageButton2);
+            imageButton3 = (ImageButton) v.findViewById(R.id.imageButton3);
+            imageButton4 = (ImageButton) v.findViewById(R.id.imageButton4);
+            imageButton5 = (ImageButton) v.findViewById(R.id.imageButton5);
+            imageButton6 = (ImageButton) v.findViewById(R.id.imageButton6);
+            imageButton7 = (ImageButton) v.findViewById(R.id.imageButton7);
+            imageButton8 = (ImageButton) v.findViewById(R.id.imageButton8);
+            imageButton9 = (ImageButton) v.findViewById(R.id.imageButton9);
         }
     }
 }

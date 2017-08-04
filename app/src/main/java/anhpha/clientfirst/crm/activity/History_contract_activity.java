@@ -17,6 +17,8 @@ import java.util.List;
 
 import anhpha.clientfirst.crm.R;
 import anhpha.clientfirst.crm.adapter.adapter_History_contract;
+import anhpha.clientfirst.crm.configs.Constants;
+import anhpha.clientfirst.crm.configs.Preferences;
 import anhpha.clientfirst.crm.interfaces.Url;
 import anhpha.clientfirst.crm.model.History_contract;
 import anhpha.clientfirst.crm.model.Result_history_contract;
@@ -31,27 +33,28 @@ import retrofit2.converter.gson.GsonConverterFactory;
  * Created by MinhTran on 7/12/2017.
  */
 
-public class History_contract_activity extends AppCompatActivity implements View.OnClickListener {
+public class History_contract_activity extends BaseAppCompatActivity implements View.OnClickListener {
     private RecyclerView lvHistory_contract;
     private Retrofit retrofit;
     private adapter_History_contract adapter_history_contract;
     private ImageView imBack;
     private Toolbar toolbar;
+    private Preferences preferences;
+    private Bundle b;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_history_contract);
         toolbar = (Toolbar) findViewById(R.id.toolbar);
+        preferences = new Preferences(mContext);
         if(toolbar != null){
             setSupportActionBar(toolbar);
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-            final Drawable upArrow = getResources().getDrawable(R.drawable.ic_black);
-            upArrow.setColorFilter(getResources().getColor(android.R.color.white), PorterDuff.Mode.SRC_IN);
-            getSupportActionBar().setHomeAsUpIndicator(upArrow);
             getSupportActionBar().setTitle(R.string.srtHistory_order);
             toolbar.setTitleTextColor(getResources().getColor(R.color.colorWhite));
         }
+        b=getIntent().getExtras();
       //  imBack = (ImageView) findViewById(R.id.imBack);
         lvHistory_contract = (RecyclerView) findViewById(R.id.lvHistory_contract);
         LinearLayoutManager layoutManager = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
@@ -73,7 +76,7 @@ public class History_contract_activity extends AppCompatActivity implements View
 
     public void getHistory_contract() {
         ServiceAPI history_contract = retrofit.create(ServiceAPI.class);
-        Call<Result_history_contract> call = history_contract.getHistory_contract(10, 4, "thuonghuyen", 597);
+        Call<Result_history_contract> call = history_contract.getHistory_contract(preferences.getIntValue(Constants.USER_ID, 0), preferences.getIntValue(Constants.PARTNER_ID, 0), preferences.getStringValue(Constants.TOKEN, ""),b.getInt("object_id"));
         call.enqueue(new Callback<Result_history_contract>() {
             @Override
             public void onResponse(Call<Result_history_contract> call, Response<Result_history_contract> response) {

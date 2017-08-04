@@ -787,6 +787,7 @@
     <string name="srtSend">Send</string>
     <string name="srtFalse">Failed</string>
     <string name="srtCheckDate">Please check from date to date</string>
+    <string name="srtDate_bigger">From date bigger or equal To date</string>
     <string name="srtUpdate">Edit</string>
     <string name="crop_image_menu_crop">Save</string>
 </resources>

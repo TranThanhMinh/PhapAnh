@@ -62,7 +62,7 @@ public class HistoryFocusActivity extends BaseAppCompatActivity implements DateP
     private List<Focus> lv_focus;
     private Bundle b;
     private Spinner spTarget;
-    private TextView editFromDate, editToDate;
+    private TextView editFromDate, editToDate,tvName,tvAddress;
     private int Target, Type;
     private RadioGroup rgFocus;
     private RadioButton rbNo, rbYes;
@@ -70,7 +70,10 @@ public class HistoryFocusActivity extends BaseAppCompatActivity implements DateP
     private int setDate;
     private DatePickerDialog date;
     MClient mClient = new MClient();
-
+    int visibleItemCount =0 ;
+    int totalItemCount =0 ;
+    int pastVisibleItems =0 ;
+    LinearLayoutManager manager;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -78,6 +81,8 @@ public class HistoryFocusActivity extends BaseAppCompatActivity implements DateP
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         editFromDate = (TextView) findViewById(R.id.editFromDate);
         editToDate = (TextView) findViewById(R.id.editToDate);
+        tvName = (TextView) findViewById(R.id.tvName);
+        tvAddress = (TextView) findViewById(R.id.tvAddress);
         lvHistory_focus = (RecyclerView) findViewById(R.id.lvHistory_focus);
         spTarget = (Spinner) findViewById(R.id.spTarget);
         rgFocus = (RadioGroup) findViewById(R.id.rgFocus);
@@ -88,6 +93,8 @@ public class HistoryFocusActivity extends BaseAppCompatActivity implements DateP
         editToDate.setText(null);
         Intent intent = getIntent();
         mClient = (MClient) intent.getSerializableExtra("mClient");
+        tvName.setText(mClient.getClient_name());
+        tvAddress.setText(mClient.getAddress());
         preferences = new Preferences(mContext);
         b = getIntent().getExtras();
         if (toolbar != null) {
@@ -96,7 +103,7 @@ public class HistoryFocusActivity extends BaseAppCompatActivity implements DateP
             getSupportActionBar().setTitle(R.string.srtHistory_focus);
             toolbar.setTitleTextColor(getResources().getColor(R.color.colorWhite));
         }
-        LinearLayoutManager manager = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
+         manager = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
         manager.setOrientation(LinearLayoutManager.VERTICAL);
         lvHistory_focus.setHasFixedSize(true);
         lvHistory_focus.setLayoutManager(manager);
@@ -147,13 +154,39 @@ public class HistoryFocusActivity extends BaseAppCompatActivity implements DateP
         retrofit = getConnect();
 
     }
-
     @Override
     protected void onResume() {
         super.onResume();
         getHistoryFocus(mClient.getClient_id());
-    }
+        lvHistory_focus.addOnScrollListener(new RecyclerView.OnScrollListener() {
+            @Override
+            public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
+                super.onScrollStateChanged(recyclerView, newState);
+            }
 
+            @Override
+            public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
+                super.onScrolled(recyclerView, dx, dy);
+                if(dy > 0) //check for scroll down
+                {
+                    visibleItemCount = manager.getChildCount();
+                    totalItemCount = manager.getItemCount();
+                    pastVisibleItems = manager.findFirstVisibleItemPosition();
+
+
+                        if ( (visibleItemCount + pastVisibleItems) >= totalItemCount)
+                        {
+
+                            Log.d("...", totalItemCount+"");
+                            //Do pagination.. i.e. fetch new data
+
+//
+
+                    }
+                }
+            }
+        });
+    }
     public Retrofit getConnect() {
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl(Url.URL_client)
@@ -188,7 +221,7 @@ public class HistoryFocusActivity extends BaseAppCompatActivity implements DateP
                 } else {
                     boolean check = isDateAfter(editFromDate.getText().toString(), editToDate.getText().toString());
                     if (check == false)
-                        Toast.makeText(this, editFromDate.getText().toString() + " > " + editToDate.getText().toString(), Toast.LENGTH_SHORT).show();
+                        Toast.makeText(this, R.string.srtDate_bigger, Toast.LENGTH_SHORT).show();
                     else {
                         long diff = date2.getTime() - date1.getTime();
                         date = (int) TimeUnit.DAYS.convert(diff, TimeUnit.MILLISECONDS);

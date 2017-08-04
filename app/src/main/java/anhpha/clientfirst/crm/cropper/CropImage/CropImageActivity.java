@@ -18,6 +18,7 @@ import android.app.Activity;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
+import android.graphics.Color;
 import android.graphics.PorterDuff;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
@@ -25,6 +26,8 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.app.ActionBar;
 import android.support.v7.widget.Toolbar;
+import android.text.SpannableString;
+import android.text.style.ForegroundColorSpan;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -66,6 +69,7 @@ public class CropImageActivity extends BaseAppCompatActivity implements CropImag
         if (toolbar != null) {
             setSupportActionBar(toolbar);
             getSupportActionBar().setDisplayShowTitleEnabled(false);
+            toolbar.setTitleTextColor(getResources().getColor(R.color.colorWhite));
         }
         mCropImageView = (CropImage_View) findViewById(R.id.cropImageView);
         Bundle bundle = getIntent().getBundleExtra(CropImageOptions.BUNDLE_KEY);
@@ -116,7 +120,11 @@ public class CropImageActivity extends BaseAppCompatActivity implements CropImag
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.crop_image_menu1, menu);
-
+        int positionOfMenuItem = 0; // or whatever...
+        MenuItem item = menu.getItem(positionOfMenuItem);
+        SpannableString s = new SpannableString("Lưu");
+        s.setSpan(new ForegroundColorSpan(Color.RED), 0, s.length(), 0);
+        item.setTitle(s);
 
 
         return true;
