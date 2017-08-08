@@ -34,7 +34,7 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class ChooseClientAreaActivity extends BaseAppCompatActivity implements  RecyclerTouchListener.ClickListener,Callback<MAPIResponse<List<MClientArea>>>, View.OnClickListener  {
+public class ChooseClientAreaActivity extends BaseAppCompatActivity implements RecyclerTouchListener.ClickListener, Callback<MAPIResponse<List<MClientArea>>>, View.OnClickListener {
 
     @Bind(R.id.rvActivities)
     RecyclerView rvActivities;
@@ -43,6 +43,7 @@ public class ChooseClientAreaActivity extends BaseAppCompatActivity implements  
     ChooseClientAreaAdapter activityAdapter;
     List<MClientArea> mClientAreas = new ArrayList<>();
     Preferences preferences;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -65,7 +66,7 @@ public class ChooseClientAreaActivity extends BaseAppCompatActivity implements  
 
         mClientAreas = (List<MClientArea>) getIntent().getSerializableExtra("mClientAreas");
 
-        if(mClientAreas.isEmpty()){
+        if (mClientAreas.isEmpty()) {
             mClientAreas = new ArrayList<>();
             GetRetrofit().create(ServiceAPI.class)
                     .getClientAreas(preferences.getStringValue(Constants.TOKEN, "")
@@ -79,10 +80,11 @@ public class ChooseClientAreaActivity extends BaseAppCompatActivity implements  
             LogUtils.d(TAG, "getUserActivities ", "start");
         }
 
-        activityAdapter = new ChooseClientAreaAdapter(mContext,mClientAreas);
+        activityAdapter = new ChooseClientAreaAdapter(mContext, mClientAreas);
         rvActivities.setAdapter(activityAdapter);
 
     }
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
@@ -105,7 +107,10 @@ public class ChooseClientAreaActivity extends BaseAppCompatActivity implements  
                 return true;
 
             case android.R.id.home:
-                onBackPressed();
+                //  onBackPressed();
+                mClientAreas = null;
+                setResult(Constants.RESULT_AREA, new Intent().putExtra("mClientAreas", (Serializable) mClientAreas));
+                finish();
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
@@ -116,7 +121,7 @@ public class ChooseClientAreaActivity extends BaseAppCompatActivity implements  
     public void onResponse(Call<MAPIResponse<List<MClientArea>>> call, Response<MAPIResponse<List<MClientArea>>> response) {
         LogUtils.api(TAG, call, (response.body()));
         box.hideAll();
-        TokenUtils.checkToken(mContext,response.body().getErrors());
+        TokenUtils.checkToken(mContext, response.body().getErrors());
         mClientAreas = response.body().getResult();
         activityAdapter.setActivityItemList(mClientAreas);
         activityAdapter.notifyDataSetChanged();
@@ -145,5 +150,11 @@ public class ChooseClientAreaActivity extends BaseAppCompatActivity implements  
 
     }
 
+    @Override
+    public void onBackPressed() {
 
+        mClientAreas = null;
+        setResult(Constants.RESULT_AREA, new Intent().putExtra("mClientAreas", (Serializable) mClientAreas));
+        finish();
+    }
 }

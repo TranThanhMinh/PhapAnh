@@ -105,7 +105,10 @@ public class ChooseClientGroupActivity extends BaseAppCompatActivity implements 
                 return true;
 
             case android.R.id.home:
-                onBackPressed();
+             //   onBackPressed();
+                mClientGroups = null;
+                setResult(Constants.RESULT_GROUP, new Intent().putExtra("mClientGroups", (Serializable) mClientGroups));
+                finish();
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
@@ -145,5 +148,11 @@ public class ChooseClientGroupActivity extends BaseAppCompatActivity implements 
 
     }
 
+    @Override
+    public void onBackPressed() {
 
+        mClientGroups = null;
+        setResult(Constants.RESULT_GROUP, new Intent().putExtra("mClientGroups", (Serializable) mClientGroups));
+        finish();
+    }
 }

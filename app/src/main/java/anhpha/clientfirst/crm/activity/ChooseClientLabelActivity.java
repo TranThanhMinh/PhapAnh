@@ -34,7 +34,7 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class ChooseClientLabelActivity extends BaseAppCompatActivity implements  RecyclerTouchListener.ClickListener,Callback<MAPIResponse<List<MLabel>>>, View.OnClickListener  {
+public class ChooseClientLabelActivity extends BaseAppCompatActivity implements RecyclerTouchListener.ClickListener, Callback<MAPIResponse<List<MLabel>>>, View.OnClickListener {
 
     @Bind(R.id.rvActivities)
     RecyclerView rvActivities;
@@ -43,6 +43,7 @@ public class ChooseClientLabelActivity extends BaseAppCompatActivity implements 
     ChooseClientLabelAdapter activityAdapter;
     List<MLabel> mLabels = new ArrayList<>();
     Preferences preferences;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -65,7 +66,7 @@ public class ChooseClientLabelActivity extends BaseAppCompatActivity implements 
 
         mLabels = (List<MLabel>) getIntent().getSerializableExtra("mLabels");
 
-        if(mLabels.isEmpty()){
+        if (mLabels.isEmpty()) {
             mLabels = new ArrayList<>();
             GetRetrofit().create(ServiceAPI.class)
                     .getClientLabels(preferences.getStringValue(Constants.TOKEN, "")
@@ -80,10 +81,11 @@ public class ChooseClientLabelActivity extends BaseAppCompatActivity implements 
             LogUtils.d(TAG, "getUserActivities ", "start");
         }
 
-        activityAdapter = new ChooseClientLabelAdapter(mContext,mLabels);
+        activityAdapter = new ChooseClientLabelAdapter(mContext, mLabels);
         rvActivities.setAdapter(activityAdapter);
 
     }
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
@@ -106,7 +108,9 @@ public class ChooseClientLabelActivity extends BaseAppCompatActivity implements 
                 return true;
 
             case android.R.id.home:
-                onBackPressed();
+                setResult(Constants.RESULT_LABEL, new Intent().putExtra("mLabels", (Serializable) mLabels));
+                finish();
+                //onBackPressed();
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
@@ -117,7 +121,7 @@ public class ChooseClientLabelActivity extends BaseAppCompatActivity implements 
     public void onResponse(Call<MAPIResponse<List<MLabel>>> call, Response<MAPIResponse<List<MLabel>>> response) {
         LogUtils.api(TAG, call, (response.body()));
         box.hideAll();
-        TokenUtils.checkToken(mContext,response.body().getErrors());
+        TokenUtils.checkToken(mContext, response.body().getErrors());
         mLabels = response.body().getResult();
         activityAdapter.setActivityItemList(mLabels);
         activityAdapter.notifyDataSetChanged();
@@ -146,5 +150,11 @@ public class ChooseClientLabelActivity extends BaseAppCompatActivity implements 
 
     }
 
+    @Override
+    public void onBackPressed() {
 
+        mLabels = null;
+        setResult(Constants.RESULT_LABEL, new Intent().putExtra("mLabels", (Serializable) mLabels));
+        finish();
+    }
 }

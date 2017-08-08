@@ -904,7 +904,7 @@ public class ClientActivity extends BaseAppCompatActivity implements RecyclerTou
                 break;
             case Constants.ACTIVITY_TYPE_EMAIL:
                 MEmail mEmail = new MEmail();
-                mEmail.setEmail_user_id(1);
+                mEmail.setEmail_user_id(activityItem.getUser_email_id());
                 mEmail.setContent_email(activityItem.getActivity_content());
                     mContext.startActivity(new Intent(mContext, EmailActivity.class).putExtra("mClient", mClient).putExtra("mEmail", mEmail));
                 break;
@@ -915,7 +915,6 @@ public class ClientActivity extends BaseAppCompatActivity implements RecyclerTou
                 break;
             default:
                 break;
-
         }
     }
 

@@ -17,6 +17,15 @@ public class MCheckin  implements Serializable{
     private int  user_id ;
     private List<MPhoto> photos;
 
+    public List<Tracking_value_defaults> getValues_default() {
+        return values_default;
+    }
+
+    public void setValues_default(List<Tracking_value_defaults> values_default) {
+        this.values_default = values_default;
+    }
+
+    private List<Tracking_value_defaults> values_default;
     public int getUser_checkin_id() {
         return user_meeting_id;
     }

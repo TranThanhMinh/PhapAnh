@@ -42,7 +42,7 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class UsersActivity extends BaseAppCompatActivity implements AdapterView.OnItemClickListener, Callback<MAPIResponse<List<MUser>>>, View.OnClickListener  {
+public class UsersActivity extends BaseAppCompatActivity implements AdapterView.OnItemClickListener, Callback<MAPIResponse<List<MUser>>>, View.OnClickListener {
 
     @Bind(R.id.include)
     Toolbar toolbar;
@@ -84,6 +84,7 @@ public class UsersActivity extends BaseAppCompatActivity implements AdapterView.
 
         LogUtils.d(TAG, "getUserActivities ", "start");
     }
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
@@ -91,23 +92,29 @@ public class UsersActivity extends BaseAppCompatActivity implements AdapterView.
 
         return super.onCreateOptionsMenu(menu);
     }
+
+    List<MId> mIds = new ArrayList<>();
+
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.done:
-                List<MId> mIds = new ArrayList<>();
-                for (MUser it : mUsers){
-                    if(it.is_select()){
+                mIds = new ArrayList<>();
+                for (MUser it : mUsers) {
+                    if (it.is_select()) {
                         mIds.add(new MId(it.getUser_id()));
-                     }
+                    }
                 }
 
-                setResult(Constants.RESULT_USERS,new Intent().putExtra("mIds", (Serializable) mIds));
+                setResult(Constants.RESULT_USERS, new Intent().putExtra("mIds", (Serializable) mIds));
                 finish();
-            return true;
+                return true;
 
             case android.R.id.home:
-                onBackPressed();
+                mIds = null;
+                setResult(Constants.RESULT_USERS, new Intent().putExtra("mIds", (Serializable) mIds));
+                finish();
+                //onBackPressed();
                 return true;
 
             default:
@@ -119,14 +126,14 @@ public class UsersActivity extends BaseAppCompatActivity implements AdapterView.
     public void onResponse(Call<MAPIResponse<List<MUser>>> call, Response<MAPIResponse<List<MUser>>> response) {
         LogUtils.api(TAG, call, (response.body()));
         box.hideAll();
-        TokenUtils.checkToken(mContext,response.body().getErrors());
+        TokenUtils.checkToken(mContext, response.body().getErrors());
         mUsers = response.body().getResult();
 
         MUser mUser0 = new MUser();
         mUser0.setUser_id(0);
         mUser0.setLeve(0);
         mUser0.setUser_name(getResources().getString(R.string.all));
-        mUsers.add(0,mUser0);
+        mUsers.add(0, mUser0);
 
         dataList = TreeViewLists.LoadInitialData(mUsers);
 
@@ -184,8 +191,7 @@ public class UsersActivity extends BaseAppCompatActivity implements AdapterView.
 
             TreeListViewHolder holder = null;
 
-            if (convertView == null)
-            {
+            if (convertView == null) {
                 convertView = getLayoutInflater().inflate(R.layout.tree_view_cell, parent, false);
 
                 holder = new TreeListViewHolder();
@@ -197,30 +203,26 @@ public class UsersActivity extends BaseAppCompatActivity implements AdapterView.
                 holder.content.setOnClickListener(mArrowClickListener);
 
                 convertView.setTag(holder);
-            } else
-            {
+            } else {
                 holder = (TreeListViewHolder) convertView.getTag();
             }
             final TreeListViewHolder finalHolder = holder;
             holder.checkBox.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    selectStaff(position,  finalHolder.checkBox.isChecked());
+                    selectStaff(position, finalHolder.checkBox.isChecked());
 
                 }
-            } );
+            });
 
             TreeViewNode node = displayNodes.get(position);
             holder.content.setText(node.getNodeName());
 
             holder.checkBox.setChecked(node.is_select());
 
-            if (node.getIsExpanded())
-            {
+            if (node.getIsExpanded()) {
                 holder.arrow.setImageResource(R.mipmap.ic_dms_90);
-            }
-            else
-            {
+            } else {
                 holder.arrow.setImageResource(R.mipmap.ic_dms_89);
             }
 
@@ -246,23 +248,20 @@ public class UsersActivity extends BaseAppCompatActivity implements AdapterView.
             if (position != ListView.INVALID_POSITION) {
                 TreeViewNode node = displayNodes.get(position);
                 boolean is_select = false;
-                MId mid  = new MId(displayNodes.get(position).getUser_id());
+                MId mid = new MId(displayNodes.get(position).getUser_id());
 
-                if (node.getIsExpanded())
-                {
+                if (node.getIsExpanded()) {
                     node.setIsExpanded(false);
                     is_select = false;
-                }
-                else
-                {
+                } else {
                     if (node.getNodeChildren() != null) {
                         node.setIsExpanded(true);
                         is_select = true;
                     }
                 }
 
-                for (MUser it :  mUsers){
-                    if(it.getUser_id() == mid.getId()){
+                for (MUser it : mUsers) {
+                    if (it.getUser_id() == mid.getId()) {
                         it.setIs_select(is_select);
                         it.setIs_expanded(is_select);
                         break;
@@ -275,16 +274,13 @@ public class UsersActivity extends BaseAppCompatActivity implements AdapterView.
         }
     };
 
-    private void LoadDisplayList()
-    {
+    private void LoadDisplayList() {
         displayNodes = new ArrayList<TreeViewNode>();
-        for(int i = 0; i < nodes.size(); i++)
-        {
+        for (int i = 0; i < nodes.size(); i++) {
             TreeViewNode node = nodes.get(i);
             displayNodes.add(node);
 
-            if (node.getIsExpanded())
-            {
+            if (node.getIsExpanded()) {
                 ArrayList<TreeViewNode> children = node.getNodeChildren();
                 if (children != null)
                     if (children.size() != 0)
@@ -292,45 +288,44 @@ public class UsersActivity extends BaseAppCompatActivity implements AdapterView.
             }
         }
     }
-    private void AddChildrenToList(ArrayList<TreeViewNode> children)
-    {
+
+    private void AddChildrenToList(ArrayList<TreeViewNode> children) {
         if (children == null) return;
 
-        for(int i = 0; i < children.size(); i++)
-        {
+        for (int i = 0; i < children.size(); i++) {
             TreeViewNode node = children.get(i);
             displayNodes.add(node);
 
             Log.v("addchildrentolist", String.format("%d %s %d", i, node.getNodeName(), children.size()));
 
-            if (node.getIsExpanded())
-            {
+            if (node.getIsExpanded()) {
                 ArrayList<TreeViewNode> grandChildren = node.getNodeChildren();
                 if (grandChildren != null)
                     AddChildrenToList(grandChildren);
             }
         }
     }
-    private void selectStaff(int index,boolean is_select){
-        MId mid =new MId(displayNodes.get(index).getUser_id());
-        boolean is_set = false;
-        int leve  = -1;
-        int user_id = mid.getId();
-        for (MUser it: mUsers){
 
-            if(leve >= it.getLeve() && user_id != 0){
+    private void selectStaff(int index, boolean is_select) {
+        MId mid = new MId(displayNodes.get(index).getUser_id());
+        boolean is_set = false;
+        int leve = -1;
+        int user_id = mid.getId();
+        for (MUser it : mUsers) {
+
+            if (leve >= it.getLeve() && user_id != 0) {
                 break;
             }
 
-            if( is_set ){
+            if (is_set) {
                 it.setIs_select(is_select);
-                if(is_select){
+                if (is_select) {
                     it.setIs_expanded(is_select);
                 }
             }
-            if(it.getUser_id() == mid.getId()){
+            if (it.getUser_id() == mid.getId()) {
                 it.setIs_select(is_select);
-                if(is_select){
+                if (is_select) {
                     it.setIs_expanded(is_select);
                 }
                 leve = it.getLeve();
@@ -350,4 +345,11 @@ public class UsersActivity extends BaseAppCompatActivity implements AdapterView.
         mAdapter.notifyDataSetChanged();
     }
 
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        mIds = null;
+        setResult(Constants.RESULT_USERS, new Intent().putExtra("mIds", (Serializable) mIds));
+        finish();
+    }
 }

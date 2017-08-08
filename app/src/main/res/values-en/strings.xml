@@ -757,8 +757,12 @@
     <string name="srtNotifi">Notification</string>
     <string name="srtNotifi_done">Edit status contract successfully</string>
     <string name="srtNotifi_false">Edit status contract failed</string>
+    <string name="srtNotifi_activity_customer">The customer has no activity yet</string>
+    <string name="srtAchieved">Achieved</string>
+    <string name="srtNoAchieved">No achieved</string>
+    <string name="srtAgree">Agree</string>
     <string name="srtHistory_order">Transaction history </string>
-    <string name="srtHistory_focus">Focus history </string>
+    <string name="srtHistory_focus">History </string>
     <string name="srtHistory_contract">Contract history </string>
     <string name="srtDelete">Delete </string>
     <string name="srtSort">Sort </string>
@@ -768,7 +772,7 @@
     <string name="srtStaus">Status: </string>
     <string name="srtNote">Note: </string>
     <string name="srtTarget">Target </string>
-    <string name="srtSetfocus">Set focus </string>
+    <string name="srtSetfocus">Execution time  </string>
     <string name="srtDate_update">Update day: </string>
     <string name="srtResult_money">Result money: </string>
     <string name="srtExpected_date">Expected date: </string>

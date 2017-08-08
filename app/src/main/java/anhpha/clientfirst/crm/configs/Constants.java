@@ -26,6 +26,7 @@ public class Constants {
     public static final int RESULT_STATUS = 312;
     public static final int RESULT_AREA = 343;
     public static final int RESULT_LABEL = 353;
+    public static final int RESULT_BACK = 1;
 
     /**
      * Substitute you own sender ID here. This is the project number you got

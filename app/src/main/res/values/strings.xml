@@ -760,13 +760,18 @@
     <string name="srtDelete_photo">Thao tác</string>
     <string name="srtNotifi">Thông báo</string>
     <string name="srtNotifi_done">Chỉnh sửa trạng thái hợp đồng thành công</string>
+    <string name="srtAgree">Đồng ý</string>
     <string name="srtNotifi_false">Chỉnh sửa trạng thái hợp đồng thất bại</string>
+    <string name="srtNotifi_activity_customer">Khách hàng chưa có hoạt động nào</string>
+    <string name="srtAchieved">Đạt</string>
+    <string name="srtNoAchieved">Chưa Đạt</string>
+
     <string name="srtHistory_order">Lịch sử giao dịch </string>
-    <string name="srtHistory_focus">Lịch sử trọng tâm </string>
+    <string name="srtHistory_focus">Lịch sử</string>
     <string name="srtHistory_contract">Lịch sử hợp đồng </string>
     <string name="srtDelete">Xóa </string>
     <string name="srtTarget">Mục tiêu </string>
-    <string name="srtSetfocus">Thiết lập trọng tâm </string>
+    <string name="srtSetfocus">Thời gian thực hiện  </string>
     <string name="srtUnknowntime">Không xác định thời gian </string>
     <string name="srtTo">Từ </string>
     <string name="srtDate">ngày </string>

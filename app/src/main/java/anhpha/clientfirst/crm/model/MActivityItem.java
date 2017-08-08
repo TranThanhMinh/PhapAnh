@@ -21,9 +21,26 @@ public class MActivityItem implements Serializable {
     private int user_call_id;
     private int inventory_contract_client_id;
     private int user_checkin_id;
+    private int user_email_id;
     private int add_client_id;
     private int user_meeting_id;
     private int activity_type;
+
+    public int getUser_email_id() {
+        return user_email_id;
+    }
+
+    public void setUser_email_id(int user_email_id) {
+        this.user_email_id = user_email_id;
+    }
+
+    public int getUser_meeting_id() {
+        return user_meeting_id;
+    }
+
+    public void setUser_meeting_id(int user_meeting_id) {
+        this.user_meeting_id = user_meeting_id;
+    }
 
     public int getMeeting_id() {
         return user_meeting_id;

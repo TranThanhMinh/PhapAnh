@@ -36,7 +36,7 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class ChooseClientTypeActivity extends BaseAppCompatActivity implements  RecyclerTouchListener.ClickListener,Callback<MAPIResponse<List<MClientType>>>, View.OnClickListener  {
+public class ChooseClientTypeActivity extends BaseAppCompatActivity implements RecyclerTouchListener.ClickListener, Callback<MAPIResponse<List<MClientType>>>, View.OnClickListener {
 
     @Bind(R.id.rvActivities)
     RecyclerView rvActivities;
@@ -44,7 +44,9 @@ public class ChooseClientTypeActivity extends BaseAppCompatActivity implements  
     Toolbar toolbar;
     ChooseClientTypeAdapter activityAdapter;
     List<MClientType> mClientTypes = new ArrayList<>();
+    List<MClientType> mClientType = new ArrayList<>();
     Preferences preferences;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -67,7 +69,7 @@ public class ChooseClientTypeActivity extends BaseAppCompatActivity implements  
 
         mClientTypes = (List<MClientType>) getIntent().getSerializableExtra("mClientTypes");
 
-        if(mClientTypes.isEmpty()){
+        if (mClientTypes.isEmpty()) {
             mClientTypes = new ArrayList<>();
             GetRetrofit().create(ServiceAPI.class)
                     .getClientTypes(preferences.getStringValue(Constants.TOKEN, "")
@@ -81,10 +83,11 @@ public class ChooseClientTypeActivity extends BaseAppCompatActivity implements  
             LogUtils.d(TAG, "getUserActivities ", "start");
         }
 
-        activityAdapter = new ChooseClientTypeAdapter(mContext,mClientTypes);
+        activityAdapter = new ChooseClientTypeAdapter(mContext, mClientTypes);
         rvActivities.setAdapter(activityAdapter);
 
     }
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
@@ -109,12 +112,21 @@ public class ChooseClientTypeActivity extends BaseAppCompatActivity implements  
                         setResult(Constants.RESULT_TYPE, new Intent().putExtra("mClientTypes", (Serializable) mClientTypes));
                         finish();
                     }
-                },500);
+                }, 500);
 
                 return true;
 
             case android.R.id.home:
-                onBackPressed();
+                rvActivities.postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        mClientTypes = null;
+                        setResult(Constants.RESULT_TYPE, new Intent().putExtra("mClientTypes", (Serializable) mClientTypes));
+                        finish();
+                    }
+                }, 500);
+                //  onBackPressed();
+
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
@@ -125,7 +137,7 @@ public class ChooseClientTypeActivity extends BaseAppCompatActivity implements  
     public void onResponse(Call<MAPIResponse<List<MClientType>>> call, Response<MAPIResponse<List<MClientType>>> response) {
         LogUtils.api(TAG, call, (response.body()));
         box.hideAll();
-        TokenUtils.checkToken(mContext,response.body().getErrors());
+        TokenUtils.checkToken(mContext, response.body().getErrors());
         mClientTypes = response.body().getResult();
         activityAdapter.setActivityItemList(mClientTypes);
         activityAdapter.notifyDataSetChanged();
@@ -156,5 +168,15 @@ public class ChooseClientTypeActivity extends BaseAppCompatActivity implements  
 
     }
 
-
+    @Override
+    public void onBackPressed() {
+        rvActivities.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                mClientTypes = null;
+                setResult(Constants.RESULT_TYPE, new Intent().putExtra("mClientTypes", (Serializable) mClientTypes));
+                finish();
+            }
+        }, 500);
+    }
 }

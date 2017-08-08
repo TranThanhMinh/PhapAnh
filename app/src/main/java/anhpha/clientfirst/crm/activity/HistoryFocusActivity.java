@@ -178,10 +178,6 @@ public class HistoryFocusActivity extends BaseAppCompatActivity implements DateP
                         {
 
                             Log.d("...", totalItemCount+"");
-                            //Do pagination.. i.e. fetch new data
-
-//
-
                     }
                 }
             }

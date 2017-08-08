@@ -1,6 +1,7 @@
 package anhpha.clientfirst.crm.model;
 
 import java.io.Serializable;
+import java.util.List;
 
 /**
  * Created by mc975 on 2/9/17.
@@ -14,6 +15,16 @@ public class MCall implements Serializable{
     private double longitude;
     private int         user_id;
     private String user_name;
+
+    public List<Tracking_value_defaults> getValues_default() {
+        return values_default;
+    }
+
+    public void setValues_default(List<Tracking_value_defaults> values_default) {
+        this.values_default = values_default;
+    }
+
+    private List<Tracking_value_defaults> values_default;
 
     public int getCall_user_id() {
         return call_user_id;

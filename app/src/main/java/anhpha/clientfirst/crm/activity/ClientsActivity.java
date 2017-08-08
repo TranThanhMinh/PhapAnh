@@ -49,7 +49,7 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class ClientsActivity extends BaseAppCompatActivity implements SwipeRefreshLayout.OnRefreshListener ,Callback<MAPIResponse<List<MClient>>>, View.OnClickListener {
+public class ClientsActivity extends BaseAppCompatActivity implements SwipeRefreshLayout.OnRefreshListener, Callback<MAPIResponse<List<MClient>>>, View.OnClickListener {
     @Bind(R.id.imageButton1)
     ImageButton imageButton1;
     @Bind(R.id.imageButton2)
@@ -76,7 +76,16 @@ public class ClientsActivity extends BaseAppCompatActivity implements SwipeRefre
     List<MLabel> mLabels = new ArrayList<>();
     List<MStatus> mStatus = new ArrayList<>();
     List<MClientArea> mAreas = new ArrayList<>();
+
+    List<MClient> mClient = new ArrayList<>();
+    List<MId> mId = new ArrayList<>();
+    List<MClientType> mType = new ArrayList<>();
+    List<MClientGroup> mGroup = new ArrayList<>();
+    List<MLabel> mLabel = new ArrayList<>();
+    List<MStatus> mStatu = new ArrayList<>();
+    List<MClientArea> mArea = new ArrayList<>();
     boolean is_filter = false;
+    private boolean isSort;
     private LinearLayoutManager mLayoutManager;
     private Preferences preferences;
     boolean is_distance;
@@ -84,11 +93,12 @@ public class ClientsActivity extends BaseAppCompatActivity implements SwipeRefre
     private int loadLimit = 20;
     private int current_page = 1;
 
-    int visibleItemCount =0 ;
-    int totalItemCount =0 ;
-    int pastVisibleItems =0 ;
+    int visibleItemCount = 0;
+    int totalItemCount = 0;
+    int pastVisibleItems = 0;
     boolean loading = true;
     private MClientRequest mClientRequest = new MClientRequest();
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -115,21 +125,17 @@ public class ClientsActivity extends BaseAppCompatActivity implements SwipeRefre
         activityAdapter = new ClientAdapter(mContext, mClients, is_distance);
         rvActivities.setAdapter(activityAdapter);
 
-        rvActivities.addOnScrollListener(new RecyclerView.OnScrollListener()
-        {
+        rvActivities.addOnScrollListener(new RecyclerView.OnScrollListener() {
             @Override
-            public void onScrolled(RecyclerView recyclerView, int dx, int dy)
-            {
-                if(dy > 0) //check for scroll down
+            public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
+                if (dy > 0) //check for scroll down
                 {
                     visibleItemCount = mLayoutManager.getChildCount();
                     totalItemCount = mLayoutManager.getItemCount();
                     pastVisibleItems = mLayoutManager.findFirstVisibleItemPosition();
 
-                    if (loading)
-                    {
-                        if ( (visibleItemCount + pastVisibleItems) >= totalItemCount)
-                        {
+                    if (loading) {
+                        if ((visibleItemCount + pastVisibleItems) >= totalItemCount) {
                             loading = false;
                             Log.v("...", "Last Item Wow !");
                             //Do pagination.. i.e. fetch new data
@@ -146,6 +152,7 @@ public class ClientsActivity extends BaseAppCompatActivity implements SwipeRefre
         LogUtils.d(TAG, "getUserActivities ", "start");
         onLoadMoreItems();
     }
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
@@ -216,11 +223,11 @@ public class ClientsActivity extends BaseAppCompatActivity implements SwipeRefre
         LogUtils.api(TAG, call, (response.body()));
         box.hideAll();
         //swipeRefreshLayout.setRefreshing(false);
-        TokenUtils.checkToken(mContext,response.body().getErrors());
+        TokenUtils.checkToken(mContext, response.body().getErrors());
         loading = true;
         //swipeRefreshLayout.setRefreshing(false);
         activityAdapter.setIs_distance(is_distance);
-        if(current_page == 1) {
+        if (current_page == 1) {
             mClients = response.body().getResult();
 //            for (MClient mTracking : mClients) {
 //
@@ -232,9 +239,7 @@ public class ClientsActivity extends BaseAppCompatActivity implements SwipeRefre
 //            }
             activityAdapter.setActivityItemList(mClients);
             rvActivities.setAdapter(activityAdapter);
-        }
-
-        else {
+        } else {
             mClients.addAll(response.body().getResult());
 //            for (MClient mTracking : mClients) {
 //
@@ -259,9 +264,9 @@ public class ClientsActivity extends BaseAppCompatActivity implements SwipeRefre
     private void loadClient() {
         //box.showLoadingLayout();
         if (is_distance) {
-           onLoadMoreItemsLocation();
+            onLoadMoreItemsLocation();
         } else {
-          onLoadMoreItems();
+            onLoadMoreItems();
         }
     }
 
@@ -292,19 +297,19 @@ public class ClientsActivity extends BaseAppCompatActivity implements SwipeRefre
                 AlertDialog.Builder builder = new AlertDialog.Builder(mContext);
                 builder.setTitle(getResources().getString(R.string.add_client_dialog));
                 builder.setCancelable(true);
-                builder.setItems(charSequences, new  DialogInterface.OnClickListener() {
+                builder.setItems(charSequences, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
-                        switch (i){
+                        switch (i) {
                             case 0:
-                                Intent intent = new Intent(mContext, EditClientActivity.class) ;
-                                intent.putExtra("Structure",1);
+                                Intent intent = new Intent(mContext, EditClientActivity.class);
+                                intent.putExtra("Structure", 1);
                                 startActivity(intent);
 
                                 break;
                             case 1:
-                                Intent intent2 = new Intent(mContext, EditClientActivity.class) ;
-                                intent2.putExtra("Structure",2);
+                                Intent intent2 = new Intent(mContext, EditClientActivity.class);
+                                intent2.putExtra("Structure", 2);
                                 startActivity(intent2);
 
                                 break;
@@ -327,7 +332,7 @@ public class ClientsActivity extends BaseAppCompatActivity implements SwipeRefre
             case R.id.ibDone:
                 current_page = 1;
                 mClientRequest = new MClientRequest();
-               loadClient();
+                loadClient();
                 break;
             default:
                 break;
@@ -339,78 +344,93 @@ public class ClientsActivity extends BaseAppCompatActivity implements SwipeRefre
         super.onActivityResult(requestCode, resultCode, data);
         // Check which request we're responding to
         mClientRequest = new MClientRequest();
-        mIds  = new ArrayList<>();
+        mId = new ArrayList<>();
         current_page = 1;
         etText.setText("");
         if (resultCode == Constants.RESULT_USERS) {
-            mIds = new ArrayList<>();
-            mIds = (List<MId>) data.getSerializableExtra("mIds");
-            mClientRequest.setUser_ids(mIds);
+            mId = new ArrayList<>();
+            mId = (List<MId>) data.getSerializableExtra("mIds");
+            if (mId != null && mId.size() > 0) {
+                mClientRequest.setUser_ids(mId);
+            }
+
         }
         if (resultCode == Constants.RESULT_STATUS) {
-            mStatus = new ArrayList<>();
-            mStatus = (List<MStatus>) data.getSerializableExtra("mStatuses");
-            for (MStatus s : mStatus) {
-                if (s.is_select()) {
-                    mIds.add(new MId(s.getId()));
-                    s.setIs_select(false);
+            mStatu = new ArrayList<>();
+            mStatu = (List<MStatus>) data.getSerializableExtra("mStatuses");
+            if (mStatu != null && mStatu.size() > 0) {
+                for (MStatus s : mStatu) {
+                    if (s.is_select()) {
+                        mId.add(new MId(s.getId()));
+                        s.setIs_select(false);
+                    }
                 }
+                mClientRequest.setStatus(mId);
             }
-            mClientRequest.setStatus(mIds);
         }
         if (resultCode == Constants.RESULT_AREA) {
-            mAreas = new ArrayList<>();
-            mAreas = (List<MClientArea>) data.getSerializableExtra("mClientAreas");
-            for (MClientArea s : mAreas) {
-                if (s.is_select()) {
-                    mIds.add(new MId(s.getClient_area_id()));
-                    s.setIs_select(false);
+            mArea = new ArrayList<>();
+            mArea = (List<MClientArea>) data.getSerializableExtra("mClientAreas");
+            if (mArea != null && mArea.size() > 0) {
+                for (MClientArea s : mArea) {
+                    if (s.is_select()) {
+                        mId.add(new MId(s.getClient_area_id()));
+                        s.setIs_select(false);
+                    }
                 }
+                mClientRequest.setAreas(mId);
             }
-            mClientRequest.setAreas(mIds);
         }
         if (resultCode == Constants.RESULT_GROUP) {
-            mGroups = new ArrayList<>();
-            mGroups = (List<MClientGroup>) data.getSerializableExtra("mClientGroups");
-            for (MClientGroup s : mGroups) {
-                if (s.is_select()) {
-                    mIds.add(new MId(s.getClient_group_id()));
-                    s.setIs_select(false);
+            mGroup = new ArrayList<>();
+            mGroup = (List<MClientGroup>) data.getSerializableExtra("mClientGroups");
+            if (mGroup != null && mGroup.size() > 0) {
+                for (MClientGroup s : mGroup) {
+                    if (s.is_select()) {
+                        mId.add(new MId(s.getClient_group_id()));
+                        s.setIs_select(false);
+                    }
                 }
+                mClientRequest.setGroups(mId);
             }
-            mClientRequest.setGroups(mIds);
         }
         if (resultCode == Constants.RESULT_TYPE) {
-            mTypes = new ArrayList<>();
-            mTypes = (List<MClientType>) data.getSerializableExtra("mClientTypes");
-            for (MClientType s : mTypes) {
-                if (s.is_select()) {
-                    mIds.add(new MId(s.getClient_type_id()));
-                    s.setIs_select(false);
+            mType = new ArrayList<>();
+            mType = (List<MClientType>) data.getSerializableExtra("mClientTypes");
+            if (mType != null && mType.size() > 0) {
+                if (mType != null && mType.size() > 0) {
+                    for (MClientType s : mType) {
+                        if (s.is_select()) {
+                            mId.add(new MId(s.getClient_type_id()));
+                            s.setIs_select(false);
+                        }
+                    }
+                    mClientRequest.setTypes(mId);
                 }
             }
-            mClientRequest.setTypes(mIds);
         }
 
         if (resultCode == Constants.RESULT_LABEL) {
-            mLabels = new ArrayList<>();
-            mLabels = (List<MLabel>) data.getSerializableExtra("mLabels");
-            for (MLabel s : mLabels) {
-                if (s.getIs_has()) {
-                    mIds.add(new MId(s.getClient_label_id()));
-                    s.setIs_has(false);
+            mLabel = new ArrayList<>();
+            mLabel = (List<MLabel>) data.getSerializableExtra("mLabels");
+            if (mLabel != null && mLabel.size() > 0) {
+                for (MLabel s : mLabel) {
+                    if (s.getIs_has()) {
+                        mId.add(new MId(s.getClient_label_id()));
+                        s.setIs_has(false);
+                    }
                 }
+                mClientRequest.setLabels(mId);
             }
-            mClientRequest.setLabels(mIds);
         }
-        Log.d("AAAA",new Gson().toJson(mClientRequest));
+        Log.d("AAAA", new Gson().toJson(mClientRequest));
 
         rvActivities.postDelayed(new Runnable() {
             @Override
             public void run() {
                 loadClient();
             }
-        },200);
+        }, 200);
     }
 
 
@@ -429,12 +449,13 @@ public class ClientsActivity extends BaseAppCompatActivity implements SwipeRefre
                         , preferences.getIntValue(Constants.USER_ID, 0)
                         , preferences.getIntValue(Constants.PARTNER_ID, 0)
                         , 40
-                        ,"android1007"
-                        ,current_page
-                        ,mClientRequest
+                        , "android1007"
+                        , current_page
+                        , mClientRequest
                 )
                 .enqueue(this);
     }
+
     private void onLoadMoreItemsLocation() {
         mClientRequest.setValue(etText.getText().toString());
         GetRetrofit().create(ServiceAPI.class)
@@ -442,11 +463,11 @@ public class ClientsActivity extends BaseAppCompatActivity implements SwipeRefre
                         , preferences.getIntValue(Constants.USER_ID, 0)
                         , preferences.getIntValue(Constants.PARTNER_ID, 0)
                         , 40
-                        ,"android1007"
-                        ,current_page
-                        ,mLastLocation.getLatitude()
-                        ,mLastLocation.getLongitude()
-                        ,mClientRequest
+                        , "android1007"
+                        , current_page
+                        , mLastLocation.getLatitude()
+                        , mLastLocation.getLongitude()
+                        , mClientRequest
                 )
                 .enqueue(this);
     }

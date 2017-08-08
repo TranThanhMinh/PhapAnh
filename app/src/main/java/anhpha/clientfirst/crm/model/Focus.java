@@ -1,16 +1,19 @@
 package anhpha.clientfirst.crm.model;
 
+import android.support.annotation.NonNull;
+
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
 import java.io.Serializable;
+import java.util.Comparator;
 import java.util.List;
 
 /**
  * Created by MinhTran on 7/24/2017.
  */
 
-public class Focus {
+public class Focus  implements Comparable<Focus> {
 
     @SerializedName("client_id")
     @Expose
@@ -332,4 +335,16 @@ public class Focus {
     }
 
 
+    @Override
+    public int compareTo(@NonNull Focus focus) {
+        if (numberDate.intValue() > focus.numberDate.intValue()) {
+            return 1;
+        }
+        else if (numberDate.intValue() <  focus.numberDate.floatValue()) {
+            return -1;
+        }
+        else {
+            return 0;
+        }
+    }
 }

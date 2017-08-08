@@ -35,7 +35,7 @@
                     android:layout_height="match_parent"
                     android:background="@color/colorBlue"
                     android:gravity="center"
-                    android:text="Đã đạt"
+                    android:text="@string/srtAchieved"
                     android:textColor="@color/colorWhite" />
 
                 <TextView
@@ -44,7 +44,7 @@
                     android:layout_height="match_parent"
                     android:background="@color/colorOrange"
                     android:gravity="center"
-                    android:text="Chưa đạt"
+                    android:text="@string/srtNoAchieved"
                     android:textColor="@color/colorWhite" />
 
                 <TextView
@@ -97,12 +97,12 @@
                         android:orientation="horizontal">
 
                         <TextView
-                            android:layout_marginTop="5dp"
                             android:id="@+id/tvName_city"
-                            android:layout_width="match_parent"
+                            android:layout_width="342dp"
                             android:layout_height="wrap_content"
-                            android:textSize="12sp"
-                            android:gravity="center_vertical" />
+                            android:layout_marginTop="5dp"
+                            android:gravity="center_vertical"
+                            android:textSize="12sp" />
                     </LinearLayout>
 
                     <RelativeLayout
@@ -118,7 +118,6 @@
                             android:layout_height="wrap_content"
                             android:gravity="center_vertical"
                             android:textSize="10sp"
-                            android:layout_below="@+id/linearLayout5"
                             android:layout_alignParentLeft="true"
                             android:layout_alignParentStart="true" />
 
@@ -261,14 +260,14 @@
                             android:scaleType="centerInside"
                             android:src="@mipmap/ic_crm_34" />
                         <ImageButton
+                            android:visibility="gone"
                             android:id="@+id/imageButton9"
                             android:layout_width="wrap_content"
                             android:layout_height="30dp"
-                            android:layout_marginLeft="3dp"
+                            android:layout_marginLeft="1dp"
                             android:layout_marginRight="5dp"
                             android:background="@color/gray"
                             android:clickable="true"
-                            android:padding="5dp"
                             android:scaleType="centerInside"
                             android:src="@mipmap/ic_crm_101" />
                     </LinearLayout>

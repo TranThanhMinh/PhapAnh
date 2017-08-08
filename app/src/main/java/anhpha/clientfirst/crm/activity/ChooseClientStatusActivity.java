@@ -89,7 +89,10 @@ public class ChooseClientStatusActivity extends BaseAppCompatActivity implements
                 finish();
                 return true;
             case android.R.id.home:
-                onBackPressed();
+                mStatuses=null;
+                setResult(Constants.RESULT_STATUS, new Intent().putExtra("mStatuses", (Serializable) mStatuses));
+                finish();
+              //  onBackPressed();
                 return true;
 
             default:
@@ -113,5 +116,10 @@ public class ChooseClientStatusActivity extends BaseAppCompatActivity implements
 
     }
 
-
+    @Override
+    public void onBackPressed() {
+        mStatuses=null;
+        setResult(Constants.RESULT_STATUS, new Intent().putExtra("mStatuses", (Serializable) mStatuses));
+        finish();
+    }
 }

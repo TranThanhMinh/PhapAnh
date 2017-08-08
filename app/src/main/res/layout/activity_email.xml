@@ -8,42 +8,59 @@
     android:id="@+id/coordinatorLayout"
     android:background="@color/white"
     tools:context="anhpha.clientfirst.crm.activity.ClientsActivity">
+
     <LinearLayout
         android:layout_width="match_parent"
-        android:orientation="vertical"
-        android:layout_height="match_parent">
-        <ScrollView
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <!--<ScrollView-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="match_parent"-->
+            <!--android:background="@color/colorWhite"-->
+            <!--android:layout_weight="1.0">-->
+
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_weight="1.0"
-            android:layout_height="match_parent">
-            <LinearLayout
+            android:layout_height="match_parent"
+            android:background="@color/colorWhite"
+            android:orientation="vertical">
+
+            <include
+                android:id="@+id/include"
+                layout="@layout/layout_toolbar"></include>
+
+
+            <include
+                android:id="@+id/layout_client"
+                layout="@layout/layout_client"></include>
+
+            <android.support.design.widget.TextInputLayout
+                android:id="@+id/input_layout_1"
                 android:layout_width="match_parent"
-                android:orientation="vertical"
-                android:layout_height="match_parent">
-                <include layout="@layout/layout_toolbar"
-                    android:id="@+id/include"></include>
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentRight="true"
+                android:layout_below="@+id/tvClientName"
+                android:background="@color/white">
 
-
-                <include layout="@layout/layout_client"
-                    android:id="@+id/layout_client"></include>
-
-                <android.support.design.widget.TextInputLayout
-                    android:id="@+id/input_layout_1"
+                <EditText
+                    android:id="@+id/etContent"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:background="@color/white"
-                    android:layout_alignParentRight="true"
-                    android:layout_alignParentEnd="true"
-                    android:layout_below="@+id/tvClientName">
+                    android:layout_height="match_parent"
+                    android:hint="@string/content"
+                    android:paddingLeft="15dp"
+                    android:paddingRight="15dp" />
+            </android.support.design.widget.TextInputLayout>
 
-                    <EditText
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:hint="@string/content"
-                        android:id="@+id/etContent" />
-                </android.support.design.widget.TextInputLayout>
-
-            </LinearLayout>
-        </ScrollView>
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/lvTracking"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@color/colorWhite"
+                android:paddingLeft="15dp"
+                android:paddingRight="15dp"></android.support.v7.widget.RecyclerView>
+        </LinearLayout>
+        <!--</ScrollView>-->
     </LinearLayout>
 </android.support.design.widget.CoordinatorLayout>

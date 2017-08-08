@@ -99,7 +99,6 @@ public class Edit_status_contract_activity extends BaseAppCompatActivity impleme
         tvName = (TextView) findViewById(R.id.tvName);
         tvAddress = (TextView) findViewById(R.id.tvAddress);
         imSelect_upload_photo = (ImageView) findViewById(R.id.imSelect_upload_photo);
-        // imBack = (ImageView) findViewById(R.id.imBack);
         imSelect_upload_photo.setOnClickListener(this);
         // imBack.setOnClickListener(this);
         LinearLayoutManager layoutManager = new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL
@@ -119,15 +118,6 @@ public class Edit_status_contract_activity extends BaseAppCompatActivity impleme
         //  funcPopupWindow_upload_photo();
     }
 
-//    public void funcPopupWindow_upload_photo() {
-//        LayoutInflater layoutInflater =
-//                (LayoutInflater) getApplicationContext()
-//                        .getSystemService(LAYOUT_INFLATER_SERVICE);
-//        popupView = layoutInflater.inflate(R.layout.activity_select_upload_photo, null);
-//        popupWindow = new PopupWindow(
-//                popupView, LinearLayout.LayoutParams.WRAP_CONTENT, TableLayout.LayoutParams.WRAP_CONTENT);
-//    }
-
     //load list photo
     public void getLoad_photo() {
         adapter_Photo_history_order adapter = new adapter_Photo_history_order(this, lvImage, this);
@@ -139,34 +129,6 @@ public class Edit_status_contract_activity extends BaseAppCompatActivity impleme
         if (view == imSelect_upload_photo) {
             CropImage.activity(null).setGuidelines(CropImage_View.Guidelines.ON)
                     .start(Edit_status_contract_activity.this);
-
-//            if (popupWindow.isShowing()) {
-//                popupWindow.dismiss();
-//            } else {
-//
-//                TextView tv_select_file = (TextView) popupView.findViewById(R.id.tv_select_file);
-//                TextView tv_select_camera = (TextView) popupView.findViewById(R.id.tv_select_camera);
-//                tv_select_file.setOnClickListener(new View.OnClickListener() {
-//                    @Override
-//                    public void onClick(View view) {
-//                        Intent intent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
-//
-//                        intent.putExtra("return-data", true);
-//                        startActivityForResult(intent, 1);
-//                        popupWindow.dismiss();
-//                    }
-//                });
-//                tv_select_camera.setOnClickListener(new View.OnClickListener() {
-//                    @Override
-//                    public void onClick(View view) {
-////                        Intent intent = new Intent("com.android.camera.action.CROP");
-////                        intent.putExtra("return-data", true);
-////                        startActivityForResult(intent, 2);
-//                        popupWindow.dismiss();
-//                    }
-//                });
-//                popupWindow.showAsDropDown(imSelect_upload_photo, 0, 0);
-//            }
         }
 
         if (view == imBack) {
@@ -304,91 +266,11 @@ public class Edit_status_contract_activity extends BaseAppCompatActivity impleme
             }
         }
     }
-//    @Override
-//    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-//        super.onActivityResult(requestCode, resultCode, data);
-//        if (data != null)
-//            if (requestCode == 1 && resultCode == Activity.RESULT_OK && data != null) {
-//                selectedImage = data.getData();
-//                if (selectedImage == null) {
-//                    Bitmap image = (Bitmap) data.getExtras().get("data");
-//                    selectedImage = getImageUri(this, image);
-//                    //String imagePath = getPath(selectedImage);
-//                }
-////                String a = null;
-////                Log.d("lvImage",selectedImage.toString());
-////                if(selectedImage.toString().contains("file")){
-////                     a = selectedImage.toString().replace("file://","");
-////                    selectedImage =getImageContentUri(this,new File(Uri.parse(a).toString()));
-////                    Log.d("uri",getImageContentUri(this,new File(Uri.parse(a).toString()))+"");
-////                }
-////
-//                Photo photo = new Photo();
-//                photo.setCode("");
-//                photo.setHeight(0);
-//                photo.setWidth(0);
-//                photo.setObjectId(0);
-//                photo.setOrderNo(0);
-//                photo.setPhotoId(0);
-//                photo.setType(0);
-//                photo.setName("");
-//                photo.setUrl("");
-//                photo.setFilePart(selectedImage);
-//                lvImage.add(photo);
-//                getLoad_photo();
-//
-//            }
-//        if (requestCode == 2 && resultCode == Activity.RESULT_OK) {
-//            Bitmap image = (Bitmap) data.getExtras().get("data");
-//            selectedImage = getImageUri(this, image);
-//            // String imagePath = getPath(selectedImage);
-//            Photo photo = new Photo();
-//            photo.setCode("");
-//            photo.setHeight(0);
-//            photo.setWidth(0);
-//            photo.setObjectId(0);
-//            photo.setOrderNo(0);
-//            photo.setPhotoId(0);
-//            photo.setType(0);
-//            photo.setName("");
-//            photo.setUrl("");
-//            photo.setFilePart(selectedImage);
-//            lvImage.add(photo);
-//            getLoad_photo();
-//
-//        }
-//    }
 
-    public Uri getImageUri(Context inContext, Bitmap inImage) {
-        ByteArrayOutputStream bytes = new ByteArrayOutputStream();
-        inImage.compress(Bitmap.CompressFormat.JPEG, 100, bytes);
-        String path = MediaStore.Images.Media.insertImage(inContext.getContentResolver(), inImage, "Title", null);
-        return Uri.parse(path);
-    }
 
-    public String getPath(Uri uri) {
-        Cursor cursor = getContentResolver().query(uri, null, null, null, null);
-        cursor.moveToFirst();
-        int idx = cursor.getColumnIndex(MediaStore.Images.ImageColumns.DATA);
-        return cursor.getString(idx);
-    }
 
     public void funcNotification(int im) {
-//        final Dialog dialog = new Dialog(this);
-//        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
-//        dialog.setContentView(R.layout.activity_notification);
-//        Button btDone = (Button) dialog.findViewById(R.id.btDone);
-//        TextView tvNotifi = (TextView) dialog.findViewById(R.id.tvNotifi);
-//        ImageView imNotifi = (ImageView) dialog.findViewById(R.id.imNotifi);
-//        tvNotifi.setText(notifi);
-//        imNotifi.setImageResource(im);
-//        btDone.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                dialog.dismiss();
-//            }
-//        });
-//        dialog.show();
+
         if(im == 1) {
             new SweetAlertDialog(this, SweetAlertDialog.WARNING_TYPE)
                     .setTitleText(getResources().getString(R.string.srtNotifi))
