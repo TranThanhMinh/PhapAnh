@@ -1,7 +1,12 @@
 <menu xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:android="http://schemas.android.com/apk/res/android">
     <item
-        android:id="@+id/actioSort"
+        android:id="@+id/actionUser"
+        android:icon="@mipmap/ic_dms_41"
+        android:title="@string/user"
+        app:showAsAction="always" />
+    <item
+        android:id="@+id/actionSort"
         android:icon="@mipmap/ic_dms_47"
         android:orderInCategory="10"
         android:title="@string/srtSort"

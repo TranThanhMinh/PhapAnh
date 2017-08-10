@@ -775,6 +775,7 @@
     <string name="srtUnknowntime">Không xác định thời gian </string>
     <string name="srtTo">Từ </string>
     <string name="srtDate">ngày </string>
+    <string name="srtToDay">Hôm nay </string>
     <string name="srtFrom">Đến </string>
     <string name="srtSort">Sắp xếp </string>
     <string name="srtFocus">Trọng tâm </string>
@@ -799,6 +800,7 @@
     <string name="srtFalse">Thất bại</string>
     <string name="srtUpdate">Chỉnh sửa</string>
     <string name="crop_image_menu_crop">Lưu</string>
+    <string name="srtNumberdate">Vui lòng nhập số ngày</string>
 
     <string name="crop_image_activity_title"/>
     <string name="crop_image_menu_flip">Flip</string>

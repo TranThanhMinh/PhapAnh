@@ -23,7 +23,9 @@ import anhpha.clientfirst.crm.model.History_order;
 import anhpha.clientfirst.crm.model.MOrder;
 import anhpha.clientfirst.crm.model.MResult_order_history;
 import anhpha.clientfirst.crm.service_api.ServiceAPI;
+import anhpha.clientfirst.crm.utils.DynamicBox;
 import anhpha.clientfirst.crm.utils.LogUtils;
+import anhpha.clientfirst.crm.utils.TokenUtils;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -45,7 +47,8 @@ public class History_orders_activity extends BaseAppCompatActivity implements Vi
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_histor_orders);
+       // setContentView(R.layout.activity_histor_orders);
+        box = new DynamicBox(this, R.layout.activity_histor_orders);
         toolbar = (Toolbar) findViewById(R.id.toolbar);
 
         mOrder = (MOrder) getIntent().getSerializableExtra("mOrder");
@@ -84,7 +87,9 @@ public class History_orders_activity extends BaseAppCompatActivity implements Vi
         call.enqueue(new Callback<MResult_order_history>() {
             @Override
             public void onResponse(Call<MResult_order_history> call, Response<MResult_order_history> response) {
+                //TokenUtils.checkToken(mContext,response.body().getErrors());
                 LogUtils.api("",call,response);
+                box.hideAll();
                 List<History_order> list = response.body().getOrder_history();
                 adapter_history_orders = new adapter_History_orders(History_orders_activity.this,list,History_orders_activity.this);
                 lvHistory_order.setAdapter(adapter_history_orders);
@@ -99,6 +104,7 @@ public class History_orders_activity extends BaseAppCompatActivity implements Vi
     @Override
     protected void onResume() {
         super.onResume();
+        box.showLoadingLayout();
         getHistory_order();
     }
 

@@ -2,6 +2,7 @@ package anhpha.clientfirst.crm.activity;
 
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.net.ParseException;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AlertDialog;
@@ -16,9 +17,13 @@ import android.widget.Toast;
 import com.google.gson.Gson;
 
 import java.io.Serializable;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Collections;
+import java.util.Date;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 import anhpha.clientfirst.crm.R;
 import anhpha.clientfirst.crm.adapter.MStatus;
@@ -27,6 +32,7 @@ import anhpha.clientfirst.crm.configs.Constants;
 import anhpha.clientfirst.crm.configs.Preferences;
 import anhpha.clientfirst.crm.interfaces.Url;
 import anhpha.clientfirst.crm.model.Focus;
+import anhpha.clientfirst.crm.model.MAPIResponse;
 import anhpha.clientfirst.crm.model.MClient;
 import anhpha.clientfirst.crm.model.MClientArea;
 import anhpha.clientfirst.crm.model.MClientGroup;
@@ -35,11 +41,14 @@ import anhpha.clientfirst.crm.model.MClientRequest;
 import anhpha.clientfirst.crm.model.MClientType;
 import anhpha.clientfirst.crm.model.MId;
 import anhpha.clientfirst.crm.model.MLabel;
+import anhpha.clientfirst.crm.model.MUser;
 import anhpha.clientfirst.crm.model.Result;
 import anhpha.clientfirst.crm.model.Result_focus;
 import anhpha.clientfirst.crm.service_api.ServiceAPI;
 import anhpha.clientfirst.crm.sweet.SweetAlert.SweetAlertDialog;
+import anhpha.clientfirst.crm.utils.DynamicBox;
 import anhpha.clientfirst.crm.utils.LogUtils;
+import anhpha.clientfirst.crm.utils.TokenUtils;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -57,9 +66,11 @@ public class Focus_activity extends BaseAppCompatActivity implements adapter_Foc
     private Retrofit retrofit;
     private Preferences preferences;
     private List<Focus> lv_focus;
+    private List<Focus> lv_focus_sort;
     private List<Focus> lv_sort;
     List<MClient> mClients = new ArrayList<>();
     List<MId> mIds = new ArrayList<>();
+    List<MId> mId = new ArrayList<>();
     List<MClientType> mTypes = new ArrayList<>();
     List<MClientType> mType = new ArrayList<>();
     List<MClientGroup> mGroups = new ArrayList<>();
@@ -71,11 +82,14 @@ public class Focus_activity extends BaseAppCompatActivity implements adapter_Foc
     List<MClientArea> mAreas = new ArrayList<>();
     List<MClientArea> mArea = new ArrayList<>();
     private MClientRequest mClientRequest = new MClientRequest();
+    String ToDay;
+    private int object_id;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_focus);
+        //setContentView(R.layout.activity_focus);
+        box = new DynamicBox(this, R.layout.activity_focus);
         lvFocus = (RecyclerView) findViewById(R.id.lvFocus);
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         preferences = new Preferences(mContext);
@@ -91,8 +105,11 @@ public class Focus_activity extends BaseAppCompatActivity implements adapter_Foc
         lvFocus.setHasFixedSize(true);
         lvFocus.setLayoutManager(manager);
         retrofit = getConnect();
-        getFocus(0);
-
+        //lấy ngày hiện tại
+        Calendar c = Calendar.getInstance();
+        SimpleDateFormat df = new SimpleDateFormat("MM/dd/yyyy HH:mm:ss a");
+        ToDay = convertStringToDate(df.format(c.getTime()));
+        Log.d("Todate", ToDay);
     }
 
     public Retrofit getConnect() {
@@ -106,11 +123,15 @@ public class Focus_activity extends BaseAppCompatActivity implements adapter_Foc
     @Override
     protected void onResume() {
         super.onResume();
+
         if (isSort == true) {
             Log.d("RESULT_TYPE", "lv_sort");
             adapter_Focus adapter_focus = new adapter_Focus(Focus_activity.this, lv_sort, Focus_activity.this);
             lvFocus.setAdapter(adapter_focus);
         } else {
+            box.showLoadingLayout();
+            lv_sort = new ArrayList<>();
+            lv_focus_sort = new ArrayList<>();
             Log.d("RESULT_TYPE", "lv_focus");
             getFocus(0);
         }
@@ -118,26 +139,32 @@ public class Focus_activity extends BaseAppCompatActivity implements adapter_Foc
 
     public void getFocus(int type) {
         ServiceAPI focus = retrofit.create(ServiceAPI.class);
-        Call<Result_focus> result_focus = focus.get_clients_focus(preferences.getIntValue(Constants.USER_ID, 0), preferences.getIntValue(Constants.PARTNER_ID, 0), type, preferences.getStringValue(Constants.TOKEN, ""));
-        result_focus.enqueue(new Callback<Result_focus>() {
+        Call<MAPIResponse<List<Focus>>> result_focus = focus.get_clients_focus_num(preferences.getIntValue(Constants.USER_ID, 0), preferences.getIntValue(Constants.PARTNER_ID, 0), type, preferences.getStringValue(Constants.TOKEN, ""));
+        result_focus.enqueue(new Callback<MAPIResponse<List<Focus>>>() {
             @Override
-            public void onResponse(Call<Result_focus> call, Response<Result_focus> response) {
+            public void onResponse(Call<MAPIResponse<List<Focus>>> call, Response<MAPIResponse<List<Focus>>> response) {
+                 TokenUtils.checkToken(Focus_activity.this,response.body().getErrors());
                 LogUtils.api("", call, response);
+                box.hideAll();
                 if (response.body() != null) {
-                    lv_focus = response.body().getFocus();
-                    Collections.sort(lv_focus);
-                    adapter_Focus adapter_focus = new adapter_Focus(Focus_activity.this, lv_focus, Focus_activity.this);
-                    lvFocus.setAdapter(adapter_focus);
-                } else Toast.makeText(mContext, "No data", Toast.LENGTH_SHORT).show();
-            }
 
+                    lv_focus = response.body().getResult();
+                    if (lv_focus.size() > 0) {
+                        for (Focus f : lv_focus) {
+                            listSort(lv_focus_sort, f);
+                        }
+                        Collections.sort(lv_focus_sort);
+                        adapter_Focus adapter_focus = new adapter_Focus(Focus_activity.this, lv_focus_sort, Focus_activity.this);
+                        lvFocus.setAdapter(adapter_focus);
+                    }
+                } else Toast.makeText(mContext, "không có dữ liệu", Toast.LENGTH_SHORT).show();
+            }
             @Override
-            public void onFailure(Call<Result_focus> call, Throwable t) {
-                LogUtils.api("", call, t.toString());
+            public void onFailure(Call<MAPIResponse<List<Focus>>> call, Throwable t) {
+                LogUtils.api("minh", call, t.toString());
                 Toast.makeText(mContext, "Failed", Toast.LENGTH_SHORT).show();
             }
         });
-
     }
 
     public void funcFocus_status(int i, int ii) {
@@ -158,6 +185,8 @@ public class Focus_activity extends BaseAppCompatActivity implements adapter_Foc
                             .setContentText(Focus_activity.this.getString(R.string.srtDone))
                             .setConfirmText(Focus_activity.this.getString(R.string.srtAgree))
                             .show();
+                    lv_focus_sort = new ArrayList<>();
+                    lv_sort = new ArrayList<>();
                     getFocus(0);
                 } else {
                     new SweetAlertDialog(Focus_activity.this, SweetAlertDialog.WARNING_TYPE)
@@ -167,6 +196,7 @@ public class Focus_activity extends BaseAppCompatActivity implements adapter_Foc
                             .show();
                 }
             }
+
             @Override
             public void onFailure(Call<Result> call, Throwable t) {
                 LogUtils.api("", call, t.toString());
@@ -193,7 +223,10 @@ public class Focus_activity extends BaseAppCompatActivity implements adapter_Foc
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
-        if (id == R.id.actioSort) {
+        if(id == R.id.actionUser){
+            startActivityForResult(new Intent(mContext, ChooseUsersActivity.class), Constants.RESULT_USER);
+        }
+        if (id == R.id.actionSort) {
             CharSequence[] charSequences = new CharSequence[6];
             charSequences[0] = getString(R.string.type_client);
             charSequences[2] = getString(R.string.group_client);
@@ -250,9 +283,54 @@ public class Focus_activity extends BaseAppCompatActivity implements adapter_Foc
         lv_sort = new ArrayList<>();
 //        current_page = 1;
 //        etText.setText("");
+        if(resultCode == Constants.RESULT_USER){
+
+            try {
+                object_id = Integer.parseInt(data.getSerializableExtra("mUser").toString());
+            }catch (Exception e){
+                object_id = 0;
+            }
+
+            if(object_id > 0){
+                isSort = true;
+                for (Focus f : lv_focus) {
+                    Log.d("RESULT_USERS1", " = " + f.getUserId());
+
+                    if (object_id == f.getUserManagerId()) {
+                        Log.d("RESULT_USERS3", object_id + " = " + f.getUserManagerId());
+                        lv_sort = listSort(lv_sort, f);
+                        Collections.sort(lv_sort);
+//                                s.setIs_select(false);
+                    }
+                }
+            }else isSort = false;
+        }
         if (resultCode == Constants.RESULT_USERS) {
-            adapter_Focus adapter_focus = new adapter_Focus(Focus_activity.this, lv_focus, Focus_activity.this);
-            lvFocus.setAdapter(adapter_focus);
+            lvFocus.setAdapter(null);
+            mId = new ArrayList<>();
+            object_id = 0;
+            mId = (List<MId>) data.getSerializableExtra("mIds");
+
+            if (mId != null && mId.size() > 0) {
+                isSort = true;
+                for (Focus f : lv_focus) {
+                    Log.d("RESULT_USERS1", " = " + f.getUserId());
+                    for (MId s : mId) {
+                        Log.d("RESULT_USERS2", s.getId() + " = " + f.getUserManagerId());
+                        if (s.getId() == f.getUserManagerId()) {
+
+                                Log.d("RESULT_USERS3", s.getId() + " = " + f.getUserManagerId());
+                                lv_sort = listSort(lv_sort, f);
+                                Collections.sort(lv_sort);
+//                                s.setIs_select(false);
+
+
+                        }
+
+                    }
+                }
+
+            }else isSort = false;
         } else if (resultCode == Constants.RESULT_STATUS) {
             lvFocus.setAdapter(null);
             mStatu = new ArrayList<>();
@@ -265,10 +343,10 @@ public class Focus_activity extends BaseAppCompatActivity implements adapter_Foc
                         if (s.getId() == f.getStatusId()) {
                             if (s.is_select()) {
                                 Log.d("RESULT_STATUS2", s.getId() + " = " + f.getStatusId());
-                                listSort(f);
+                                lv_sort = listSort(lv_sort, f);
+                                Collections.sort(lv_sort);
 //                                s.setIs_select(false);
                             }
-
                         }
 
                     }
@@ -285,7 +363,8 @@ public class Focus_activity extends BaseAppCompatActivity implements adapter_Foc
                     for (MClientArea s : mArea) {
                         if (s.getClient_area_id() == f.getClientAreaId()) {
                             if (s.is_select()) {
-                                listSort(f);
+                                lv_sort = listSort(lv_sort, f);
+                                Collections.sort(lv_sort);
                             }
 //                        s.setIs_select(false);
                         }
@@ -305,7 +384,8 @@ public class Focus_activity extends BaseAppCompatActivity implements adapter_Foc
                     for (MClientGroup s : mGroup) {
                         if (s.getClient_group_id() == f.getClientGroupId()) {
                             if (s.is_select()) {
-                                listSort(f);
+                                lv_sort = listSort(lv_sort, f);
+                                Collections.sort(lv_sort);
 //                                s.setIs_select(false);
                             }
 
@@ -324,7 +404,8 @@ public class Focus_activity extends BaseAppCompatActivity implements adapter_Foc
                         if (s.getClient_type_id() == f.getClientTypeId()) {
                             if (s.is_select()) {
                                 Log.d("RESULT_TYPE", s.getClient_type_id() + " = " + f.getClientTypeId());
-                                listSort(f);
+                                lv_sort = listSort(lv_sort, f);
+                                Collections.sort(lv_sort);
 //                                s.setIs_select(false);
                             }
                         }
@@ -355,7 +436,8 @@ public class Focus_activity extends BaseAppCompatActivity implements adapter_Foc
                         }
                     }
                     if (ClientLabel.contains(Label)) {
-                        listSort(f);
+                        lv_sort = listSort(lv_sort, f);
+                        Collections.sort(lv_sort);
                         Log.d("RESULT_TYPE4", "Giong");
                     } else {
                         Log.d("RESULT_TYPE5", "Khong Giong");
@@ -375,7 +457,39 @@ public class Focus_activity extends BaseAppCompatActivity implements adapter_Foc
         }, 1);
     }
 
-    public void listSort(Focus f) {
+    public boolean isDateAfter(String startDate, String endDate) {
+        try {
+            String myFormatString = "dd/MM/yyyy"; // for example
+            SimpleDateFormat df = new SimpleDateFormat(myFormatString);
+            Date date1 = df.parse(endDate);
+            Date startingDate = df.parse(startDate);
+
+            if (date1.after(startingDate))
+                return true;
+            else
+                return false;
+        } catch (Exception e) {
+
+            return false;
+        }
+    }
+
+    public String convertStringToDate(String stringData)
+            throws ParseException {
+
+        SimpleDateFormat sdf = new SimpleDateFormat("MM/dd/yyyy HH:mm:ss a");//yyyy-MM-dd'T'HH:mm:ss
+        SimpleDateFormat output = new SimpleDateFormat("dd/MM/yyyy");
+        Date data = null;
+        try {
+            data = sdf.parse(stringData);
+        } catch (java.text.ParseException e) {
+            e.printStackTrace();
+        }
+        String formattedTime = output.format(data);
+        return formattedTime;
+    }
+
+    public List listSort(List<Focus> list, Focus f) {
         Focus focus = new Focus();
         focus.setClientId(f.getClientId());
         focus.setUserId(f.getUserId());
@@ -400,14 +514,72 @@ public class Focus_activity extends BaseAppCompatActivity implements adapter_Foc
         focus.setNumberOrder(f.getNumberOrder());
         focus.setNumberMeeting(f.getNumberMeeting());
         focus.setNumberCall(f.getNumberCall());
-        focus.setNumberDate(f.getNumberDate());
+        focus.setNumberDate(funcNumberDate(ToDay, convertStringToDate(f.getEndDate())));
         focus.setNumberEmail(f.getNumberEmail());
         focus.setNumberEvent(f.getNumberEvent());
         focus.setLabels(f.getLabels());
-        lv_sort.add(focus);
+        list.add(focus);
+        return list;
     }
+
+    public int funcNumberDate(String toDay, String enDate) {
+        SimpleDateFormat myFormat = new SimpleDateFormat("dd/MM/yyyy");
+        int date = 0;
+        try {
+            Date date1 = null, date2 = null;
+            try {
+                date1 = myFormat.parse(toDay);
+                date2 = myFormat.parse(enDate);
+            } catch (java.text.ParseException e) {
+                e.printStackTrace();
+            }
+            boolean check = isDateAfter(ToDay, enDate);
+            //ngày hiện tại lớn hơn ngày EnDate
+            if (check == false) {
+                long diff = date1.getTime() - date2.getTime();
+                date =-((int) TimeUnit.DAYS.convert(diff, TimeUnit.MILLISECONDS));
+
+            }
+            //ngày hiện tại nhỏ hơn ngày EnDate
+            else {
+                long diff = date2.getTime() - date1.getTime();
+                date = (int) TimeUnit.DAYS.convert(diff, TimeUnit.MILLISECONDS);
+            }
+
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        return date;
+    }
+
     @Override
     public void Click(int i, int ii) {
-        funcFocus_status(i, ii);
+        if(ii == 3){
+           int id= preferences.getIntValue(Constants.USER_ID, 0);
+
+            if(lv_sort.size()>0){
+                if(id == lv_sort.get(i).getUserId())
+                    funcFocus_status(i, ii);
+//                Log.d("DELETE1",id +" = "+ lv_sort.get(i).getUserId());
+                else {
+                    new SweetAlertDialog(Focus_activity.this, SweetAlertDialog.WARNING_TYPE)
+                            .setTitleText(Focus_activity.this.getString(R.string.srtNotifi))
+                            .setContentText(Focus_activity.this.getString(R.string.srtFalse))
+                            .setConfirmText("Nhân viên chỉ xóa khách hàng do mình thiết lập")
+                            .show();
+                }
+            }else if(lv_focus_sort.size()>0){
+                if(id == lv_focus_sort.get(i).getUserId())
+                    funcFocus_status(i, ii);
+                else {
+                    new SweetAlertDialog(Focus_activity.this, SweetAlertDialog.WARNING_TYPE)
+                            .setTitleText(Focus_activity.this.getString(R.string.srtNotifi))
+                            .setContentText(Focus_activity.this.getString(R.string.srtFalse))
+                            .setConfirmText("Nhân viên chỉ xóa khách hàng do mình thiết lập")
+                            .show();
+                }
+            }
+        }else
+         funcFocus_status(i, ii);
     }
 }

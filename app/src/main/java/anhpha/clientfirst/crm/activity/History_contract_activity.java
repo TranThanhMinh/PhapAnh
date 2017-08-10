@@ -23,6 +23,8 @@ import anhpha.clientfirst.crm.interfaces.Url;
 import anhpha.clientfirst.crm.model.History_contract;
 import anhpha.clientfirst.crm.model.Result_history_contract;
 import anhpha.clientfirst.crm.service_api.ServiceAPI;
+import anhpha.clientfirst.crm.utils.DynamicBox;
+import anhpha.clientfirst.crm.utils.TokenUtils;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -45,7 +47,8 @@ public class History_contract_activity extends BaseAppCompatActivity implements 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_history_contract);
+        //setContentView(R.layout.activity_history_contract);
+        box = new DynamicBox(this, R.layout.activity_history_contract);
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         preferences = new Preferences(mContext);
         if(toolbar != null){
@@ -62,6 +65,7 @@ public class History_contract_activity extends BaseAppCompatActivity implements 
         lvHistory_contract.setHasFixedSize(true);
         lvHistory_contract.setLayoutManager(layoutManager);
         retrofit = func_Connect();
+        box.showLoadingLayout();
         getHistory_contract();
        // imBack.setOnClickListener(this);
     }
@@ -80,6 +84,8 @@ public class History_contract_activity extends BaseAppCompatActivity implements 
         call.enqueue(new Callback<Result_history_contract>() {
             @Override
             public void onResponse(Call<Result_history_contract> call, Response<Result_history_contract> response) {
+               // TokenUtils.checkToken(mContext,response.body().getErrors());
+                box.hideAll();
                 List<History_contract> list = response.body().getHistory_contracts();
                 adapter_history_contract = new adapter_History_contract(History_contract_activity.this, list);
                 lvHistory_contract.setAdapter(adapter_history_contract);

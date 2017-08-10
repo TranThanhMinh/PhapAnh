@@ -4,6 +4,7 @@ import android.app.ActionBar;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
+import android.net.ParseException;
 import android.os.Bundle;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -19,12 +20,16 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import java.io.Serializable;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 import java.util.Random;
 
 import anhpha.clientfirst.crm.R;
 import anhpha.clientfirst.crm.activity.CallActivity;
 import anhpha.clientfirst.crm.activity.CheckinActivity;
+import anhpha.clientfirst.crm.activity.ClientActivity;
 import anhpha.clientfirst.crm.activity.EmailActivity;
 import anhpha.clientfirst.crm.activity.EventsClientActivity;
 import anhpha.clientfirst.crm.activity.HistoryFocusActivity;
@@ -48,6 +53,21 @@ import retrofit2.Callback;
 public class adapter_Focus extends RecyclerView.Adapter<adapter_Focus.MyViewHolder> {
     private Context context;
     private List<Focus> list;
+    String ToDay;
+    public  String convertStringToDate(String stringData)
+            throws ParseException {
+
+        SimpleDateFormat sdf = new SimpleDateFormat("MM/dd/yyyy HH:mm:ss a");//yyyy-MM-dd'T'HH:mm:ss
+        SimpleDateFormat output = new SimpleDateFormat("dd/MM/yyyy");
+        Date data = null;
+        try {
+            data = sdf.parse(stringData);
+        } catch (java.text.ParseException e) {
+            e.printStackTrace();
+        }
+        String formattedTime = output.format(data);
+        return formattedTime;
+    }
 
     public Event getEvent() {
         return event;
@@ -67,6 +87,9 @@ public class adapter_Focus extends RecyclerView.Adapter<adapter_Focus.MyViewHold
         this.context = context;
         this.list = list;
         this.event = event;
+        Calendar c = Calendar.getInstance();
+        SimpleDateFormat df = new SimpleDateFormat("MM/dd/yyyy HH:mm:ss a");
+        ToDay = convertStringToDate(df.format(c.getTime()));
 
     }
 
@@ -84,10 +107,19 @@ public class adapter_Focus extends RecyclerView.Adapter<adapter_Focus.MyViewHold
         activityItem.setClient_type_id(focus.getClientTypeId());
         activityItem.setAddress(focus.getAddress());
         activityItem.setClient_name(focus.getClientName());
-        if (focus.getNumberDate() == 0)
-            holder.tvDate.setText("");
+        if (focus.getNumberDate()<0) {
+                holder.tvDate.setText(-(focus.getNumberDate()) + " " + context.getResources().getString(R.string.srtDate));
+                holder.tvDate.setTextColor(context.getResources().getColor(R.color.colorRed));
+
+        }
         else
+        {
+            if (focus.getNumberDate() == 0) {
+                holder.tvDate.setTextColor(context.getResources().getColor(R.color.colorRed));
+            }
             holder.tvDate.setText(focus.getNumberDate() + " " + context.getResources().getString(R.string.srtDate));
+        }
+
         holder.tvName_city.setText(focus.getClientName());
         holder.tvNote.setText(focus.getFocusTargetName());
         if (focus.getNumberOrder() > 0) {
@@ -108,19 +140,30 @@ public class adapter_Focus extends RecyclerView.Adapter<adapter_Focus.MyViewHold
         holder.linearLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                Intent intent = new Intent(context, ClientActivity.class).putExtra("mClient",activityItem);
+                context.startActivity(intent);
+            }
+        });
 
+        holder.tvName_city.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(context, ClientActivity.class).putExtra("mClient",activityItem);
+                context.startActivity(intent);
             }
         });
         holder.tvDate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+                Intent intent = new Intent(context, ClientActivity.class).putExtra("mClient",activityItem);
+                context.startActivity(intent);
             }
         });
         holder.tvNote.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+                Intent intent = new Intent(context, ClientActivity.class).putExtra("mClient",activityItem);
+                context.startActivity(intent);
             }
         });
 

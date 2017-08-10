@@ -8,6 +8,7 @@ import java.util.List;
 
 import anhpha.clientfirst.crm.model.AddFocus;
 import anhpha.clientfirst.crm.model.Focus;
+import anhpha.clientfirst.crm.model.Focus_date;
 import anhpha.clientfirst.crm.model.MAPIResponse;
 import anhpha.clientfirst.crm.model.MActivity;
 import anhpha.clientfirst.crm.model.MCall;
@@ -43,6 +44,7 @@ import anhpha.clientfirst.crm.model.MWeekWork;
 import anhpha.clientfirst.crm.model.MWorkUser;
 import anhpha.clientfirst.crm.model.Result;
 import anhpha.clientfirst.crm.model.Result_focus;
+import anhpha.clientfirst.crm.model.Result_focus_date;
 import anhpha.clientfirst.crm.model.Result_history_contract;
 import anhpha.clientfirst.crm.model.Result_status_contract;
 import anhpha.clientfirst.crm.model.Result_upload_photo;
@@ -284,7 +286,11 @@ public interface ServiceAPI {
 
     //Focus
     @GET("get_clients_focus")
-    Call<Result_focus> get_clients_focus(@Header("user_id") int user_id, @Header("partner_id") int partner_id, @Header("client_id") int client_id, @Header("token") String token);
+    Call<MAPIResponse<List<Focus_date>>> get_clients_focus (@Header("user_id") int user_id, @Header("partner_id") int partner_id, @Header("client_id") int client_id, @Header("token") String token);
+
+    @GET("get_clients_focus")
+    Call<MAPIResponse<List<Focus>>> get_clients_focus_num (@Header("user_id") int user_id, @Header("partner_id") int partner_id, @Header("client_id") int client_id, @Header("token") String token);
+
 
     @POST("set_clients_focus_status")
     Call<Result> set_clients_focus_status(@Header("user_id") int user_id, @Header("partner_id") int partner_id, @Header("token") String token, @Body List<Focus> focus);

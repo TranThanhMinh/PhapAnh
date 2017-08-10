@@ -718,7 +718,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:scaleType="centerInside"
-            android:padding="15dp"
+            android:padding="10dp"
             android:src="@mipmap/ic_crm_101"
             style="@style/MenuButtonsSmall"
             fab:fabSize="normal"

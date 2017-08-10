@@ -26,6 +26,7 @@ import com.wdullaer.materialdatetimepicker.date.DatePickerDialog;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
@@ -38,11 +39,16 @@ import anhpha.clientfirst.crm.configs.Preferences;
 import anhpha.clientfirst.crm.interfaces.Url;
 import anhpha.clientfirst.crm.model.AddFocus;
 import anhpha.clientfirst.crm.model.Focus;
+import anhpha.clientfirst.crm.model.Focus_date;
+import anhpha.clientfirst.crm.model.MAPIResponse;
 import anhpha.clientfirst.crm.model.MClient;
 import anhpha.clientfirst.crm.model.Result;
 import anhpha.clientfirst.crm.model.Result_focus;
+import anhpha.clientfirst.crm.model.Result_focus_date;
 import anhpha.clientfirst.crm.service_api.ServiceAPI;
+import anhpha.clientfirst.crm.utils.DynamicBox;
 import anhpha.clientfirst.crm.utils.LogUtils;
+import anhpha.clientfirst.crm.utils.TokenUtils;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -59,10 +65,10 @@ public class HistoryFocusActivity extends BaseAppCompatActivity implements DateP
     private RecyclerView lvHistory_focus;
     private Retrofit retrofit;
     private Preferences preferences;
-    private List<Focus> lv_focus;
+    private List<Focus_date> lv_focus;
     private Bundle b;
     private Spinner spTarget;
-    private TextView editFromDate, editToDate,tvName,tvAddress;
+    private TextView editFromDate, editToDate,tvName,tvAddress,tvNumberDate;
     private int Target, Type;
     private RadioGroup rgFocus;
     private RadioButton rbNo, rbYes;
@@ -77,12 +83,14 @@ public class HistoryFocusActivity extends BaseAppCompatActivity implements DateP
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_history_focus);
+       // setContentView(R.layout.activity_history_focus);
+        box = new DynamicBox(this, R.layout.activity_history_focus);
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         editFromDate = (TextView) findViewById(R.id.editFromDate);
         editToDate = (TextView) findViewById(R.id.editToDate);
         tvName = (TextView) findViewById(R.id.tvName);
         tvAddress = (TextView) findViewById(R.id.tvAddress);
+        tvNumberDate = (TextView) findViewById(R.id.tvNumberDate);
         lvHistory_focus = (RecyclerView) findViewById(R.id.lvHistory_focus);
         spTarget = (Spinner) findViewById(R.id.spTarget);
         rgFocus = (RadioGroup) findViewById(R.id.rgFocus);
@@ -100,10 +108,10 @@ public class HistoryFocusActivity extends BaseAppCompatActivity implements DateP
         if (toolbar != null) {
             setSupportActionBar(toolbar);
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-            getSupportActionBar().setTitle(R.string.srtHistory_focus);
+            getSupportActionBar().setTitle(R.string.srtFocus);
             toolbar.setTitleTextColor(getResources().getColor(R.color.colorWhite));
         }
-         manager = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
+        manager = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
         manager.setOrientation(LinearLayoutManager.VERTICAL);
         lvHistory_focus.setHasFixedSize(true);
         lvHistory_focus.setLayoutManager(manager);
@@ -157,6 +165,7 @@ public class HistoryFocusActivity extends BaseAppCompatActivity implements DateP
     @Override
     protected void onResume() {
         super.onResume();
+        box.showLoadingLayout();
         getHistoryFocus(mClient.getClient_id());
         lvHistory_focus.addOnScrollListener(new RecyclerView.OnScrollListener() {
             @Override
@@ -201,39 +210,45 @@ public class HistoryFocusActivity extends BaseAppCompatActivity implements DateP
         focus.setPartner_id(preferences.getIntValue(Constants.PARTNER_ID, 0));
         focus.setBegin_date(editFromDate.getText().toString());
         focus.setEnd_date(editToDate.getText().toString());
-        if (Type == 1) {
-            SimpleDateFormat myFormat = new SimpleDateFormat("dd/MM/yyyy");
-            int date = 0;
-            try {
-                Date date1 = null, date2 = null;
-                try {
-                    date1 = myFormat.parse(editFromDate.getText().toString());
-                    date2 = myFormat.parse(editToDate.getText().toString());
-                } catch (java.text.ParseException e) {
-                    e.printStackTrace();
-                }
-                if (editFromDate.getText().toString().equals("") || editToDate.getText().toString().equals("")) {
-                    Toast.makeText(this,R.string.srtCheckDate, Toast.LENGTH_SHORT).show();
-                } else {
-                    boolean check = isDateAfter(editFromDate.getText().toString(), editToDate.getText().toString());
-                    if (check == false)
-                        Toast.makeText(this, R.string.srtDate_bigger, Toast.LENGTH_SHORT).show();
-                    else {
-                        long diff = date2.getTime() - date1.getTime();
-                        date = (int) TimeUnit.DAYS.convert(diff, TimeUnit.MILLISECONDS);
-                        focus.setNumber_date(date);
-                        lvAddfocus.add(focus);
-                    }
-                }
-            } catch (ParseException e) {
-                e.printStackTrace();
-            }
-
-        } else {
-            focus.setNumber_date(0);
+//        if (Type == 1) {
+//            SimpleDateFormat myFormat = new SimpleDateFormat("dd/MM/yyyy");
+//            int date = 0;
+//            try {
+//                Date date1 = null, date2 = null;
+//                try {
+//                    date1 = myFormat.parse(editFromDate.getText().toString());
+//                    date2 = myFormat.parse(editToDate.getText().toString());
+//                } catch (java.text.ParseException e) {
+//                    e.printStackTrace();
+//                }
+//                if (editFromDate.getText().toString().equals("") || editToDate.getText().toString().equals("")) {
+//                    Toast.makeText(this,R.string.srtCheckDate, Toast.LENGTH_SHORT).show();
+//                } else {
+//                    boolean check = isDateAfter(editFromDate.getText().toString(), editToDate.getText().toString());
+//                    if (check == false)
+//                        Toast.makeText(this, R.string.srtDate_bigger, Toast.LENGTH_SHORT).show();
+//                    else {
+//                        long diff = date2.getTime() - date1.getTime();
+//                        date = (int) TimeUnit.DAYS.convert(diff, TimeUnit.MILLISECONDS);
+//                        focus.setNumber_date(date);
+//                        lvAddfocus.add(focus);
+//                    }
+//                }
+//            } catch (ParseException e) {
+//                e.printStackTrace();
+//            }
+//
+//        } else {
+//            focus.setNumber_date(Integer.parseInt(tvNumberDate.getText().toString()));
+//            lvAddfocus.add(focus);
+//        }
+        if(tvNumberDate.getText().toString().equals("")){
+            Toast.makeText(this, R.string.srtNumberdate, Toast.LENGTH_SHORT).show();
+        }
+        else {
+            focus.setNumber_date(Integer.parseInt(tvNumberDate.getText().toString()));
             lvAddfocus.add(focus);
         }
-
         if (lvAddfocus.size() > 0) {
             ServiceAPI apiFocus = retrofit.create(ServiceAPI.class);
             Call<Result> result_focus = apiFocus.set_clients_focus(preferences.getIntValue(Constants.USER_ID, 0), preferences.getIntValue(Constants.PARTNER_ID, 0), preferences.getStringValue(Constants.TOKEN, ""), lvAddfocus);
@@ -258,44 +273,28 @@ public class HistoryFocusActivity extends BaseAppCompatActivity implements DateP
         }
 
     }
-
-    public boolean isDateAfter(String startDate, String endDate) {
-        try {
-            String myFormatString = "dd/MM/yyyy"; // for example
-            SimpleDateFormat df = new SimpleDateFormat(myFormatString);
-            Date date1 = df.parse(endDate);
-            Date startingDate = df.parse(startDate);
-
-            if (date1.after(startingDate))
-                return true;
-            else
-                return false;
-        } catch (Exception e) {
-
-            return false;
-        }
-    }
-
     public void getHistoryFocus(int client_id) {
         ServiceAPI focus = retrofit.create(ServiceAPI.class);
-        Call<Result_focus> result_focus = focus.get_clients_focus(preferences.getIntValue(Constants.USER_ID, 0), preferences.getIntValue(Constants.PARTNER_ID, 0), client_id, preferences.getStringValue(Constants.TOKEN, ""));
-        result_focus.enqueue(new Callback<Result_focus>() {
+        Call<MAPIResponse<List<Focus_date>>> result_focus = focus.get_clients_focus(preferences.getIntValue(Constants.USER_ID, 0), preferences.getIntValue(Constants.PARTNER_ID, 0), client_id, preferences.getStringValue(Constants.TOKEN, ""));
+        result_focus.enqueue(new Callback<MAPIResponse<List<Focus_date>>>() {
             @Override
-            public void onResponse(Call<Result_focus> call, Response<Result_focus> response) {
+            public void onResponse(Call<MAPIResponse<List<Focus_date>>> call, Response<MAPIResponse<List<Focus_date>>> response) {
+                box.hideAll();
+                TokenUtils.checkToken(mContext,response.body().getErrors());
                 LogUtils.api("",call,response);
                 if (response.body() != null) {
-                    lv_focus = response.body().getFocus();
+                    lv_focus = response.body().getResult();
+                    Collections.sort(lv_focus,new Focus_date());
                     adapter_History_focus adapter_focus = new adapter_History_focus(HistoryFocusActivity.this, lv_focus);
                     lvHistory_focus.setAdapter(adapter_focus);
                 } else Toast.makeText(mContext, "No data", Toast.LENGTH_SHORT).show();
             }
-
             @Override
-            public void onFailure(Call<Result_focus> call, Throwable t) {
-                Toast.makeText(mContext, "No data", Toast.LENGTH_SHORT).show();
+            public void onFailure(Call<MAPIResponse<List<Focus_date>>> call, Throwable t) {
+                LogUtils.api("minh", call, t.toString());
+                Toast.makeText(mContext, "Failed", Toast.LENGTH_SHORT).show();
             }
         });
-
     }
 
     @Override

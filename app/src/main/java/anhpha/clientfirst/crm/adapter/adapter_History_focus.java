@@ -15,9 +15,11 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 import anhpha.clientfirst.crm.R;
 import anhpha.clientfirst.crm.model.Focus;
+import anhpha.clientfirst.crm.model.Focus_date;
 
 /**
  * Created by MinhTran on 7/24/2017.
@@ -25,9 +27,9 @@ import anhpha.clientfirst.crm.model.Focus;
 
 public class adapter_History_focus extends RecyclerView.Adapter<adapter_History_focus.MyViewHolder> {
     private Context context;
-    private List<Focus> list;
+    private List<Focus_date> list;
 
-    public adapter_History_focus(Context context, List<Focus> list) {
+    public adapter_History_focus(Context context, List<Focus_date> list) {
         this.context = context;
         this.list = list;
     }
@@ -37,21 +39,81 @@ public class adapter_History_focus extends RecyclerView.Adapter<adapter_History_
         View v = LayoutInflater.from(context).inflate(R.layout.item_history_focus, null);
         return new MyViewHolder(v);
     }
+    public boolean isDateAfter(String startDate, String endDate) {
+        try {
+            String myFormatString = "dd/MM/yyyy"; // for example
+            SimpleDateFormat df = new SimpleDateFormat(myFormatString);
+            Date date1 = df.parse(endDate);
+            Date startingDate = df.parse(startDate);
 
+            if (date1.after(startingDate))
+                return true;
+            else
+                return false;
+        } catch (Exception e) {
+
+            return false;
+        }
+    }
+
+    public String convertStringToDate(String stringData)
+            throws ParseException {
+
+        SimpleDateFormat sdf = new SimpleDateFormat("MM/dd/yyyy HH:mm:ss a");//yyyy-MM-dd'T'HH:mm:ss
+        SimpleDateFormat output = new SimpleDateFormat("dd/MM/yyyy");
+        Date data = null;
+        try {
+            data = sdf.parse(stringData);
+        } catch (java.text.ParseException e) {
+            e.printStackTrace();
+        }
+        String formattedTime = output.format(data);
+        return formattedTime;
+    }
+    public int funcNumberDate(String Modify, String enDate) {
+        SimpleDateFormat myFormat = new SimpleDateFormat("dd/MM/yyyy");
+        int date = 0;
+        try {
+            Date date1 = null, date2 = null;
+            try {
+                date1 = myFormat.parse(Modify);
+                date2 = myFormat.parse(enDate);
+            } catch (java.text.ParseException e) {
+                e.printStackTrace();
+            }
+            boolean check = isDateAfter(Modify, enDate);
+            //ngày Modify lớn hơn ngày beginDate
+            if (check == false) {
+                long diff = date1.getTime() - date2.getTime();
+                date = (int) TimeUnit.DAYS.convert(diff, TimeUnit.MILLISECONDS);
+
+            }
+            //ngày Modify nhỏ hơn ngày beginDate
+            else {
+                long diff = date2.getTime() - date1.getTime();
+                date = (int) TimeUnit.DAYS.convert(diff, TimeUnit.MILLISECONDS);
+            }
+
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        return date;
+    }
     @Override
     public void onBindViewHolder(adapter_History_focus.MyViewHolder holder, int position) {
         if (position % 2 != 0)
             holder.lay_display.setBackgroundResource(R.color.colorWhite);
         else  holder.lay_display.setBackgroundResource(R.color.color1);
-        Focus focus = list.get(position);
-        if (focus.getFocusTypeId() == 2)
-            holder.tvSetupTime.setText(focus.getFocusTypeName());
-        else
-            holder.tvSetupTime.setText(context.getResources().getString(R.string.srtTo) + " " + convertStringToData(focus.getBeginDate()) + " " + context.getResources().getString(R.string.srtFrom) + " " + convertStringToData(focus.getEndDate()));
+        Focus_date focus = list.get(position);
+//        if (focus.getFocusTypeId() == 2)
+//            holder.tvSetupTime.setText(focus.getFocusTypeName());
+//        else
+            holder.tvSetupTime.setText(context.getResources().getString(R.string.srtTo) + " " + convertStringToDate(focus.getBeginDate()) + " : " +focus.getNumberDate()+ " " + context.getResources().getString(R.string.srtDate));
 
 
-        if(focus.getNumberDate()>0)
-        holder.tvDate.setText(focus.getNumberDate()+"" + " " + context.getResources().getString(R.string.srtDate));
+        //if(focus.getNumberDate()>0)
+        holder.tvDate.setText(funcNumberDate(convertStringToDate(focus.getModify_date()), convertStringToDate(focus.getBeginDate()))+"" + " " + context.getResources().getString(R.string.srtDate));
+//        else  holder.tvDate.setText(context.getResources().getString(R.string.srtToDay));
         holder.tvName.setText(focus.getClientName());
         holder.tvTarget.setText(focus.getFocusTargetName());
         holder.tvStatus.setText(focus.getFocusStatusName());
@@ -74,7 +136,7 @@ public class adapter_History_focus extends RecyclerView.Adapter<adapter_History_
     public static String convertStringToData(String stringData)
             throws ParseException {
 
-        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy hh:mm:ss");//yyyy-MM-dd'T'HH:mm:ss
+        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss a");//yyyy-MM-dd'T'HH:mm:ss
         SimpleDateFormat output = new SimpleDateFormat("dd/MM/yyyy");
         Date data = null;
         try {

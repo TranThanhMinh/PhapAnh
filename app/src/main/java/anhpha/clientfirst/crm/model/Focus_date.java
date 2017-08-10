@@ -1,11 +1,12 @@
 package anhpha.clientfirst.crm.model;
 
+import android.net.ParseException;
 import android.support.annotation.NonNull;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-import java.io.Serializable;
+import java.text.SimpleDateFormat;
 import java.util.Comparator;
 import java.util.Date;
 import java.util.List;
@@ -14,7 +15,7 @@ import java.util.List;
  * Created by MinhTran on 7/24/2017.
  */
 
-public class Focus  implements Comparable<Focus> {
+public class Focus_date implements Comparator<Focus_date> {
     public String getModify_date() {
         return modify_date;
     }
@@ -346,16 +347,24 @@ public class Focus  implements Comparable<Focus> {
 
 
     @Override
-    public int compareTo(@NonNull Focus focus) {
-        if (numberDate.intValue() > focus.numberDate.intValue()) {
-            return 1;
+    public int compare(Focus_date focus_date, Focus_date t1) {
+        SimpleDateFormat format = new SimpleDateFormat(  "dd-MM-yyyy");
+        int compareResult = 0;
+        try {
+            Date arg0Date ,arg1Date;
+            try {
+                arg0Date = format.parse(focus_date.getBeginDate());
+                arg1Date  = format.parse(t1.getBeginDate());
+                compareResult = arg0Date.compareTo(arg1Date);
+            } catch (java.text.ParseException e) {
+                e.printStackTrace();
+            }
+
+        } catch (ParseException e) {
+            e.printStackTrace();
+            compareResult = focus_date.getBeginDate().compareTo(t1.getBeginDate());
         }
-        else if (numberDate.intValue() <  focus.numberDate.floatValue()) {
-            return -1;
-        }
-        else {
-            return 0;
-        }
+        return compareResult;
     }
 
 }

@@ -180,7 +180,7 @@ public class CalendarActivitiesActivity extends BaseAppCompatActivity implements
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.user:
-                startActivityForResult(new Intent(mContext, ChooseUsersActivity.class), Constants.RESULT_USERS);
+                startActivityForResult(new Intent(mContext, ChooseUsersActivity.class), Constants.RESULT_USER);
                 return true;
 
             case R.id.calendar:
@@ -321,8 +321,10 @@ public class CalendarActivitiesActivity extends BaseAppCompatActivity implements
         // Check which request we're responding to
         if (resultCode == Constants.RESULT_USER) {
             try {
-                object_id = ((MUser) data.getSerializableExtra("mUser")).getUser_id();
-                loadClient();
+                object_id =  Integer.parseInt(data.getSerializableExtra("mUser").toString());
+                if(object_id > 0){
+                    loadClient();
+                }
             }catch (Exception e){
 
             }

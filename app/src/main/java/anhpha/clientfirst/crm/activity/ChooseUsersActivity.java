@@ -92,14 +92,15 @@ public class ChooseUsersActivity extends BaseAppCompatActivity implements  Recyc
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case android.R.id.home:
-                onBackPressed();
+                setResult(Constants.RESULT_USER, new Intent().putExtra("mUser",0));
+                finish();
+              //  onBackPressed();
                 return true;
 
             default:
                 return super.onOptionsItemSelected(item);
         }
     }
-
     @Override
     public void onResponse(Call<MAPIResponse<List<MUser>>> call, Response<MAPIResponse<List<MUser>>> response) {
         LogUtils.api(TAG, call, (response.body()));
@@ -124,12 +125,18 @@ public class ChooseUsersActivity extends BaseAppCompatActivity implements  Recyc
 
     @Override
     public void onClick(View view, int position) {
-        setResult(Constants.RESULT_USER, new Intent().putExtra("mUser",mUsers.get(position)));
+        setResult(Constants.RESULT_USER, new Intent().putExtra("mUser",mUsers.get(position).getUser_id()));
         finish();
     }
 
     @Override
     public void onLongClick(View view, int position) {
 
+    }
+
+    @Override
+    public void onBackPressed() {
+        setResult(Constants.RESULT_USER, new Intent().putExtra("mUser",0));
+        finish();
     }
 }
