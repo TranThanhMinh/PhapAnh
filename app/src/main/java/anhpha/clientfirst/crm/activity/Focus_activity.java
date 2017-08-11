@@ -109,7 +109,7 @@ public class Focus_activity extends BaseAppCompatActivity implements adapter_Foc
         Calendar c = Calendar.getInstance();
         SimpleDateFormat df = new SimpleDateFormat("MM/dd/yyyy HH:mm:ss a");
         ToDay = convertStringToDate(df.format(c.getTime()));
-        Log.d("Todate", ToDay);
+
     }
 
     public Retrofit getConnect() {

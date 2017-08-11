@@ -72,12 +72,12 @@
                     <LinearLayout
                         android:layout_marginTop="5dp"
                         android:id="@+id/linearLayout2"
-                        android:layout_width="wrap_content"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_alignLeft="@+id/client_name"
                         android:layout_alignStart="@+id/client_name"
                         android:background="@color/white"
-                        android:orientation="horizontal"
+                        android:orientation="vertical"
                         android:padding="2dp"
                         android:visibility="visible"></LinearLayout>
                     <TextView
@@ -90,7 +90,7 @@
                         android:gravity="center_vertical"
                         android:textColor="@color/color" />
                     <LinearLayout
-                        android:layout_marginTop="20dp"
+                        android:layout_below="@+id/linearLayout2"
                         android:id="@+id/linCenter"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
