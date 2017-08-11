@@ -6,10 +6,8 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.net.ParseException;
 import android.os.Bundle;
-import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
-import android.view.Display;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -104,7 +102,7 @@ public class adapter_Focus extends RecyclerView.Adapter<adapter_Focus.MyViewHold
 
     @Override
     public void onBindViewHolder(final MyViewHolder holder, final int p) {
-        final int position = p;
+        final int position  = p;
         final Focus focus = list.get(position);
         final MClient activityItem = new MClient();
         activityItem.setClient_id(focus.getClientId());
@@ -118,26 +116,35 @@ public class adapter_Focus extends RecyclerView.Adapter<adapter_Focus.MyViewHold
         } else {
             if (focus.getNumberDate() == 0) {
                 holder.tvDate.setTextColor(context.getResources().getColor(R.color.colorRed));
-            } else holder.tvDate.setTextColor(context.getResources().getColor(R.color.color));
+            }else  holder.tvDate.setTextColor(context.getResources().getColor(R.color.colorBlack));
             holder.tvDate.setText(focus.getNumberDate() + " " + context.getResources().getString(R.string.srtDate));
         }
         holder.tvName_city.setText(focus.getClientName());
         holder.tvNote.setText(focus.getFocusTargetName());
-        if (focus.getNumberOrder() > 0) {
-            holder.imageOrder.setVisibility(View.VISIBLE);
-        } else holder.imageOrder.setVisibility(View.GONE);
-        if (focus.getNumberMeeting() > 0) {
-            holder.imageMeeting.setVisibility(View.VISIBLE);
-        } else holder.imageMeeting.setVisibility(View.GONE);
-        if (focus.getNumberCall() > 0) {
-            holder.imageCall.setVisibility(View.VISIBLE);
-        } else holder.imageCall.setVisibility(View.GONE);
-        if (focus.getNumberEmail() > 0) {
-            holder.imageEmail.setVisibility(View.VISIBLE);
-        } else holder.imageEmail.setVisibility(View.GONE);
-        if (focus.getNumberEvent() > 0) {
-            holder.imageEvent.setVisibility(View.VISIBLE);
-        } else holder.imageEvent.setVisibility(View.GONE);
+        Log.d("position",position+"");
+            if (focus.getNumberOrder() > 0) {
+                Log.d("getNumberOrder",focus.getNumberOrder()+"");
+                holder.imageOrder.setVisibility(View.VISIBLE);
+            }else holder.imageOrder.setVisibility(View.GONE);
+            if (focus.getNumberMeeting() > 0) {
+                Log.d("getNumberMeeting",focus.getNumberMeeting()+"");
+                holder.imageMeeting.setVisibility(View.VISIBLE);
+            }
+            else  holder.imageMeeting.setVisibility(View.GONE);
+            if (focus.getNumberCall() > 0) {
+                Log.d("getNumberCall",focus.getNumberCall()+"");
+                holder.imageCall.setVisibility(View.VISIBLE);
+            }
+            else  holder.imageCall.setVisibility(View.GONE);
+            if (focus.getNumberEmail() > 0) {
+                Log.d("getNumberEmail",focus.getNumberEmail()+"");
+                holder.imageEmail.setVisibility(View.VISIBLE);
+            }
+            else  holder.imageEmail.setVisibility(View.GONE);
+            if (focus.getNumberEvent() > 0) {
+                Log.d("getNumberEvent",focus.getNumberEvent()+"");
+                holder.imageEvent.setVisibility(View.VISIBLE);
+            }else  holder.imageEvent.setVisibility(View.GONE);
 
         holder.linearLayout.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -202,6 +209,8 @@ public class adapter_Focus extends RecyclerView.Adapter<adapter_Focus.MyViewHold
                 }
             }
         }
+
+
         holder.imageCheck.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -228,13 +237,6 @@ public class adapter_Focus extends RecyclerView.Adapter<adapter_Focus.MyViewHold
 
         holder.linearLayout2.removeAllViews();
         int i = 0;
-        LinearLayout ro = new LinearLayout(context);
-        ro.setOrientation(LinearLayout.HORIZONTAL);
-        ro.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT));
-        holder.linearLayout2.addView(ro);
-        // Display display = context.getWindowManager().getDefaultDisplay();
-        //   int width = display.getWidth();
-        Log.d("pos", position + "");
         for (MClientLabel mClientLabel : focus.getLabels()) {
 
             if (i < 8) {
@@ -249,32 +251,9 @@ public class adapter_Focus extends RecyclerView.Adapter<adapter_Focus.MyViewHold
                 valueTV2.setId((int) System.currentTimeMillis() + new Random().nextInt(255));
                 valueTV2.setBackgroundColor(Color.WHITE);
                 valueTV2.setLayoutParams(new ActionBar.LayoutParams(5, Utils.getWidth(context) / 38));
-                ro.addView(valueTV);
-                ro.addView(valueTV2);
+                holder.linearLayout2.addView(valueTV);
+                holder.linearLayout2.addView(valueTV2);
                 i++;
-            } else {
-                i = 0;
-                LinearLayout row = new LinearLayout(context);
-                row.setOrientation(LinearLayout.HORIZONTAL);
-                row.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, 5));
-                holder.linearLayout2.addView(row);
-                ro = new LinearLayout(context);
-                ro.setOrientation(LinearLayout.HORIZONTAL);
-                ro.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT));
-                holder.linearLayout2.addView(ro);
-                Button valueTV = new Button(context);
-                if (mClientLabel.getHex().isEmpty())
-                    valueTV.setBackgroundColor(Color.GRAY);
-                else
-                    valueTV.setBackgroundColor(Color.parseColor(mClientLabel.getHex()));
-                valueTV.setId((int) System.currentTimeMillis() + new Random().nextInt(255));
-                valueTV.setLayoutParams(new ActionBar.LayoutParams(Utils.getWidth(context) / 10, Utils.getWidth(context) / 38));
-                Button valueTV2 = new Button(context);
-                valueTV2.setId((int) System.currentTimeMillis() + new Random().nextInt(255));
-                valueTV2.setBackgroundColor(Color.WHITE);
-                valueTV2.setLayoutParams(new ActionBar.LayoutParams(5, Utils.getWidth(context) / 38));
-                ro.addView(valueTV);
-                ro.addView(valueTV2);
             }
         }
 
