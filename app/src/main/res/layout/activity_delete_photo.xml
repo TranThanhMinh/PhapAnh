@@ -5,21 +5,23 @@
     <LinearLayout
         android:layout_centerInParent="true"
         android:layout_width="match_parent"
-        android:layout_height="80dp"
+        android:layout_height="wrap_content"
         android:orientation="vertical">
         <TextView
             android:id="@+id/tvText"
             android:layout_width="match_parent"
-            android:layout_height="40dp"
+            android:layout_height="50dp"
             android:gravity="center"
-            android:textColor="@color/colorBlack"
+            android:textStyle="bold"
+            android:textColor="@color/colorPrimary"
             android:text="@string/srtDelete_photo"/>
         <Button
 
             android:id="@+id/btDelete"
             android:layout_width="match_parent"
-            android:layout_height="40dp"
+            android:layout_height="50dp"
             android:text="Xóa"
+            android:textStyle="bold"
             android:textColor="@color/colorWhite"
             android:background="@color/colorPrimary"/>
     </LinearLayout>

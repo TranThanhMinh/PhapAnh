@@ -4,6 +4,7 @@
     android:layout_height="wrap_content">
     <ImageView
         android:layout_marginRight="7dp"
+        android:layout_marginTop="2dp"
         android:id="@+id/imHistory"
         android:layout_width="60dp"
         android:layout_height="60dp"/>

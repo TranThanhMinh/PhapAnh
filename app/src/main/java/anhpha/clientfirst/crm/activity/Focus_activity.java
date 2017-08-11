@@ -84,7 +84,7 @@ public class Focus_activity extends BaseAppCompatActivity implements adapter_Foc
     private MClientRequest mClientRequest = new MClientRequest();
     String ToDay;
     private int object_id;
-
+    adapter_Focus adapter_focus;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -126,8 +126,9 @@ public class Focus_activity extends BaseAppCompatActivity implements adapter_Foc
 
         if (isSort == true) {
             Log.d("RESULT_TYPE", "lv_sort");
-            adapter_Focus adapter_focus = new adapter_Focus(Focus_activity.this, lv_sort, Focus_activity.this);
+            adapter_focus = new adapter_Focus(Focus_activity.this, lv_sort, Focus_activity.this);
             lvFocus.setAdapter(adapter_focus);
+            isSort = false;
         } else {
             box.showLoadingLayout();
             lv_sort = new ArrayList<>();
@@ -136,7 +137,6 @@ public class Focus_activity extends BaseAppCompatActivity implements adapter_Foc
             getFocus(0);
         }
     }
-
     public void getFocus(int type) {
         ServiceAPI focus = retrofit.create(ServiceAPI.class);
         Call<MAPIResponse<List<Focus>>> result_focus = focus.get_clients_focus_num(preferences.getIntValue(Constants.USER_ID, 0), preferences.getIntValue(Constants.PARTNER_ID, 0), type, preferences.getStringValue(Constants.TOKEN, ""));
@@ -154,7 +154,7 @@ public class Focus_activity extends BaseAppCompatActivity implements adapter_Foc
                             listSort(lv_focus_sort, f);
                         }
                         Collections.sort(lv_focus_sort);
-                        adapter_Focus adapter_focus = new adapter_Focus(Focus_activity.this, lv_focus_sort, Focus_activity.this);
+                        adapter_focus = new adapter_Focus(Focus_activity.this, lv_focus_sort, Focus_activity.this);
                         lvFocus.setAdapter(adapter_focus);
                     }
                 } else Toast.makeText(mContext, "không có dữ liệu", Toast.LENGTH_SHORT).show();

@@ -134,7 +134,7 @@
             <android.support.v7.widget.RecyclerView
                 android:id="@+id/lvPhoto"
                 android:layout_width="match_parent"
-                android:layout_height="70dp"
+                android:layout_height="65dp"
                 android:background="@drawable/border_edit"></android.support.v7.widget.RecyclerView>
 
         </LinearLayout>
@@ -145,7 +145,10 @@
         android:visibility="invisible"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/colorNotifi">
+        android:background="@color/colorNotifi"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true">
         <ProgressBar
             android:layout_centerInParent="true"
             android:layout_width="30dp"

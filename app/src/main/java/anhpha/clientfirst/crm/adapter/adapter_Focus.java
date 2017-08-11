@@ -54,7 +54,8 @@ public class adapter_Focus extends RecyclerView.Adapter<adapter_Focus.MyViewHold
     private Context context;
     private List<Focus> list;
     String ToDay;
-    public  String convertStringToDate(String stringData)
+
+    public String convertStringToDate(String stringData)
             throws ParseException {
 
         SimpleDateFormat sdf = new SimpleDateFormat("MM/dd/yyyy HH:mm:ss a");//yyyy-MM-dd'T'HH:mm:ss
@@ -100,47 +101,55 @@ public class adapter_Focus extends RecyclerView.Adapter<adapter_Focus.MyViewHold
     }
 
     @Override
-    public void onBindViewHolder(final MyViewHolder holder, final int position) {
+    public void onBindViewHolder(final MyViewHolder holder, final int p) {
+        final int position  = p;
         final Focus focus = list.get(position);
         final MClient activityItem = new MClient();
         activityItem.setClient_id(focus.getClientId());
         activityItem.setClient_type_id(focus.getClientTypeId());
         activityItem.setAddress(focus.getAddress());
         activityItem.setClient_name(focus.getClientName());
-        if (focus.getNumberDate()<0) {
-                holder.tvDate.setText(-(focus.getNumberDate()) + " " + context.getResources().getString(R.string.srtDate));
-                holder.tvDate.setTextColor(context.getResources().getColor(R.color.colorRed));
+        if (focus.getNumberDate() < 0) {
+            holder.tvDate.setText(focus.getNumberDate() + " " + context.getResources().getString(R.string.srtDate));
+            holder.tvDate.setTextColor(context.getResources().getColor(R.color.colorRed));
 
-        }
-        else
-        {
+        } else {
             if (focus.getNumberDate() == 0) {
                 holder.tvDate.setTextColor(context.getResources().getColor(R.color.colorRed));
-            }
+            }else  holder.tvDate.setTextColor(context.getResources().getColor(R.color.colorBlack));
             holder.tvDate.setText(focus.getNumberDate() + " " + context.getResources().getString(R.string.srtDate));
         }
-
         holder.tvName_city.setText(focus.getClientName());
         holder.tvNote.setText(focus.getFocusTargetName());
-        if (focus.getNumberOrder() > 0) {
-            holder.imageOrder.setVisibility(View.VISIBLE);
-        }
-        if (focus.getNumberMeeting() > 0) {
-            holder.imageMeeting.setVisibility(View.VISIBLE);
-        }
-        if (focus.getNumberCall() > 0) {
-            holder.imageCall.setVisibility(View.VISIBLE);
-        }
-        if (focus.getNumberEmail() > 0) {
-            holder.imageEmail.setVisibility(View.VISIBLE);
-        }
-        if (focus.getNumberEvent() > 0) {
-            holder.imageEvent.setVisibility(View.VISIBLE);
-        }
+        Log.d("position",position+"");
+            if (focus.getNumberOrder() > 0) {
+                Log.d("getNumberOrder",focus.getNumberOrder()+"");
+                holder.imageOrder.setVisibility(View.VISIBLE);
+            }else holder.imageOrder.setVisibility(View.GONE);
+            if (focus.getNumberMeeting() > 0) {
+                Log.d("getNumberMeeting",focus.getNumberMeeting()+"");
+                holder.imageMeeting.setVisibility(View.VISIBLE);
+            }
+            else  holder.imageMeeting.setVisibility(View.GONE);
+            if (focus.getNumberCall() > 0) {
+                Log.d("getNumberCall",focus.getNumberCall()+"");
+                holder.imageCall.setVisibility(View.VISIBLE);
+            }
+            else  holder.imageCall.setVisibility(View.GONE);
+            if (focus.getNumberEmail() > 0) {
+                Log.d("getNumberEmail",focus.getNumberEmail()+"");
+                holder.imageEmail.setVisibility(View.VISIBLE);
+            }
+            else  holder.imageEmail.setVisibility(View.GONE);
+            if (focus.getNumberEvent() > 0) {
+                Log.d("getNumberEvent",focus.getNumberEvent()+"");
+                holder.imageEvent.setVisibility(View.VISIBLE);
+            }else  holder.imageEvent.setVisibility(View.GONE);
+
         holder.linearLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(context, ClientActivity.class).putExtra("mClient",activityItem);
+                Intent intent = new Intent(context, ClientActivity.class).putExtra("mClient", activityItem);
                 context.startActivity(intent);
             }
         });
@@ -148,21 +157,21 @@ public class adapter_Focus extends RecyclerView.Adapter<adapter_Focus.MyViewHold
         holder.tvName_city.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(context, ClientActivity.class).putExtra("mClient",activityItem);
+                Intent intent = new Intent(context, ClientActivity.class).putExtra("mClient", activityItem);
                 context.startActivity(intent);
             }
         });
         holder.tvDate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(context, ClientActivity.class).putExtra("mClient",activityItem);
+                Intent intent = new Intent(context, ClientActivity.class).putExtra("mClient", activityItem);
                 context.startActivity(intent);
             }
         });
         holder.tvNote.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(context, ClientActivity.class).putExtra("mClient",activityItem);
+                Intent intent = new Intent(context, ClientActivity.class).putExtra("mClient", activityItem);
                 context.startActivity(intent);
             }
         });
@@ -215,6 +224,7 @@ public class adapter_Focus extends RecyclerView.Adapter<adapter_Focus.MyViewHold
                     holder.linearLayout3.setVisibility(View.GONE);
                     list.get(position).setCheck(false);
                 }
+
                 notifyDataSetChanged();
             }
         });
@@ -300,7 +310,7 @@ public class adapter_Focus extends RecyclerView.Adapter<adapter_Focus.MyViewHold
             public void onClick(View view) {
                 if (focus.getNumberOrder() > 0 || focus.getNumberMeeting() > 0 || focus.getNumberCall() > 0 || focus.getNumberEmail() > 0 || focus.getNumberEvent() > 0) {
                     event.Click(position, 1);
-                }else {
+                } else {
                     new SweetAlertDialog(context, SweetAlertDialog.WARNING_TYPE)
                             .setTitleText(context.getResources().getString(R.string.srtNotifi))
                             .setContentText(context.getResources().getString(R.string.srtNotifi_activity_customer))
@@ -314,20 +324,19 @@ public class adapter_Focus extends RecyclerView.Adapter<adapter_Focus.MyViewHold
             public void onClick(View view) {
                 if (focus.getNumberOrder() > 0 || focus.getNumberMeeting() > 0 || focus.getNumberCall() > 0 || focus.getNumberEmail() > 0 || focus.getNumberEvent() > 0) {
                     event.Click(position, 2);
-                }
-                else {
-                        new SweetAlertDialog(context, SweetAlertDialog.WARNING_TYPE)
-                                .setTitleText(context.getResources().getString(R.string.srtNotifi))
-                                .setContentText(context.getResources().getString(R.string.srtNotifi_activity_customer))
-                                .setConfirmText(context.getResources().getString(R.string.srtAgree))
-                                .show();
+                } else {
+                    new SweetAlertDialog(context, SweetAlertDialog.WARNING_TYPE)
+                            .setTitleText(context.getResources().getString(R.string.srtNotifi))
+                            .setContentText(context.getResources().getString(R.string.srtNotifi_activity_customer))
+                            .setConfirmText(context.getResources().getString(R.string.srtAgree))
+                            .show();
                 }
             }
         });
         holder.tvDelete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                 event.Click(position, 3);
+                event.Click(position, 3);
             }
         });
     }
@@ -353,11 +362,19 @@ public class adapter_Focus extends RecyclerView.Adapter<adapter_Focus.MyViewHold
             tvNoOk = (TextView) v.findViewById(R.id.tvNoOk);
             tvDelete = (TextView) v.findViewById(R.id.tvDelete);
             imageCheck = (ImageView) v.findViewById(R.id.imageCheck);
+
             imageOrder = (ImageView) v.findViewById(R.id.imageOrder);
             imageMeeting = (ImageView) v.findViewById(R.id.imageMeeting);
             imageCall = (ImageView) v.findViewById(R.id.imageCall);
             imageEmail = (ImageView) v.findViewById(R.id.imageEmail);
             imageEvent = (ImageView) v.findViewById(R.id.imageEvent);
+
+            imageOrder.setVisibility(View.GONE);
+            imageMeeting.setVisibility(View.GONE);
+            imageCall.setVisibility(View.GONE);
+            imageEmail.setVisibility(View.GONE);
+            imageEvent.setVisibility(View.GONE);
+
             linearLayout2 = (LinearLayout) v.findViewById(R.id.linearLayout2);
             linearLayout3 = (LinearLayout) v.findViewById(R.id.linearLayout3);
             linearLayout = (RelativeLayout) v.findViewById(R.id.linearLayout);
